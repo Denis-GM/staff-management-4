@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    background-color: #F9FBFE;
+
+    margin: 0;
+    overflow-x: hidden;
+}
+
+button {
+    cursor: pointer;
+    padding: 0;
+}
+
+button,
+input {
+    border: none;
+    background: none;
+    outline: none;
+    color: inherit;
+    font: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}   
+
+li {
+    list-style-type: none;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 10px
+}
