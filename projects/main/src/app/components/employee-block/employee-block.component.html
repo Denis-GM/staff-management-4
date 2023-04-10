@@ -1,0 +1,33 @@
+<div class="emp-block__container">
+  <div class="notation-panel">
+    <ul class="list-reset">
+      <li>Автатар</li><li>Имя</li><li>Проект</li><li>Должность</li><li>Зарплата</li><li>Успешность</li>
+    </ul>
+  </div>
+  <div *ngFor="let employee of employees">
+    <div class="emp-block outer">
+      <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
+                  class="tui-space_top-1 inner" size="m" [rounded]="true">
+      </tui-avatar>
+      <div class="emp-block-main-data">
+        <span class="emp-block__name">{{ employee.firstName + ' ' + employee.lastName}}</span>
+        <span class="emp-block__project">{{ employee.project }}</span>
+        <span class="emp-block__post">{{ employee.post }}</span>
+        <span class="emp-block__salary">{{ employee.salary | monetary}}</span>
+        <tui-badge size="l" status="custom" value="{{ employee.success }}"
+          class="tui-space_right-2 emp-block__success" [ngClass]="{
+          success: employee.success == 'Успешный',
+          unsuccess: employee.success == 'Неуспешный',
+          ordinary: employee.success == 'Обычный',
+          }">
+          <span class="custom-content" [ngClass]="{
+          success_circle: employee.success == 'Успешный',
+          unsuccess_circle: employee.success == 'Неуспешный',
+          ordinary_circle: employee.success == 'Обычный',
+          }"></span>
+        </tui-badge>
+<!--        <span class="emp-block__success">{{ employee.success }}</span>-->
+      </div>
+    </div>
+  </div>
+</div>

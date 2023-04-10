@@ -8,19 +8,34 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
 
+import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
+import { TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER } from "@taiga-ui/core";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { TuiAvatarModule, TuiBadgeModule } from "@taiga-ui/kit";
+import { EmployeeBlockComponent } from './components/employee-block/employee-block.component';
+import {MonetaryPipe} from "./pipes/monetary.pipe";
+
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    ActiveEmployeesComponent
+    ActiveEmployeesComponent,
+    EmployeeBlockComponent,
+    MonetaryPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    TuiRootModule,
+    TuiDialogModule,
+    TuiAlertModule,
+    TuiAvatarModule,
+    TuiBadgeModule
   ],
-  providers: [],
+  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
