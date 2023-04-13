@@ -1,11 +1,12 @@
 <app-header></app-header>
+<app-search (searchEvent)="applySearch($event)"></app-search>
 <div class="emp-block__container">
   <div class="notation-panel">
     <ul class="list-reset">
       <li>Автатар</li><li>Имя</li><li>Проект</li><li>Должность</li><li>Зарплата</li><li>Успешность</li>
     </ul>
   </div>
-  <div *ngFor="let employee of employees">
+  <div *ngFor="let employee of employees |search:searchText">
     <div class="emp-block outer">
       <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
                   class="tui-space_top-1 inner" size="m" [rounded]="true">

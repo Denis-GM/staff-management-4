@@ -13,6 +13,7 @@ export class EmployeeBlockComponent implements OnInit {
   employees: Employee[] = [];
   // success = 'background-color: #FEEBE4;';
   success_circle = 'background-color: #4AC99B';
+  searchText = ""
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -25,5 +26,8 @@ export class EmployeeBlockComponent implements OnInit {
       .subscribe(employees => {
         this.employees = employees
       });
+  }
+  applySearch(value:string):void{
+    this.searchText = value
   }
 }
