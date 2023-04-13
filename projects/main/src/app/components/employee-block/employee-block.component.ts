@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Employee } from "../../employees/employee.interface";
 import { EmployeeService } from '../../services/employee.service';
 
@@ -7,7 +7,8 @@ import { EmployeeService } from '../../services/employee.service';
   templateUrl: './employee-block.component.html',
   styleUrls: ['./employee-block.component.css']
 })
-export class EmployeeBlockComponent {
+
+export class EmployeeBlockComponent implements OnInit {
   employee?: Employee;
   employees: Employee[] = [];
   // success = 'background-color: #FEEBE4;';
