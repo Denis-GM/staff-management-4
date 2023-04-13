@@ -1,0 +1,24 @@
+header{
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+.header__container{
+  position: relative;
+  width: 1300px;
+  display: flex;
+  padding-bottom: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px auto 50px;
+}
+.header__logo{
+  max-width: 205px;
+}
+a{
+  font-size: 22px;
+  font-family: Montserrat,sans-serif;
+  font-weight: 400;
+}
+.active{
+  color: #526ED3;
+  font-weight: 500;
+}

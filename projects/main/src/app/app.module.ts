@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TuiAvatarModule, TuiBadgeModule } from "@taiga-ui/kit";
 import { EmployeeBlockComponent } from './components/employee-block/employee-block.component';
 import {MonetaryPipe} from "./pipes/monetary.pipe";
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {MonetaryPipe} from "./pipes/monetary.pipe";
     RegistrationComponent,
     ActiveEmployeesComponent,
     EmployeeBlockComponent,
-    MonetaryPipe
+    MonetaryPipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
