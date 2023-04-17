@@ -4,20 +4,20 @@
     </a>
 </header>
 
-<form class="registration" [formGroup]="loginForm" #form="ngForm" (ngSubmit)="submitHandler()">
-    <h2 class="registration__title">Вход</h2>
+<form class="login" [formGroup]="loginForm" #form="ngForm" (ngSubmit)="submitHandler()">
+    <h2 class="login__title">Вход</h2>
 
-    <input class= "registration__input" type="text" placeholder="Логин" autocomplete="off" formControlName="login">
-    <div class="registration__msg" *ngIf="login!.hasError('required') && login!.touched">Введите логин</div>
+    <input class= "login__input" type="text" placeholder="Логин" autocomplete="off" formControlName="login">
+    <div class="login__msg" *ngIf="login!.hasError('required') && login!.touched">Введите логин</div>
 
-    <input class= "registration__input" type="password" placeholder="Пароль" autocomplete="off" formControlName="password">
-    <div class="registration__msg" *ngIf="password!.hasError('required') && password!.touched">Введите пароль</div>
-    <div class="registration__msg" *ngIf="form!.hasError('noSuchUser') && form.submitted">Введен неверный логин или пароль</div>
+    <input class= "login__input" type="password" placeholder="Пароль" autocomplete="off" formControlName="password">
+    <div class="login__msg" *ngIf="password!.hasError('required') && password!.touched">Введите пароль</div>
+    <div class="login__msg" *ngIf="form!.hasError('noSuchUser') && form.submitted">Введен неверный логин или пароль</div>
 
-    <button class= "registration__button" type="submit">Войти</button>
+    <button class= "login__button" type="submit">Войти</button>
 
-    <p class="registration__bottom-text">
+    <p class="login__bottom-text">
         Еще нет аккаунта? 
-        <a class="registration__bottom-link" routerLink="/registration">Регистрация</a>
+        <a class="login__bottom-link" routerLink="/registration">Регистрация</a>
     </p>
 </form>

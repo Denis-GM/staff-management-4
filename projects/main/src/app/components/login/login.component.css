@@ -1,4 +1,4 @@
-.registration {
+.login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,14 +12,14 @@
     border-radius: 29.2473px;
 }
 
-.registration__title {
+.login__title {
     margin: 40px 0;
 
     font-size: 1.6em;
     font-weight: 400;
 }
 
-.registration__input {
+.login__input {
     margin-bottom: 25px;
     padding: 12px;
 
@@ -32,7 +32,7 @@
     border-radius: 5px;
 }
 
-.registration__button {
+.login__button {
     margin-top: 10px;
     padding: 15px;
 
@@ -47,29 +47,29 @@
     transition: background-color 0.3s ease;
 }
 
-.registration__button:hover {
+.login__button:hover {
     background-color: #354991;
 }
 
-.registration__msg {
+.login__msg {
     position: relative;
     top: -12px;
     color: red;
     font-size: 0.7em;
 }
 
-.registration__bottom-text {
+.login__bottom-text {
     margin: 20px 0 30px;
     font-weight: 300;
 }
 
-.registration__bottom-link {
+.login__bottom-link {
     color: #526ED3;
     font-weight: 400;
     text-decoration: underline;
 }
 
-.registration__bottom-link:hover {
+.login__bottom-link:hover {
     color: #354991;
 }
 
