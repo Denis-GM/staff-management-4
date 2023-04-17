@@ -1,21 +1,28 @@
 <header class="header">
-    <a routerLink="/companies">
+    <a routerLink="/dashboard">
         <img class="header__logo" src="../../../assets/logo.svg" alt="Логотип">
     </a>
 </header>
 
-<form class="registration" [formGroup]="registrationForm" (ngSubmit)="submitHandler()">
+<form class="registration" [formGroup]="registrationForm" #form="ngForm" (ngSubmit)="submitHandler()">
     <h2 class="registration__title">Регистрация</h2>
 
     <input class= "registration__input" type="text" placeholder="Логин" autocomplete="off" formControlName="login">
     <div class="registration__msg" *ngIf="login!.hasError('required') && login!.touched">Введите логин</div>
     <div class="registration__msg" *ngIf="login!.hasError('minlength')">Логин не может быть короче 3 символов</div>
     <div class="registration__msg" *ngIf="login!.hasError('noSpaceAllowed') && login!.touched">Логин не должен содержать пробелы</div>
-    
+
+    <div class="registration__msg" *ngIf="registrationForm!.hasError('notUniqueUser') && form.submitted">Пользователь с таким логином уже существует</div>
+
     <input class= "registration__input" type="password" placeholder="Пароль" autocomplete="off" formControlName="password">
     <div class="registration__msg" *ngIf="password!.hasError('required') && password!.touched">Введите пароль</div>
     <div class="registration__msg" *ngIf="password!.hasError('minlength')">Пароль не может быть короче 5 символов</div>
     <div class="registration__msg" *ngIf="password!.hasError('noSpaceAllowed') && password!.touched">Пароль не должен содержать пробелы</div>
     
     <button class= "registration__button" type="submit">Зарегистрироваться</button>
+
+    <p class="registration__bottom-text">
+        Уже есть аккаунт?
+        <a class="registration__bottom-link" routerLink="/login">Войти</a>
+    </p>
 </form>

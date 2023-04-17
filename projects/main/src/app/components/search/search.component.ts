@@ -10,9 +10,10 @@ import {Component, EventEmitter, Output} from '@angular/core';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  value=""
   @Output()
   public searchEvent: EventEmitter<string> = new EventEmitter<string>()
+
+  public value = "";
 
   searchText() {
     this.searchEvent.next(this.value)

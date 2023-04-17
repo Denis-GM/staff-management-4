@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { LocalStorageService } from '../../services/local-storage.service';
+import { IUser } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-registration',
@@ -12,6 +13,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 export class RegistrationComponent implements OnInit{
 
   registrationForm!: FormGroup;
+  users: IUser[] = this.localStorageService.get('users') ?? [];
 
   constructor(
     private fb: FormBuilder, 
@@ -45,8 +47,15 @@ export class RegistrationComponent implements OnInit{
   async submitHandler() {
     this.registrationForm.markAllAsTouched();
     if (this.registrationForm.valid) {
-      this.localStorageService.save('user', this.registrationForm.value);
-      this.router.navigate(['/main'])
+      if (this.users.filter((user: IUser) => user.login === this.login?.value).length) {
+        this.registrationForm.setErrors({ 'notUniqueUser': true })
+        return;
+      }
+      this.users.push(this.registrationForm.value)
+      this.localStorageService.save('users', this.users);
+      
+      this.localStorageService.save('loggedInStatus', true);
+      this.router.navigate(['/dashboard'])
     }
   }
 

@@ -23,11 +23,13 @@ import {MonetaryPipe} from "./pipes/monetary.pipe";
 import { HeaderComponent } from './components/header/header.component';
 import {SearchPipe} from "./pipes/search.pipe";
 import { SearchComponent } from './components/search/search.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
+    LoginComponent,
     ActiveEmployeesComponent,
     EmployeeBlockComponent,
     MonetaryPipe,

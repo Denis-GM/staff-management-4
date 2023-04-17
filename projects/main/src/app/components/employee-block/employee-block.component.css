@@ -80,6 +80,7 @@
   display: grid;
   grid-template-columns: 230px 150px 270px 180px 220px;
   text-align: center;
+  align-items: center;
   margin: auto;
   margin-left: 0;
 }

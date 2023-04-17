@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Employee } from "../employees/employee.interface";
-import { Employees } from '../employees/mock-employees';
+import { IEmployee } from "../interfaces/employee.interface";
+import { Employees } from '../mock/mock-employees';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable, of } from 'rxjs';
 })
 export class EmployeeService {
 
-  getEmployees(): Observable<Employee[]> {
+  getEmployees(): Observable<IEmployee[]> {
     const employees = of(Employees);
     return employees;
   }

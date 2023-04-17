@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { Employee } from "../../employees/employee.interface";
+import { IEmployee } from "../../interfaces/employee.interface";
 import { EmployeeService } from '../../services/employee.service';
 
 @Component({
@@ -9,8 +9,8 @@ import { EmployeeService } from '../../services/employee.service';
 })
 
 export class EmployeeBlockComponent implements OnInit {
-  employee?: Employee;
-  employees: Employee[] = [];
+  employee?: IEmployee;
+  employees: IEmployee[] = [];
   // success = 'background-color: #FEEBE4;';
   success_circle = 'background-color: #4AC99B';
   searchText = ""

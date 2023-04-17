@@ -1,6 +1,6 @@
-import { Employee } from './employee.interface';
+import { IEmployee } from '../interfaces/employee.interface';
 
-export const Employees: Employee[] = [
+export const Employees: IEmployee[] = [
   { firstName: 'Андрей', lastName: 'Фролов', patronymic: 'Олегович',
     post: 'Старший программист', project: 'Artsofte', salary: 100000,
     success: 'Успешный' },

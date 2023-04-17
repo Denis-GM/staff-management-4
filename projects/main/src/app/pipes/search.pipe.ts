@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform} from "@angular/core";
-import {Employee} from "../employees/employee.interface";
+import {IEmployee} from "../interfaces/employee.interface";
 
 @Pipe({
   name: 'search'
 })
 export class SearchPipe implements PipeTransform {
-  transform(Employees: Employee[], searchText: string): [] | Employee[] {
+  transform(Employees: IEmployee[], searchText: string): [] | IEmployee[] {
     if (!Employees){
       return [];
     }

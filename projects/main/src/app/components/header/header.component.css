@@ -1,4 +1,5 @@
 header{
+  background-color: #FFFFFF;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 .header__container{
@@ -8,7 +9,8 @@ header{
   padding-bottom: 12px;
   justify-content: space-between;
   align-items: center;
-  margin: 12px auto 50px;
+  margin: auto;
+  margin-bottom: 50px;
 }
 .header__logo{
   max-width: 205px;
