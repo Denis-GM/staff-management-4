@@ -3,8 +3,22 @@
     <a routerLink="/dashboard">
       <img class="header__logo" src="../../../assets/logo.svg" alt="Логотип">
     </a>
-    <a routerLinkActive="active" routerLink="/main">Активные сотрудники</a>
-    <a routerLinkActive="active" routerLink="/del">Уволенные сотрудники</a> <!-- заменить на нужный линк -->
-    <a routerLinkActive="active" routerLink="/add">Добавление сотрудника</a> <!-- заменить на нужный линк -->
+    <a class="header__link" routerLinkActive="active" routerLink="/dashboard">Активные сотрудники</a>
+    <a class="header__link" routerLinkActive="active" routerLink="/del">Уволенные сотрудники</a> <!-- заменить на нужный линк -->
+    <a class="header__link" routerLinkActive="active" routerLink="/add">Добавление сотрудника</a> <!-- заменить на нужный линк -->
+    <div class="header__wrapper">
+      <tui-avatar text="{{user.login}}"
+        class="tui-space_top-1 inner" size="m" [rounded]="true">
+      </tui-avatar>
+      <div class="header__logout" (click)="logout()">
+        <tui-svg
+          src="tuiIconLogOutLarge"
+          class="header__icon"
+        ></tui-svg>
+        <p>Выйти</p>
+      </div>
+      
+    </div>
+    
   </div>
 </header>
