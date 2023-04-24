@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { IEmployee } from "../../interfaces/employee.interface";
 import { EmployeeService } from '../../services/employee.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-employee-block',
@@ -9,13 +10,11 @@ import { EmployeeService } from '../../services/employee.service';
 })
 
 export class EmployeeBlockComponent implements OnInit {
-  employee?: IEmployee;
   employees: IEmployee[] = [];
-  // success = 'background-color: #FEEBE4;';
-  success_circle = 'background-color: #4AC99B';
+  // selectedEmployee: IEmployee = {} as IEmployee;
   searchText = ""
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -29,5 +28,15 @@ export class EmployeeBlockComponent implements OnInit {
   }
   applySearch(value:string):void{
     this.searchText = value
+  }
+
+  selectEmployee(employee: IEmployee) {
+    this.employeeService.setEmployee(employee);
+    this.router.navigate(
+      ['dashboard/employee/', employee.id],
+      // { queryParams: { 'employee': JSON.stringify(employee) }}
+      );
+    // this.selectedEmployee = employee;
+    // console.log(this.selectedEmployee);
   }
 }

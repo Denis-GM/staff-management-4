@@ -52,15 +52,17 @@
   background: #FFF;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   padding: 0 var(--right) 0 var(--left);
-  margin-bottom: 20px;
 
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
+
+  user-select: none;
+  cursor: pointer;
 }
 
 .outer {

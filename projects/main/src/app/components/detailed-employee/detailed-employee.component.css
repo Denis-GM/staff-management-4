@@ -1,0 +1,145 @@
+.main-board {
+  position: relative;
+  display: flex;
+  width: 850px;
+  min-height: 788px;
+  background: #fff;
+  margin: auto;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin-top: 70px;
+  margin-bottom: 142px;
+}
+
+/*.container {*/
+/*  width: 100%;*/
+/*  */
+/*}*/
+
+.name-field {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 39px;
+  margin-top: 52px;
+  margin-left: 67px;
+
+  /*background-color: #526ED3;*/
+  /*background-position:left;*/
+}
+
+.avatar {
+  position: absolute;
+  top: 34px;
+  right: 34px;
+}
+
+.emp-block__success {
+  width: 178px;
+  position: absolute !important;
+  top: 212px;
+  right: 37px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.success {
+  position: relative;
+  background-color: #E9F8F3;
+}
+
+.success_circle {
+  position: absolute;
+  left: 29px;
+  top: 10px;
+  width: 10px;
+  height: 10px;
+  background: #4AC99B;
+  border-radius: 10px;
+}
+
+.unsuccess {
+  position: relative;
+  background: #FEEBE4;
+}
+
+.unsuccess_circle {
+  position: absolute;
+  left: 29px;
+  top: 10px;
+  width: 10px;
+  height: 10px;
+  background: #F45725;
+  border-radius: 10px;
+}
+
+.ordinary {
+  position: relative;
+  background: #EEF6FE;
+}
+
+.ordinary_circle {
+  position: absolute;
+  left: 29px;
+  top: 10px;
+  width: 10px;
+  height: 10px;
+  background: #71B7F6;
+  border-radius: 10px;
+}
+
+.data-field {
+  margin: 14px 0 0 49px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 24px;
+}
+
+.data-field:first-child {
+  margin-top: 22px;
+}
+
+
+.data-field__label {
+  display: block;
+  color: #797979;
+  font-size: 20px;
+  margin-bottom: 7px;
+}
+
+.dairy-container {
+  margin-top: 23px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.dairy-field__label {
+  margin: 25px 0 0 67px;
+}
+
+.dairy-field {
+  margin-top: 23px;
+  margin-left: 49px;
+}
+
+.btn-edit {
+  position: absolute;
+  left: 30px;
+  bottom: 29px;
+}
+
+.btn-back {
+  position: absolute;
+  right: 30px;
+  bottom: 29px;
+}

@@ -1,0 +1,57 @@
+.main-board {
+  position: relative;
+  display: flex;
+  width: 600px;
+  min-height: 788px;
+  background: #fff;
+  margin: auto;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin-top: 70px;
+  margin-bottom: 142px;
+
+  font-family: 'Montserrat', 'sans-serif';
+  font-style: normal;
+}
+
+.title-sec {
+  margin-bottom: 18px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin-top: 40px;
+}
+
+.title-sec:first-child {
+  margin-top: 42px;
+}
+
+.form-container {
+  margin: 30px auto 137px;
+  /*margin-top: 30px;*/
+  width: 80%;
+}
+
+.label {
+  display: block;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 9px;
+}
+
+.input {
+  margin-bottom: 15px;
+}
+
+.btn-back {
+  position: absolute;
+  right: 10%;
+  bottom: 29px;
+}
+
+.btn-save {
+  position: absolute;
+  left: 10%;
+  bottom: 29px;
+}

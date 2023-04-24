@@ -7,7 +7,7 @@
     </ul>
   </div>
   <div *ngFor="let employee of employees |search:searchText">
-    <div class="emp-block outer">
+    <div class="emp-block outer" (click)="selectEmployee(employee)">
       <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
                   class="tui-space_top-1 inner" size="m" [rounded]="true">
       </tui-avatar>
@@ -33,4 +33,6 @@
       </div>
     </div>
   </div>
+<!--    <app-detailed-employee [employee]="selectedEmployee" ></app-detailed-employee>-->
+<!--  <router-outlet></router-outlet>-->
 </div>

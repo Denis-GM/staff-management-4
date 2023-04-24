@@ -1,0 +1,53 @@
+<app-header></app-header>
+<tui-root>
+  <div class="main-board">
+    <div>
+      <div class="name-field">{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}</div>
+      <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
+                  class="tui-space_top-1 avatar" size="xxl" [rounded]="true">
+      </tui-avatar>
+      <tui-badge size="l" status="custom" value="{{ employee.success }}"
+                 class="tui-space_right-2 emp-block__success"
+                 [ngClass]="{
+                    success: employee.success === 'Успешный',
+                    unsuccess: employee.success === 'Неуспешный',
+                    ordinary: employee.success === 'Обычный',}">
+          <span class="custom-content" [ngClass]="{
+            success_circle: employee.success === 'Успешный',
+            unsuccess_circle: employee.success === 'Неуспешный',
+            ordinary_circle: employee.success === 'Обычный',
+            }">
+          </span>
+      </tui-badge>
+      <div class="data-field">
+        <span class="data-field__label">Дата рождения</span>
+        <div>{{employee.birthday}}</div>
+      </div>
+      <div class="data-field">
+        <span class="data-field__label">Образование</span>
+        <div>{{employee.education}}</div>
+      </div>
+      <div class="data-field">
+        <span class="data-field__label">Проект</span>
+        <div>{{employee.project}}</div>
+      </div>
+      <div class="data-field">
+        <span class="data-field__label">Должность</span>
+        <div>{{employee.post}}</div>
+      </div>
+      <div class="data-field">
+        <span class="data-field__label">Зарплата</span>
+        <div>{{employee.salary | monetary}}</div>
+      </div>
+      <div class="dairy-container">
+        <span class="dairy-field__label">Журнал</span>
+        <div class="dairy-field">// todo</div>
+      </div>
+    </div>
+    <button tuiButton type="button" appearance="primary"
+            class="tui-space_right-3 tui-space_bottom-3 btn-edit">
+      Редактировать
+    </button>
+    <app-btn-back [ngClass]="{'btn-back': true}"></app-btn-back>
+  </div>
+</tui-root>
