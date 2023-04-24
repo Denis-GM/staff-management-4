@@ -47,14 +47,15 @@ export class RegistrationComponent implements OnInit{
   async submitHandler() {
     this.registrationForm.markAllAsTouched();
     if (this.registrationForm.valid) {
-      if (this.users.filter((user: IUser) => user.login === this.login?.value).length) {
+      const newUser: IUser = this.registrationForm.value;
+      if (this.users.filter((user: IUser) => user.login === newUser.login).length) {
         this.registrationForm.setErrors({ 'notUniqueUser': true })
         return;
       }
-      this.users.push(this.registrationForm.value)
+      this.users.push(newUser)
       this.localStorageService.save('users', this.users);
+      this.localStorageService.save('user', newUser);
       
-      this.localStorageService.save('loggedInStatus', true);
       this.router.navigate(['/dashboard'])
     }
   }

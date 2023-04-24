@@ -1,0 +1,17 @@
+.container{
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+  padding: 0;
+  margin-top: 10px;
+}
+.input_tags{
+  width: 595px;
+}
+.wrapper {
+  width: 595px;
+}
+
+.ticks-labels {
+  color: var(--tui-text-02);
+}

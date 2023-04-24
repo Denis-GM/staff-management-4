@@ -18,8 +18,8 @@ export class AuthGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-    const status: boolean = this.localStorageService.get('loggedInStatus') ?? false;
-    if(!status) {
+      const user: boolean = this.localStorageService.get('user') || false;
+      if(!user) {
       this.router.navigate(['registration']);
       return false;
     }

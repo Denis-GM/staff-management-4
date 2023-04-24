@@ -39,8 +39,9 @@ export class LoginComponent implements OnInit{
   async submitHandler() {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
-      if (this.users.filter((user: IUser) => JSON.stringify(this.loginForm.value) === JSON.stringify(user)).length) {
-        this.localStorageService.save('loggedInStatus', true);
+      const currentUser: IUser = this.loginForm.value;
+      if (this.users.filter((user: IUser) => JSON.stringify(currentUser) === JSON.stringify(user)).length) {
+        this.localStorageService.save('user', currentUser);
         this.router.navigate(['/dashboard'])
       }
       else {

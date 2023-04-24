@@ -13,6 +13,7 @@ export class EmployeeBlockComponent implements OnInit {
   employees: IEmployee[] = [];
   // selectedEmployee: IEmployee = {} as IEmployee;
   searchText = ""
+  searchTags:string[] = []
 
   constructor(private employeeService: EmployeeService, private router: Router) { }
 
@@ -29,6 +30,9 @@ export class EmployeeBlockComponent implements OnInit {
   applySearch(value:string):void{
     this.searchText = value
   }
+  applyFilter(value:string[]):void{
+    this.searchTags = value
+  }
 
   selectEmployee(employee: IEmployee) {
     this.employeeService.setEmployee(employee);
@@ -36,7 +40,5 @@ export class EmployeeBlockComponent implements OnInit {
       ['dashboard/employee/', employee.id],
       // { queryParams: { 'employee': JSON.stringify(employee) }}
       );
-    // this.selectedEmployee = employee;
-    // console.log(this.selectedEmployee);
   }
 }
