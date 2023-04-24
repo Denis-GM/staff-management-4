@@ -13,7 +13,7 @@ export const Employees: IEmployee[] = [
   { id: 4, firstName: 'Василий', lastName: 'Васильев', patronymic: 'Васильевич', birthday: '05.01.2000',
     education: 'УрФУ', post: 'Младший программист', project: 'Artsofte', salary: 70000,
     success: 'Обычный' },
-  { firstName: 'Радик', lastName: 'Васильев', patronymic: 'Васильевич',
-    post: 'Младший программист', project: 'Artsofte', salary: 70000,
+  { id: 4, firstName: 'Радик', lastName: 'Васильев', patronymic: 'Васильевич', birthday: '05.01.2000',
+    education: 'УрФУ', post: 'Младший программист', project: 'Artsofte', salary: 70000,
     success: 'Обычный' },
 ]
