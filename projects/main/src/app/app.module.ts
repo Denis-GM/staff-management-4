@@ -17,12 +17,20 @@ import {
   TuiTextfieldControllerModule, TuiSvgModule
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import {TuiAvatarModule, TuiBadgeModule, TuiInputModule} from "@taiga-ui/kit";
+import {
+    TuiAvatarModule,
+    TuiBadgeModule,
+    TuiDataListWrapperModule,
+    TuiInputModule, TuiInputRangeModule,
+    TuiInputTagModule
+} from "@taiga-ui/kit";
 import { EmployeeBlockComponent } from './components/employee-block/employee-block.component';
 import {MonetaryPipe} from "./pipes/monetary.pipe";
 import { HeaderComponent } from './components/header/header.component';
 import {SearchPipe} from "./pipes/search.pipe";
 import { SearchComponent } from './components/search/search.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { FilterComponent } from './components/filter/filter.component';
 import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
@@ -35,24 +43,29 @@ import { LoginComponent } from './components/login/login.component';
     MonetaryPipe,
     HeaderComponent,
     SearchPipe,
-    SearchComponent
+    SearchComponent,
+    FilterPipe,
+    FilterComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    TuiRootModule,
-    TuiDialogModule,
-    TuiAlertModule,
-    TuiAvatarModule,
-    TuiBadgeModule,
-    TuiTextfieldControllerModule,
-    TuiInputModule,
-    TuiSvgModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        TuiRootModule,
+        TuiDialogModule,
+        TuiAlertModule,
+        TuiAvatarModule,
+        TuiBadgeModule,
+        TuiTextfieldControllerModule,
+        TuiInputModule,
+        TuiSvgModule,
+        FormsModule,
+        TuiInputTagModule,
+        TuiDataListWrapperModule,
+        TuiInputRangeModule
+    ],
   providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent]
 })

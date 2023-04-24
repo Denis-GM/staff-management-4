@@ -1,12 +1,13 @@
 <app-header></app-header>
-<app-search (searchEvent)="applySearch($event)"></app-search>
+<app-search (searchEvent$)="applySearch($event)"></app-search>
+<app-filter (filterEvent$)="applyFilter($event)"></app-filter>
 <div class="emp-block__container">
   <div class="notation-panel">
     <ul class="list-reset">
       <li>Автатар</li><li>Имя</li><li>Проект</li><li>Должность</li><li>Зарплата</li><li>Успешность</li>
     </ul>
   </div>
-  <div *ngFor="let employee of employees |search:searchText">
+  <div *ngFor="let employee of employees |search:searchText |filterTags:searchTags">
     <div class="emp-block outer">
       <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
                   class="tui-space_top-1 inner" size="m" [rounded]="true">

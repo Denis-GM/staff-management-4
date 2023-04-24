@@ -14,6 +14,7 @@ export class EmployeeBlockComponent implements OnInit {
   // success = 'background-color: #FEEBE4;';
   success_circle = 'background-color: #4AC99B';
   searchText = ""
+  searchTags:string[] = []
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -29,5 +30,8 @@ export class EmployeeBlockComponent implements OnInit {
   }
   applySearch(value:string):void{
     this.searchText = value
+  }
+  applyFilter(value:string[]):void{
+    this.searchTags = value
   }
 }

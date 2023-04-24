@@ -11,12 +11,12 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class SearchComponent {
   @Output()
-  public searchEvent: EventEmitter<string> = new EventEmitter<string>()
+  public searchEvent$: EventEmitter<string> = new EventEmitter<string>()
 
   public value = "";
 
   searchText() {
-    this.searchEvent.next(this.value)
+    this.searchEvent$.next(this.value)
   }
 }
 
