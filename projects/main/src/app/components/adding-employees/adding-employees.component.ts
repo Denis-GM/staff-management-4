@@ -62,14 +62,14 @@ export class AddingEmployeesComponent implements OnInit {
     if (form.valid) {
       this.employee = {
         id: Employees[Employees.length - 1].id++,
-        firstName: form.get('firstName')!.value,
-        lastName: form.get('lastName')!.value,
-        patronymic: form.get('patronymic')!.value,
-        birthday: form.get('birthday')!.value,
-        education: form.get('education')!.value,
-        project: form.get('project')!.value,
-        post: form.get('post')!.value,
-        salary: Number(form.get('salary')!.value),
+        firstName: form.get('firstName')?.value,
+        lastName: form.get('lastName')?.value,
+        patronymic: form.get('patronymic')?.value,
+        birthday: form.get('birthday')?.value,
+        education: form.get('education')?.value,
+        project: form.get('project')?.value,
+        post: form.get('post')?.value,
+        salary: Number(form.get('salary')?.value),
         success: 'Обычный',
       }
     }

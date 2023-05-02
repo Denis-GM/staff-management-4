@@ -1,57 +1,56 @@
-.main-board {
-  position: relative;
-  display: flex;
-  width: 600px;
-  min-height: 788px;
-  background: #fff;
-  margin: auto;
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  margin-top: 70px;
-  margin-bottom: 142px;
-
+.adding {
   font-family: 'Montserrat', 'sans-serif';
   font-style: normal;
+  
+  display: flex;
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 140px;
+
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-.title-sec {
-  margin-bottom: 18px;
+.adding__container {
+  padding: 42px 50px;
+  width: 100%;
+}
+
+.adding__title {
   font-weight: 500;
   font-size: 24px;
-  line-height: 29px;
-  margin-top: 40px;
+
+  border-left: 4px solid #526ED3;
+  padding-left: 10px;
+  margin-bottom: 20px;
 }
 
-.title-sec:first-child {
-  margin-top: 42px;
+.adding__title:not(:first-child) {
+  margin-top: 30px;
 }
 
-.form-container {
-  margin: 30px auto 137px;
-  /*margin-top: 30px;*/
-  width: 80%;
+.adding__label {
+  font-size: 1.5em;
 }
 
-.label {
-  display: block;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  margin-bottom: 9px;
-}
-
-.input {
+.adding__input {
+  margin-top: 10px;
   margin-bottom: 15px;
 }
 
-.btn-back {
-  position: absolute;
-  right: 10%;
-  bottom: 29px;
+.adding__buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.btn-save {
-  position: absolute;
-  left: 10%;
-  bottom: 29px;
+.adding__add{
+  max-width: 270px;
+  width: 100%;
+}
+
+.adding__cancel{
+  max-width: 192px;
+  width: 100%;
 }

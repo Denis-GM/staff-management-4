@@ -1,98 +1,97 @@
 <app-header></app-header>
 <tui-root>
-  <div class="main-board">
-    <div class="form-container">
+  <div class="adding">
+    <div class="adding__container">
       <form [formGroup]="employeeForm" novalidate (ngSubmit)='submit()'>
-        <h2 class="title-sec">Основная информация</h2>
-        <label class="label">Фамилия</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <h2 class="adding__title">Основная информация</h2>
+        <label class="adding__label">Фамилия</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           Иванов
           <input type="text" name="lastName" formControlName="lastName" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Имя</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Имя</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                     [tuiTextfieldLabelOutside]="true">
           Иван
           <input type="text" name="firstName" formControlName="firstName" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Отчество</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Отчество</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           Иванович
           <input type="text" name="patronymic" formControlName="patronymic" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Дата рождения</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Дата рождения</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
-<!--          Иванов-->
           <input type="text" name="birthday" formControlName="birthday" tuiTextfield type="date"/>
         </tui-input>
 
-        <label class="label">Контактный Email</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Контактный Email</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
-          exapmle@email.com
+          example@email.com
           <input  type="text" name="email" formControlName="email" tuiTextfield type="email"/>
         </tui-input>
 
 
-        <h2 class="title-sec">Трудоустройство</h2>
-        <label class="label">Должность</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <h2 class="adding__title">Трудоустройство</h2>
+        <label class="adding__label">Должность</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           Зарплата
           <input type="text" name="post" formControlName="post" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Зарплата</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Зарплата</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           Зарплата
           <input type="text" name="salary" formControlName="salary" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Проект</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Проект</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           Название
           <input type="text" name="project" formControlName="project" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Город</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Город</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           Введите город
-          <input type="text" name="city" formControlName="city" tuiTextfield/>
+          <input type="adding__label" name="city" formControlName="city" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Дата собеседования</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Дата собеседования</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           <input type="date" name="date_interview" formControlName="date_interview" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Дата трудоустройства</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Дата трудоустройства</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           <input type="date" name="date_employment" formControlName="date_employment" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Дата выхода</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Дата выхода</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           <input type="date" name="date_output" formControlName="date_output" tuiTextfield/>
         </tui-input>
 
 
-        <h2 class="title-sec">Образование</h2>
-        <label class="label">Тип образования</label>
+        <h2 class="adding__title">Образование</h2>
+        <label class="adding__label">Тип образования</label>
         <tui-select
-          tuiTextfieldSize="l" class="tui-space_vertical-4 input"  formControlName="education" [tuiTextfieldLabelOutside]="true">
-          Высшее
+          tuiTextfieldSize="l" class="adding__input"  formControlName="education"
+          [tuiTextfieldLabelOutside]="true" [(ngModel)]="types[0]">
           <input name="education" tuiTextfield/>
           <tui-data-list-wrapper
             *tuiDataList
@@ -100,34 +99,37 @@
           ></tui-data-list-wrapper>
         </tui-select>
 
-        <label class="label">Образовательное учреждение</label>
-        <tui-input tuiTextfieldSize="l" class="input"
+        <label class="adding__label">Образовательное учреждение</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           Название
           <input type="text" name="educational_institution" formControlName="educational_institution" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Специальность</label>
-        <tui-input tuiTextfieldSize="l" class="input" [tuiTextfieldLabelOutside]="true">
+        <label class="adding__label">Специальность</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input" [tuiTextfieldLabelOutside]="true">
           Название
           <input type="text" name="specialization" formControlName="specialization" tuiTextfield/>
         </tui-input>
 
-        <label class="label">Год окончания</label>
-        <tui-input tuiTextfieldSize="l" class="input" [tuiTextfieldLabelOutside]="true">
+        <label class="adding__label">Год окончания</label>
+        <tui-input tuiTextfieldSize="l" class="adding__input" [tuiTextfieldLabelOutside]="true">
           Введите год
           <input type="text" name="year_graduation" formControlName="year_graduation" tuiTextfield/>
         </tui-input>
 
-        <button tuiButton type="button" appearance="outline"
-                class="tui-space_right-3 tui-space_bottom-3 btn-back"
-                (click)="redirectBack()">
-          Отмена
-        </button>
-        <button tuiButton type="submit" appearance="primary" [disabled]="employeeForm.invalid"
-                class="tui-space_right-3 tui-space_bottom-3 btn-save">
-          Добавить
-        </button>
+        <div class="adding__buttons">
+          <button tuiButton type="submit" appearance="primary" [disabled]="employeeForm.invalid"
+            class="adding__add">
+            Добавить
+          </button>
+          
+          <button tuiButton type="button" appearance="outline" class="adding__cancel"
+              (click)="redirectBack()">
+            Отмена
+          </button>
+        </div>
+
       </form>
     </div>
   </div>
