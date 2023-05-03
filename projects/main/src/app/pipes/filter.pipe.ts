@@ -7,48 +7,58 @@ import {IEmployee} from "../interfaces/employee.interface";
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(Employees: IEmployee[], searchTags: string[]): [] | IEmployee[] {
+  transform(Employees: IEmployee[], searchText: string, searchTags: string[],range:number[]|null): [] | IEmployee[] {
     if (!Employees){
       return [];
     }
-    if (searchTags.length === 0){
-      return Employees;
-    }
     let result:[]|IEmployee[] = Employees
-    searchTags = searchTags.map((tag) => tag.toLocaleLowerCase());
-    const toFilter:ISearchTags = {
-      projects: searchTags.filter(tag=>tag.includes("проект: ")).map(value => {
-        if (value === undefined){
-          return ""
-        }
-        return value.split(": ")[1]
-      }),
-      post: searchTags.filter(tag=>tag.includes("должность: ")).map(value => {
-        if (value === undefined){
-          return ""
-        }
-        return value.split(": ")[1]
-      }),
-      success: searchTags.filter(tag=>tag.includes("успешность: ")).map(value => {
-        if (value === undefined){
-          return ""
-        }
-        return value.split(": ")[1]
+    if (searchText){
+      searchText = searchText.toLocaleLowerCase();
+      result = result.filter(Employee =>{
+        return (Employee.firstName + Employee.lastName + Employee.patronymic).toLocaleLowerCase().includes(searchText);
       })
     }
-    // console.log(toFilter);
-    if (toFilter.projects.length !==0){
-      result = result.filter(Employee=>
-        toFilter.projects.some(value => value === Employee.project.toLocaleLowerCase()))
+    if (searchTags.length !== 0){
+      searchTags = searchTags.map((tag) => tag.toLocaleLowerCase());
+      const toFilter:ISearchTags = {
+        projects: searchTags.filter(tag=>tag.includes("проект: ")).map(value => {
+          if (value === undefined){
+            return ""
+          }
+          return value.split(": ")[1]
+        }),
+        post: searchTags.filter(tag=>tag.includes("должность: ")).map(value => {
+          if (value === undefined){
+            return ""
+          }
+          return value.split(": ")[1]
+        }),
+        success: searchTags.filter(tag=>tag.includes("успешность: ")).map(value => {
+          if (value === undefined){
+            return ""
+          }
+          return value.split(": ")[1]
+        })
+      }
+      if (toFilter.projects.length !==0){
+        result = result.filter(Employee=>
+          toFilter.projects.some(value => value === Employee.project.toLocaleLowerCase()))
+      }
+      if (toFilter.post.length !==0){
+        result = result.filter(Employee=>
+          toFilter.post.some(value => value === Employee.post.toLocaleLowerCase()))
+      }
+      if (toFilter.success.length !==0){
+        result = result.filter(Employee=>
+          toFilter.success.some(value => value === Employee.success.toLocaleLowerCase()))
+      }
     }
-    if (toFilter.post.length !==0){
-      result = result.filter(Employee=>
-        toFilter.post.some(value => value === Employee.post.toLocaleLowerCase()))
+
+    if (range !== null){
+      result = result.filter(Employee => range[0] <= Employee.salary && Employee.salary <= range[1]
+      )
     }
-    if (toFilter.success.length !==0){
-      result = result.filter(Employee=>
-        toFilter.success.some(value => value === Employee.success.toLocaleLowerCase()))
-    }
+    // console.log(result)
     return result
   }
 }

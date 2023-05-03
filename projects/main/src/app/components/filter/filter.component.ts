@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Observable, of, Subject} from "rxjs";
+import {debounceTime, Observable, of, Subject} from "rxjs";
 import {delay, startWith, switchMap} from 'rxjs/operators';
 import {EmployeeService} from "../../services/employee.service";
 import {FormControl} from "@angular/forms";
@@ -22,9 +22,20 @@ export class FilterComponent implements OnInit{
   constructor(private employeeService: EmployeeService) { }
   @Output()
   public filterEvent$: EventEmitter<string[]> = new EventEmitter<string[]>()
+  @Output()
+  public filterRangeEvent$: EventEmitter<number[]|null> = new EventEmitter<number[]|null>()
+  @Output()
+  public paginationEvent$: EventEmitter<number> = new EventEmitter<number>()
 
   private readonly search$ = new Subject<string>();
   ngOnInit(): void {
+    this.filterRangeEvent$.next(this.control.value)
+    this.control.valueChanges.pipe(debounceTime(500))
+      .subscribe(v=>this.filterRangeEvent$.next(v))
+    this.pagination.setValue(5)
+    this.pagination.valueChanges.pipe(debounceTime(500))
+      .subscribe(v=>this.paginationEvent$.next(v))
+
     this.getEmployees();
     this.databaseMockData.forEach(Employee => {
       const proj = "Проект: "+Employee.project
@@ -62,6 +73,7 @@ export class FilterComponent implements OnInit{
   onSearchChange(search: string): void {
     this.search$.next(search);
   }
+
   private serverRequest(search: string): Observable<string[]> {
     let data = this.result
     data = data.filter(item =>
@@ -69,10 +81,11 @@ export class FilterComponent implements OnInit{
       return item.toLowerCase().includes(search.toLocaleLowerCase())
     })
     return of(data).pipe(delay(Math.random()*1000+500));
+    // return of(data);
   }
-  readonly control = new FormControl([10_000, 1000_000]);
+  readonly control = new FormControl([50_000, 1000_000]);
   readonly max = 1_000_000;
-  readonly min = 0;
+  readonly min = 10_000;
   readonly totalSteps = 100;
   readonly ticksLabels = ['0', '10K', '100K', '500k', '1000K'];
   readonly segments = this.ticksLabels.length - 1;
@@ -80,7 +93,7 @@ export class FilterComponent implements OnInit{
   readonly keySteps: TuiKeySteps = [
     // [percent, value]
     [0, this.min],
-    [25, 10_000],
+    [25, 50_000],
     [50, 100_000],
     [75, 500_000],
     [100, this.max],
@@ -88,5 +101,11 @@ export class FilterComponent implements OnInit{
   readonly currency = {
     other: '₽',
   };
+  items = [
+    5,10,15,20
+  ];
+
+  pagination = new FormControl();
+
 }
 

@@ -18,18 +18,17 @@ import {
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
-    TuiAvatarModule,
-    TuiBadgeModule,
-    TuiDataListWrapperModule,
-    TuiInputModule,
-    TuiInputRangeModule,
-    TuiInputTagModule,
-    TuiSelectModule
+  TuiAvatarModule,
+  TuiBadgeModule,
+  TuiDataListWrapperModule,
+  TuiInputModule,
+  TuiInputRangeModule,
+  TuiInputTagModule, TuiPaginationModule,
+  TuiSelectModule
 } from "@taiga-ui/kit";
 import { EmployeeBlockComponent } from './components/employee-block/employee-block.component';
 import {MonetaryPipe} from "./pipes/monetary.pipe";
 import { HeaderComponent } from './components/header/header.component';
-import {SearchPipe} from "./pipes/search.pipe";
 import { SearchComponent } from './components/search/search.component';
 import { DetailedEmployeeComponent } from './components/detailed-employee/detailed-employee.component';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -37,6 +36,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { LoginComponent } from './components/login/login.component';
 import { AddingEmployeesComponent } from './components/adding-employees/adding-employees.component';
 import { BtnBackComponent } from './components/btn-back/btn-back.component';
+import { PaginationPipe } from './pipes/pagination.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,6 @@ import { BtnBackComponent } from './components/btn-back/btn-back.component';
     EmployeeBlockComponent,
     MonetaryPipe,
     HeaderComponent,
-    SearchPipe,
     SearchComponent,
     FilterPipe,
     FilterComponent,
@@ -55,6 +54,7 @@ import { BtnBackComponent } from './components/btn-back/btn-back.component';
     DetailedEmployeeComponent,
     AddingEmployeesComponent,
     BtnBackComponent,
+    PaginationPipe,
   ],
   imports: [
     BrowserModule,
@@ -76,8 +76,9 @@ import { BtnBackComponent } from './components/btn-back/btn-back.component';
     TuiDataListWrapperModule,
     TuiInputRangeModule,
     TuiInputTagModule,
+    TuiPaginationModule,
   ],
-  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
+  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},FilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

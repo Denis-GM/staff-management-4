@@ -26,8 +26,25 @@
       [segments]="segments"
       [formControl]="control"
       [pluralize]="currency"
+
     >
       зарплата
     </tui-input-range>
   </div>
+
+</div>
+<div class="container">
+  <tui-select
+    tuiTextfieldSize="m"
+    [formControl]="pagination"
+  >
+    элементов на странице
+    <input
+      tuiTextfield
+    />
+    <tui-data-list-wrapper
+      *tuiDataList
+      [items]="items"
+    ></tui-data-list-wrapper>
+  </tui-select>
 </div>
