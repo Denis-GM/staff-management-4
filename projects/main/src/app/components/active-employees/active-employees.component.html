@@ -1,3 +1,28 @@
 <tui-root>
-  <app-employee-block></app-employee-block>
+  <app-header></app-header>
+  <app-search (searchEvent$)="applySearch($event)"></app-search>
+  <app-filter 
+    (filterEvent$)="applyFilter($event)"
+    (filterRangeEvent$)="applyRangeFilter($event)"
+    (paginationEvent$)="setItemsPerPage($event)">
+  </app-filter>
+  <div class="emp-block__container">
+    <div class="notation-panel">
+      <ul class="list-reset">
+        <li>Автатар</li><li>Имя</li><li>Проект</li><li>Должность</li><li>Зарплата</li><li>Успешность</li>
+      </ul>
+    </div>
+    <div *ngFor="let employee of employees
+    | filterTags:searchText:searchTags:rangeSalary
+    | pagination:itemsPerPage:index">
+      <app-employee [employee]="employee" (click)="selectEmployee(employee)"></app-employee>
+    </div>
+    <div class="pagination" *ngIf="length>1">
+      <tui-pagination
+        [length]="length"
+        [index]="index"
+        (indexChange)="goToPage($event)"
+      ></tui-pagination>
+    </div>
+  </div>    
 </tui-root>

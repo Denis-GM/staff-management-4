@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -6,7 +6,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
 
 import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
 import {
@@ -38,6 +37,9 @@ import { AddingEmployeesComponent } from './components/adding-employees/adding-e
 import { BtnBackComponent } from './components/btn-back/btn-back.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
 import { DialogWindowComponent } from './components/dialog-window/dialog-window.component';
+import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { ErrorHandlerService } from './services/error-handler.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import { DialogWindowComponent } from './components/dialog-window/dialog-window.
     RegistrationComponent,
     LoginComponent,
     ActiveEmployeesComponent,
-    EmployeeBlockComponent,
+    EmployeeComponent,
     MonetaryPipe,
     HeaderComponent,
     SearchComponent,
@@ -80,7 +82,15 @@ import { DialogWindowComponent } from './components/dialog-window/dialog-window.
     TuiInputTagModule,
     TuiPaginationModule,
   ],
-  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},FilterPipe],
+  providers: [{
+    provide: TUI_SANITIZER,
+    useClass: NgDompurifySanitizer
+    },
+    {
+      provide: ErrorHandler,
+      useClass: ErrorHandlerService,
+    },
+    FilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
