@@ -1,17 +1,17 @@
 .container{
-  display: flex;
-  justify-content: space-between;
-  width: 1200px;
-  padding: 0;
   margin-top: 10px;
-}
-.input_tags{
-  width: 595px;
-}
-.wrapper {
-  width: 595px;
+  margin-bottom: 20px;
+  padding: 0;
+
+  max-width: 1200px;
+  width: 100%;
 }
 
-.ticks-labels {
-  color: var(--tui-text-02);
+.wrapper {
+  margin-bottom: 10px;
+
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+
+  gap: 10px;
 }

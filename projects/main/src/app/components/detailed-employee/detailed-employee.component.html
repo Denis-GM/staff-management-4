@@ -4,7 +4,7 @@
     <div>
       <div class="name-field">{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}</div>
       <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
-                  class="tui-space_top-1 avatar" size="xxl" [rounded]="true">
+        class="tui-space_top-1 avatar" size="xxl" [rounded]="true" [autoColor]="true">
       </tui-avatar>
       <tui-badge size="l" status="custom" value="{{ employee.success }}"
                  class="tui-space_right-2 emp-block__success"
