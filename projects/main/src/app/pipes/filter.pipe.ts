@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {ISearchTags} from "../components/filter/filter.interface";
+import {ISearchTags} from "../interfaces/filter.interface";
 import {IEmployee} from "../interfaces/employee.interface";
 
 @Pipe({
@@ -15,7 +15,7 @@ export class FilterPipe implements PipeTransform {
     if (searchText){
       searchText = searchText.toLocaleLowerCase();
       result = result.filter(Employee =>{
-        return (Employee.firstName + Employee.lastName + Employee.patronymic).toLocaleLowerCase().includes(searchText);
+        return `${Employee.lastName} ${Employee.firstName} ${Employee.patronymic}`.toLocaleLowerCase().includes(searchText);
       })
     }
     if (searchTags.length !== 0){

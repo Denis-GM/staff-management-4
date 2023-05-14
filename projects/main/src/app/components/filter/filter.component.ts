@@ -6,9 +6,6 @@ import {FormControl} from "@angular/forms";
 import {TuiKeySteps} from "@taiga-ui/kit";
 import {IEmployee} from "../../interfaces/employee.interface";
 
-
-
-
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -16,27 +13,59 @@ import {IEmployee} from "../../interfaces/employee.interface";
 
 })
 
-export class FilterComponent implements OnInit{
-  databaseMockData: IEmployee[] =[]
-  result:string[] = []
+export class FilterComponent implements OnInit {
+
+  protected databaseMockData: IEmployee[] =[]
+  protected result: string[] = []
+  protected value: string[] = [];
+  
+  protected readonly min_salary = 0;
+  protected readonly max_salary = 1000000
+
+  protected salaryControl: FormControl = new FormControl([this.min_salary, this.max_salary]);
+  protected paginationControl: FormControl = new FormControl();
+
+  protected readonly items: number[] = [5, 10, 15, 20];
+  protected readonly totalSteps = 100;
+
+  protected readonly keySteps: TuiKeySteps = [
+    [0, this.min_salary],
+    [25, 100_000],
+    [50, 250_000],
+    [75, 500_000],
+    [100, this.max_salary],
+  ];
+
+  protected readonly currency = {
+    other: 'руб',
+  };
+
+  private readonly search$: Subject<string> = new Subject<string>();
+
   constructor(private employeeService: EmployeeService) { }
+
   @Output()
   public filterEvent$: EventEmitter<string[]> = new EventEmitter<string[]>()
+
   @Output()
   public filterRangeEvent$: EventEmitter<number[]|null> = new EventEmitter<number[]|null>()
+
   @Output()
   public paginationEvent$: EventEmitter<number> = new EventEmitter<number>()
 
-  private readonly search$ = new Subject<string>();
   ngOnInit(): void {
-    this.filterRangeEvent$.next(this.control.value)
-    this.control.valueChanges.pipe(debounceTime(500))
+    this.getEmployees();
+
+    const salary_list = this.databaseMockData.map((employee: IEmployee) => employee.salary);
+    this.salaryControl = new FormControl([Math.min(...salary_list), Math.max(...salary_list)]);
+
+    this.filterRangeEvent$.next(this.salaryControl.value)
+    this.salaryControl.valueChanges.pipe(debounceTime(500))
       .subscribe(v=>this.filterRangeEvent$.next(v))
-    this.pagination.setValue(5)
-    this.pagination.valueChanges.pipe(debounceTime(500))
+    this.paginationControl.setValue(5)
+    this.paginationControl.valueChanges.pipe(debounceTime(500))
       .subscribe(v=>this.paginationEvent$.next(v))
 
-    this.getEmployees();
     this.databaseMockData.forEach(Employee => {
       const proj = "Проект: "+Employee.project
       if (!this.result.includes(proj)){
@@ -51,6 +80,7 @@ export class FilterComponent implements OnInit{
         this.result.push(success)
       }
     })
+
     this.result.sort()
   }
 
@@ -60,8 +90,6 @@ export class FilterComponent implements OnInit{
         this.databaseMockData = employees
       });
   }
-  value = [];
-
 
   readonly items$ = this.search$.pipe(
     switchMap(search =>
@@ -81,31 +109,6 @@ export class FilterComponent implements OnInit{
       return item.toLowerCase().includes(search.toLocaleLowerCase())
     })
     return of(data).pipe(delay(Math.random()*1000+500));
-    // return of(data);
   }
-  readonly control = new FormControl([50_000, 1000_000]);
-  readonly max = 1_000_000;
-  readonly min = 10_000;
-  readonly totalSteps = 100;
-  readonly ticksLabels = ['0', '10K', '100K', '500k', '1000K'];
-  readonly segments = this.ticksLabels.length - 1;
-
-  readonly keySteps: TuiKeySteps = [
-    // [percent, value]
-    [0, this.min],
-    [25, 50_000],
-    [50, 100_000],
-    [75, 500_000],
-    [100, this.max],
-  ];
-  readonly currency = {
-    other: '₽',
-  };
-  items = [
-    5,10,15,20
-  ];
-
-  pagination = new FormControl();
-
 }
 

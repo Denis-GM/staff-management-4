@@ -3,7 +3,7 @@
   <div class="header-board">
     <a routerLink="/dashboard" class="btn-back">Назад</a>
     <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
-                class="tui-space_top-1 avatar" size="xxl" [rounded]="true">
+                class="tui-space_top-1 avatar" size="xxl" [rounded]="true" [autoColor]="true">
     </tui-avatar>
     <div>
       <div class="name-field">{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}</div>

@@ -10,14 +10,14 @@
     </ul>
   </div>
   <div *ngFor="let employee of employees
-  |filterTags:searchText:searchTags:rangeSalary
+  | filterTags:searchText:searchTags:rangeSalary
   | pagination:itemsPerPage:index">
     <div class="emp-block outer" (click)="selectEmployee(employee)">
       <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
-                  class="tui-space_top-1 inner" size="m" [rounded]="true">
+        class="tui-space_top-1 inner" size="m" [rounded]="true" [autoColor]="true">
       </tui-avatar>
       <div class="emp-block-main-data">
-        <span class="emp-block__name">{{ employee.firstName + ' ' + employee.lastName + ' ' +
+        <span class="emp-block__name">{{ employee.lastName + ' ' + employee.firstName + ' ' +
         employee.patronymic}}</span>
         <span class="emp-block__project">{{ employee.project }}</span>
         <span class="emp-block__post">{{ employee.post }}</span>
@@ -34,11 +34,10 @@
           ordinary_circle: employee.success === 'Обычный',
           }"></span>
         </tui-badge>
-<!--        <span class="emp-block__success">{{ employee.success }}</span>-->
       </div>
     </div>
   </div>
-  <div *ngIf="length>1">
+  <div class="pagination" *ngIf="length>1">
     <tui-pagination
       [length]="length"
       [index]="index"
