@@ -1,53 +1,93 @@
 <app-header></app-header>
 <tui-root>
-  <div class="main-board">
+  <div class="header-board">
+    <a routerLink="/dashboard" class="btn-back">Назад</a>
+    <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
+                class="tui-space_top-1 avatar" size="xxl" [rounded]="true">
+    </tui-avatar>
     <div>
       <div class="name-field">{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}</div>
-      <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
-                  class="tui-space_top-1 avatar" size="xxl" [rounded]="true">
-      </tui-avatar>
+      <div class="email-field">{{employee.email}}</div>
       <tui-badge size="l" status="custom" value="{{ employee.success }}"
                  class="tui-space_right-2 emp-block__success"
                  [ngClass]="{
-                    success: employee.success === 'Успешный',
-                    unsuccess: employee.success === 'Неуспешный',
-                    ordinary: employee.success === 'Обычный',}">
-          <span class="custom-content" [ngClass]="{
-            success_circle: employee.success === 'Успешный',
-            unsuccess_circle: employee.success === 'Неуспешный',
-            ordinary_circle: employee.success === 'Обычный',
-            }">
-          </span>
+                  success: employee.success === 'Успешный',
+                  unsuccess: employee.success === 'Неуспешный',
+                  ordinary: employee.success === 'Обычный',}">
+        <span class="custom-content" [ngClass]="{
+          success_circle: employee.success === 'Успешный',
+          unsuccess_circle: employee.success === 'Неуспешный',
+          ordinary_circle: employee.success === 'Обычный',
+          }">
+        </span>
       </tui-badge>
-      <div class="data-field">
-        <span class="data-field__label">Дата рождения</span>
-        <div>{{employee.birthday}}</div>
+    </div>
+  </div>
+
+  <div class="main-board">
+    <div class="detailed__container">
+      <h2 class="detailed__title">Основная информация</h2>
+      <div class="data-sec">
+        <div class="data-field">
+          <span class="data-field__label">Дата рождения</span>
+          <div>{{employee.birthday}}</div>
+        </div>
+        <div class="data-field">
+          <span class="data-field__label">Город</span>
+          <div>{{employee.city}}</div>
+        </div>
+        <div class="data-field">
+          <span class="data-field__label">Проект</span>
+          <div>{{employee.project}}</div>
+        </div>
+        <div class="data-field">
+          <span class="data-field__label">Должность</span>
+          <div>{{employee.post}}</div>
+        </div>
+        <div class="data-field">
+          <span class="data-field__label">Зарплата</span>
+          <div>{{employee.salary | monetary}}</div>
+        </div>
       </div>
-      <div class="data-field">
-        <span class="data-field__label">Образование</span>
-        <div>{{employee.education}}</div>
+
+      <h2 class="detailed__title">Образование</h2>
+      <div class="data-sec">
+        <div class="data-field">
+          <span class="data-field__label">Образование</span>
+          <div>{{employee.education}}</div>
+        </div>
+        <div class="data-field">
+          <span class="data-field__label">Образовательное учреждение</span>
+          <div>{{employee.educational_institution}}</div>
+        </div>
+        <div class="data-field">
+          <span class="data-field__label">Специальность</span>
+          <div>{{employee.specialization}}</div>
+        </div>
+        <div class="data-field">
+          <span class="data-field__label">Год окончания</span>
+          <div>{{employee.year_graduation}}</div>
+        </div>
       </div>
-      <div class="data-field">
-        <span class="data-field__label">Проект</span>
-        <div>{{employee.project}}</div>
-      </div>
-      <div class="data-field">
-        <span class="data-field__label">Должность</span>
-        <div>{{employee.post}}</div>
-      </div>
-      <div class="data-field">
-        <span class="data-field__label">Зарплата</span>
-        <div>{{employee.salary | monetary}}</div>
-      </div>
+
+      <h2 class="detailed__title">Журнал</h2>
       <div class="dairy-container">
-        <span class="dairy-field__label">Журнал</span>
-        <div class="dairy-field">// todo</div>
+        <div class="dairy-field"></div>
+      </div>
+      <div class="detailed__buttons">
+        <button tuiButton type="button" appearance="primary"
+                class="tui-space_right-3 tui-space_bottom-3 detailed__add"
+                (click)="showDialog()"
+        >
+          Добавить запись
+        </button>
+<!--        <app-dialog-window></app-dialog-window>-->
+        <button tuiButton type="button" appearance="outline"
+                class="tui-space_right-3 tui-space_bottom-3 detailed__edit">
+          Изменить данные
+        </button>
       </div>
     </div>
-    <button tuiButton type="button" appearance="primary"
-            class="tui-space_right-3 tui-space_bottom-3 btn-edit">
-      Редактировать
-    </button>
-    <app-btn-back [ngClass]="{'btn-back': true}"></app-btn-back>
   </div>
+  <app-dialog-window *ngIf="isOpen" (isOpen)="hideDialog($event)"></app-dialog-window>
 </tui-root>

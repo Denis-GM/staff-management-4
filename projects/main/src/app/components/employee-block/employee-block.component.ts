@@ -20,20 +20,21 @@ export class EmployeeBlockComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployees();
-
   }
-
 
   getEmployees(): void {
     this.employeeService.getEmployees()
       .subscribe(employees => {
-        this.employees = employees
+        this.employees = employees;
+        console.log(employees);
       });
   }
+
   applySearch(value:string):void{
     this.searchText = value
     this.updatePaginationPages()
   }
+
   applyFilter(value:string[]):void{
     this.searchTags = value
     this.updatePaginationPages()
@@ -46,10 +47,12 @@ export class EmployeeBlockComponent implements OnInit {
       // { queryParams: { 'employee': JSON.stringify(employee) }}
       );
   }
+
   applyRangeFilter(value:number[]|null):void{
     this.rangeSalary = value
     this.updatePaginationPages()
   }
+
   updatePaginationPages():void{
     const searchedItems = this.filterPipe.transform(this.employees,this.searchText,
       this.searchTags,this.rangeSalary);

@@ -1,0 +1,58 @@
+<tui-root>
+  <div class="dialog__container">
+    <div class="dialog__container_outer">
+      <div class="dialog__container_inner">
+        <h2 class="dialog__title">Добавить запись</h2>
+<!--        <form class="dialog__form" [formGroup]="logForm" novalidate (ngSubmit)="submit()">-->
+          <tui-select [formControl]="actionControl" class="dialog__select">
+            Действие
+            <input
+              tuiTextfield
+            />
+            <tui-data-list-wrapper
+              *tuiDataList
+              [items]="actions"
+            ></tui-data-list-wrapper>
+<!--            <select-->
+<!--              tuiSelect-->
+<!--              [items]="actions"-->
+<!--              class="dialog__select"-->
+<!--            ></select>-->
+          </tui-select>
+          <div *ngIf="actionControl.value === 'Повышение'">
+            <form class="dialog__form" [formGroup]="formPost" (ngSubmit)="submitFormPost()">
+
+              <label class="dialog__label">Дата</label>
+              <tui-input tuiTextfieldSize="l" class="dialog__input"
+                         [tuiTextfieldLabelOutside]="true">
+                <input type="date" name="date_interview" formControlName="date" tuiTextfield/>
+              </tui-input>
+
+              <label class="dialog__label">Должность</label>
+              <tui-input tuiTextfieldSize="l" class="dialog__input"
+                         [tuiTextfieldLabelOutside]="true">
+                <input type="text" name="lastName" formControlName="newPost" tuiTextfield/>
+              </tui-input>
+
+              <label class="dialog__label">Зарплата</label>
+              <tui-input tuiTextfieldSize="l" class="dialog__input"
+                         [tuiTextfieldLabelOutside]="true">
+                <input type="number" name="lastName" formControlName="newSalary" tuiTextfield/>
+              </tui-input>
+            </form>
+          </div>
+          <div class="dialog__buttons">
+            <button tuiButton type="submit" class="dialog__add" (click)="submitFormPost()">
+              Добавить
+            </button>
+            <button tuiButton type="button" appearance="outline"
+                    class="tui-space_right-3 tui-space_bottom-3 dialog__cancel"
+                    (click)="hideDialog()">
+              Отмена
+            </button>
+          </div>
+<!--        </form>-->
+      </div>
+    </div>
+  </div>
+</tui-root>

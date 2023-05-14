@@ -11,6 +11,6 @@ export class BtnBackComponent {
   }
 
   redirectBack(){
-    this.router.navigate(['dashboard/']);
+    this.router.navigate(['../']);
   }
 }

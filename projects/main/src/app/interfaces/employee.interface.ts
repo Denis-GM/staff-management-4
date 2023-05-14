@@ -4,8 +4,14 @@ export interface IEmployee{
   lastName: string;
   patronymic: string;
   birthday: string;
-  education: string;
+  email: string;
   project: string;
+  city: string;
+
+  education: string;
+  educational_institution: string;
+  specialization: string;
+  year_graduation: string;
   post: string;
   salary: number;
   success: string;

@@ -1,0 +1,77 @@
+:host {
+  --width-dialog-window: 600px;
+  --height-dialog-window: 568px;
+}
+
+/*.dialog__container {*/
+/*  position: relative;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*}*/
+
+.dialog__container_outer {
+
+}
+
+.dialog__container_inner {
+  position: fixed;
+  top: calc(50% - var(--height-dialog-window) / 2);
+  left: calc(50% - var(--width-dialog-window) / 2);
+  background: #fff;
+  z-index: 1000;
+
+  width: var(--width-dialog-window);
+  height: var(--width-dialog-window);
+  /*position: relative;*/
+  display: flex;
+  flex-direction: column ;
+  padding: 49px 50px 40px 50px;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+
+.dialog__title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  /*margin-top: 45px;*/
+
+  border-left: 4px solid #526ED3;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+.dialog__form {
+  display: block;
+}
+
+.dialog__select {
+  z-index: 1000;
+  margin-bottom: 15px;
+}
+
+.dialog__label {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+}
+
+.dialog__input {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.dialog__buttons {
+  margin-top: 40px;
+  position: relative;
+}
+
+.dialog__add {
+  position: absolute;
+  left: 0;
+}
+
+.dialog__cancel {
+  position: absolute;
+  right: 0;
+}

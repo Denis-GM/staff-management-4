@@ -28,30 +28,20 @@ export class AddingEmployeesComponent implements OnInit {
       'firstName': new FormControl('', [Validators.required]),
       'patronymic': new FormControl('', [Validators.required]),
       'birthday': new FormControl('', [Validators.required]),
-      'email': new FormControl('',
-        // [Validators.required]
-      ),
+      'email': new FormControl('', [Validators.required]),
 
-      'post': new FormControl('', [Validators.required]),
-      'salary': new FormControl('', [Validators.required]),
-      'project': new FormControl('', [Validators.required]),
-      'city': new FormControl('',
-        // [Validators.required]
-      ),
-      'date_interview': new FormControl(''),
-      'date_employment': new FormControl(''),
-      'date_output': new FormControl(''),
+      'post': new FormControl(' '),
+      'salary': new FormControl(' '),
+      'project': new FormControl(' '),
+      'city': new FormControl(' '),
+      'date_interview': new FormControl(' '),
+      'date_employment': new FormControl(' '),
+      'date_output': new FormControl(' '),
 
-      'education': new FormControl('', [Validators.required]),
-      'educational_institution': new FormControl('',
-        // [Validators.required]
-        ),
-      'specialization': new FormControl('',
-        // [Validators.required]
-      ),
-      'year_graduation': new FormControl('',
-        // [Validators.required]
-      ),
+      'education': new FormControl('УрФУ'),
+      'educational_institution': new FormControl(' '),
+      'specialization': new FormControl(' '),
+      'year_graduation': new FormControl('2021'),
     });
   }
 
@@ -66,7 +56,14 @@ export class AddingEmployeesComponent implements OnInit {
         lastName: form.get('lastName')?.value,
         patronymic: form.get('patronymic')?.value,
         birthday: form.get('birthday')?.value,
+        email: form.get('email')?.value,
+        city: form.get('city')?.value,
+
         education: form.get('education')?.value,
+        educational_institution: form.get('educational_institution')?.value,
+        specialization: form.get('specialization')?.value,
+        year_graduation: form.get('year_graduation')?.value,
+
         project: form.get('project')?.value,
         post: form.get('post')?.value,
         salary: Number(form.get('salary')?.value),
@@ -81,8 +78,11 @@ export class AddingEmployeesComponent implements OnInit {
 
   submit(){
     this.setEmployee(this.employeeForm);
+    // this.employeeService.getEmployees().subscribe( observer => {
+    //   observer.
+    // });
     this.employeeService.addEmployee(this.employee);
-    console.log(this.employeeForm);
+    console.log(this.employee);
     this.redirectBack();
   }
 }

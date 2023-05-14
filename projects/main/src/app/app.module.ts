@@ -18,13 +18,13 @@ import {
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
-  TuiAvatarModule,
-  TuiBadgeModule,
-  TuiDataListWrapperModule,
-  TuiInputModule,
-  TuiInputRangeModule,
-  TuiInputTagModule, TuiPaginationModule,
-  TuiSelectModule
+    TuiAvatarModule,
+    TuiBadgeModule,
+    TuiDataListWrapperModule,
+    TuiInputModule,
+    TuiInputRangeModule,
+    TuiInputTagModule, TuiPaginationModule,
+    TuiSelectModule
 } from "@taiga-ui/kit";
 import { EmployeeBlockComponent } from './components/employee-block/employee-block.component';
 import {MonetaryPipe} from "./pipes/monetary.pipe";
@@ -37,6 +37,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AddingEmployeesComponent } from './components/adding-employees/adding-employees.component';
 import { BtnBackComponent } from './components/btn-back/btn-back.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
+import { DialogWindowComponent } from './components/dialog-window/dialog-window.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { PaginationPipe } from './pipes/pagination.pipe';
     DetailedEmployeeComponent,
     AddingEmployeesComponent,
     BtnBackComponent,
+    DialogWindowComponent,
     PaginationPipe,
   ],
   imports: [

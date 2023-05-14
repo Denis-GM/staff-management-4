@@ -19,7 +19,7 @@ export class EmployeeService {
     return res;
   }
 
-  addEmployee(employee:IEmployee): void{
+  addEmployee(employee:IEmployee): void {
     Employees.push(employee);
   }
 

@@ -1,20 +1,47 @@
-.main-board {
+.header-board {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 250px 1fr;
   width: 850px;
-  min-height: 788px;
+  height: 220px;
   background: #fff;
   margin: auto;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  margin-top: 70px;
+  margin-top: 20px;
+}
+
+.main-board {
+  font-family: 'Montserrat', 'sans-serif';
+  font-style: normal;
+
+  position: relative;
+  display: flex;
+  width: 850px;
+  background: #fff;
+  margin: auto;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  margin-top: 54px;
   margin-bottom: 142px;
 }
 
-/*.container {*/
-/*  width: 100%;*/
-/*  */
-/*}*/
+.detailed__container {
+  padding: 0 60px 50px 60px;
+  width: 100%;
+}
+
+.detailed__title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin-top: 45px;
+
+  border-left: 4px solid #526ED3;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
 
 .name-field {
   font-family: 'Montserrat', sans-serif;
@@ -22,24 +49,29 @@
   font-weight: 500;
   font-size: 32px;
   line-height: 39px;
-  margin-top: 52px;
-  margin-left: 67px;
+  margin-top: 44px;
+  /*margin-left: 67px;*/
+}
 
-  /*background-color: #526ED3;*/
-  /*background-position:left;*/
+.email-field {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
 }
 
 .avatar {
-  position: absolute;
-  top: 34px;
-  right: 34px;
+  /*position: absolute;*/
+  top: 39px;
+  left: 44px;
 }
 
 .emp-block__success {
-  width: 178px;
-  position: absolute !important;
-  top: 212px;
-  right: 37px;
+  width: 220px;
+  padding-right: 30px;
+  /*position: absolute !important;*/
+  /*top: 212px;*/
+  /*right: 37px;*/
+  margin-top: 18px;
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -94,7 +126,8 @@
 }
 
 .data-field {
-  margin: 14px 0 0 49px;
+  /*margin: 14px 0 0 49px;*/
+  margin-top: 15px;
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -115,7 +148,8 @@
 }
 
 .dairy-container {
-  margin-top: 23px;
+  margin-top: 19px;
+  margin-left: 63px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
@@ -124,22 +158,44 @@
 }
 
 .dairy-field__label {
-  margin: 25px 0 0 67px;
+  margin: 25px 0 0 87px;
 }
 
 .dairy-field {
-  margin-top: 23px;
-  margin-left: 49px;
+  /*margin-top: 23px;*/
+  /*margin-left: 49px;*/
 }
 
-.btn-edit {
-  position: absolute;
-  left: 30px;
-  bottom: 29px;
+.detailed__buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailed__add{
+  max-width: 300px;
+  width: 100%;
+}
+
+.detailed__edit{
+  position: relative !important;
+  max-width: 290px;
+  width: 100%;
 }
 
 .btn-back {
+  padding-left: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
   position: absolute;
-  right: 30px;
-  bottom: 29px;
+  top: -35px;
+  /*left: 5px;*/
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 30px;
+  color: #535353;
+  background-image: url("../../../assets/arrow.svg");
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  background-position-y: 7px;
 }
