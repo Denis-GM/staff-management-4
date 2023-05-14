@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,6 +37,7 @@ import { BtnBackComponent } from './components/btn-back/btn-back.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
 import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { ErrorHandlerService } from './services/error-handler.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,15 @@ import { EmployeeComponent } from './components/employee/employee.component';
     TuiInputTagModule,
     TuiPaginationModule,
   ],
-  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}, FilterPipe],
+  providers: [{
+    provide: TUI_SANITIZER,
+    useClass: NgDompurifySanitizer
+    },
+    {
+      provide: ErrorHandler,
+      useClass: ErrorHandlerService,
+    },
+    FilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

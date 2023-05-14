@@ -5,7 +5,7 @@
     --right: 41px;
     /*width: calc(100% - var(--left) - var(--right));*/
     height: 80px;
-    background: #FFF;
+    background-color: #FFF;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     margin: 0 auto 20px;
@@ -19,6 +19,12 @@
   
     user-select: none;
     cursor: pointer;
+
+    transition: background-color 0.3s ease;
+}
+
+.emp-block:hover {
+    background-color: #f9f9f9;
 }
   
 .outer {
