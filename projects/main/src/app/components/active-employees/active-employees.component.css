@@ -1,0 +1,48 @@
+.emp-block__container {
+  position: relative;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.notation-panel {
+  padding: 13px 25px 13px 25px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  color: #797979;
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.list-reset li:nth-child(1) {
+  margin-right: 115px;
+}
+
+.list-reset li:nth-child(2) {
+  margin-right: 139px;
+}
+
+.list-reset li:nth-child(3) {
+  margin-right: 129px;
+}
+
+.list-reset li:nth-child(4) {
+  margin-right: 144px;
+}
+
+.list-reset li:nth-child(5) {
+  margin-right: 110px;
+}
+
+.pagination {
+  margin-bottom: 50px;
+}

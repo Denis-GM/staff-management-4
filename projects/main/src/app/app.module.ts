@@ -6,7 +6,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
 
 import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
 import {
@@ -26,7 +25,6 @@ import {
   TuiInputTagModule, TuiPaginationModule,
   TuiSelectModule
 } from "@taiga-ui/kit";
-import { EmployeeBlockComponent } from './components/employee-block/employee-block.component';
 import {MonetaryPipe} from "./pipes/monetary.pipe";
 import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
@@ -37,6 +35,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AddingEmployeesComponent } from './components/adding-employees/adding-employees.component';
 import { BtnBackComponent } from './components/btn-back/btn-back.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
+import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
+import { EmployeeComponent } from './components/employee/employee.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { PaginationPipe } from './pipes/pagination.pipe';
     RegistrationComponent,
     LoginComponent,
     ActiveEmployeesComponent,
-    EmployeeBlockComponent,
+    EmployeeComponent,
     MonetaryPipe,
     HeaderComponent,
     SearchComponent,
@@ -78,7 +78,7 @@ import { PaginationPipe } from './pipes/pagination.pipe';
     TuiInputTagModule,
     TuiPaginationModule,
   ],
-  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},FilterPipe],
+  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}, FilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

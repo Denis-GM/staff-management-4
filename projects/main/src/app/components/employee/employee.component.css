@@ -1,0 +1,104 @@
+/* TODO Переделать стили*/
+
+.emp-block {
+    --left: 29px;
+    --right: 41px;
+    /*width: calc(100% - var(--left) - var(--right));*/
+    height: 80px;
+    background: #FFF;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin: 0 auto 20px;
+    padding: 0 var(--right) 0 var(--left);
+  
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+  
+    user-select: none;
+    cursor: pointer;
+}
+  
+.outer {
+    display: flex;
+}
+  
+.inner {
+    margin: auto;
+    margin-left: 0;
+}
+  
+.tui-space_top-1 {
+    margin-right: 28px;
+}
+  
+.emp-block-main-data {
+    display: grid;
+    grid-template-columns: 230px 150px 270px 180px 220px;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    margin-left: 0;
+}
+  
+.emp-block__success {
+    /*max-width: 200px;*/
+    text-align: center;
+    margin-right: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius: 10px;
+    /*width: 158px;*/
+    color: #000;
+}
+  
+.success {
+    position: relative;
+    background-color: #E9F8F3;
+}
+  
+.success_circle {
+    position: absolute;
+    left: 29px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: #4AC99B;
+    border-radius: 10px;
+}
+  
+.unsuccess {
+    position: relative;
+    background: #FEEBE4;
+}
+  
+.unsuccess_circle {
+    position: absolute;
+    left: 29px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: #F45725;
+    border-radius: 10px;
+}
+  
+.ordinary {
+    position: relative;
+    background: #EEF6FE;
+}
+  
+.ordinary_circle {
+    position: absolute;
+    left: 29px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: #71B7F6;
+    border-radius: 10px;
+}
+  
