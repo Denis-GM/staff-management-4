@@ -12,7 +12,6 @@ import { FilterPipe } from "../../pipes/filter.pipe";
 
 export class ActiveEmployeesComponent implements OnInit {
   employees: IEmployee[] = [];
-  // selectedEmployee: IEmployee = {} as IEmployee;
   searchText = ""
   searchTags: string[] = []
   rangeSalary: number[] | null = []

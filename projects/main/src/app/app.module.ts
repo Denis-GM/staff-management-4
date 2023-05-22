@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import {NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,7 +25,6 @@ import {
     TuiInputTagModule, TuiPaginationModule,
     TuiSelectModule
 } from "@taiga-ui/kit";
-import { EmployeeBlockComponent } from './components/employee-block/employee-block.component';
 import {MonetaryPipe} from "./pipes/monetary.pipe";
 import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
@@ -40,6 +39,8 @@ import { DialogWindowComponent } from './components/dialog-window/dialog-window.
 import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { ErrorHandlerService } from './services/error-handler.service';
+import { StatusEmployeeDirective } from './directives/status-employee.directive';
+import { ActionDirective } from './directives/action/action.directive';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,8 @@ import { ErrorHandlerService } from './services/error-handler.service';
     BtnBackComponent,
     DialogWindowComponent,
     PaginationPipe,
+    StatusEmployeeDirective,
+    ActionDirective,
   ],
   imports: [
     BrowserModule,

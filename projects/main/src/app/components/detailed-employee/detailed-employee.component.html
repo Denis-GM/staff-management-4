@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header xmlns="http://www.w3.org/1999/html"></app-header>
 <tui-root>
   <div class="header-board">
     <a routerLink="/dashboard" class="btn-back">Назад</a>
@@ -8,18 +8,10 @@
     <div>
       <div class="name-field">{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}</div>
       <div class="email-field">{{employee.email}}</div>
-      <tui-badge size="l" status="custom" value="{{ employee.success }}"
+      <tui-badge size="l" statusEmployee="custom" value="{{ employee.success }}"
                  class="tui-space_right-2 emp-block__success"
-                 [ngClass]="{
-                  success: employee.success === 'Успешный',
-                  unsuccess: employee.success === 'Неуспешный',
-                  ordinary: employee.success === 'Обычный',}">
-        <span class="custom-content" [ngClass]="{
-          success_circle: employee.success === 'Успешный',
-          unsuccess_circle: employee.success === 'Неуспешный',
-          ordinary_circle: employee.success === 'Обычный',
-          }">
-        </span>
+                 [appStatusEmployee]="employee.success">
+        <span class="custom-content" [appStatusEmployee]="employee.success" [isCircle]="true"></span>
       </tui-badge>
     </div>
   </div>
@@ -27,52 +19,196 @@
   <div class="main-board">
     <div class="detailed__container">
       <h2 class="detailed__title">Основная информация</h2>
-      <div class="data-sec">
+      <form [formGroup]="formMain" (ngSubmit)="saveFormMain()" class="data-sec">
         <div class="data-field">
           <span class="data-field__label">Дата рождения</span>
           <div>{{employee.birthday}}</div>
+
+          <div *ngIf="editMode && editModeMain" class="detailed__form_change">
+            <tui-input tuiTextfieldSize="m" class="detailed__input"
+                       [tuiTextfieldLabelOutside]="true">
+              <input type="date" formControlName="newBirthday" tuiTextfield/>
+            </tui-input>
+          </div>
+
         </div>
         <div class="data-field">
           <span class="data-field__label">Город</span>
           <div>{{employee.city}}</div>
+
+          <div *ngIf="editMode && editModeMain" class="detailed__form_change">
+            <tui-input tuiTextfieldSize="m" class="detailed__input"
+                       [tuiTextfieldLabelOutside]="true">
+              {{employee.city}}
+              <input type="text" formControlName="newCity" tuiTextfield/>
+            </tui-input>
+          </div>
         </div>
         <div class="data-field">
           <span class="data-field__label">Проект</span>
           <div>{{employee.project}}</div>
+
+          <div *ngIf="editMode && editModeMain" class="detailed__form_change">
+            <tui-input tuiTextfieldSize="m" class="detailed__input"
+                       [tuiTextfieldLabelOutside]="true">
+              {{employee.project}}
+              <input type="text" formControlName="newProject" tuiTextfield/>
+            </tui-input>
+          </div>
+
         </div>
         <div class="data-field">
           <span class="data-field__label">Должность</span>
           <div>{{employee.post}}</div>
+
+          <div *ngIf="editMode && editModeMain" class="detailed__form_change">
+            <tui-input tuiTextfieldSize="m" class="detailed__input"
+                       [tuiTextfieldLabelOutside]="true">
+              {{employee.post}}
+              <input type="text" formControlName="newPost" tuiTextfield/>
+            </tui-input>
+          </div>
+
         </div>
         <div class="data-field">
           <span class="data-field__label">Зарплата</span>
           <div>{{employee.salary | monetary}}</div>
+
+          <div *ngIf="editMode && editModeMain" class="detailed__form_change">
+            <tui-input tuiTextfieldSize="m" class="detailed__input"
+                       [tuiTextfieldLabelOutside]="true">
+              {{employee.salary}}
+              <input type="number" formControlName="newSalary" tuiTextfield/>
+            </tui-input>
+          </div>
+
         </div>
-      </div>
+        <button *ngIf="editMode && editModeMain" tuiButton type="submit" appearance="primary" size="m"
+                class="tui-space_right-3 tui-space_bottom-3 detailed__btn_change">
+          Изменить
+        </button>
+        <button *ngIf="editMode && editModeMain" tuiButton type="button" appearance="outline" size="m"
+                class="tui-space_right-3 tui-space_bottom-3 detailed__btn_change" (click)="closeEditModeMain()">
+          Отменить
+        </button>
+      </form>
 
       <h2 class="detailed__title">Образование</h2>
       <div class="data-sec">
-        <div class="data-field">
-          <span class="data-field__label">Образование</span>
-          <div>{{employee.education}}</div>
-        </div>
-        <div class="data-field">
-          <span class="data-field__label">Образовательное учреждение</span>
-          <div>{{employee.educational_institution}}</div>
-        </div>
-        <div class="data-field">
-          <span class="data-field__label">Специальность</span>
-          <div>{{employee.specialization}}</div>
-        </div>
-        <div class="data-field">
-          <span class="data-field__label">Год окончания</span>
-          <div>{{employee.year_graduation}}</div>
-        </div>
+        <form [formGroup]="formEducation" (ngSubmit)="saveFormEducation()" class="data-sec">
+          <div class="data-field">
+            <span class="data-field__label">Образование</span>
+            <div>{{employee.education}}</div>
+
+            <div *ngIf="editMode && editModeEducation" class="detailed__form_change">
+              <tui-input tuiTextfieldSize="m" class="detailed__input"
+                         [tuiTextfieldLabelOutside]="true">
+                {{employee.education}}
+                <input type="text" formControlName="newEducation" tuiTextfield/>
+              </tui-input>
+            </div>
+          </div>
+          <div class="data-field">
+            <span class="data-field__label">Образовательное учреждение</span>
+            <div>{{employee.educational_institution}}</div>
+
+            <div *ngIf="editMode && editModeEducation" class="detailed__form_change">
+              <tui-input tuiTextfieldSize="m" class="detailed__input"
+                         [tuiTextfieldLabelOutside]="true">
+                {{employee.educational_institution}}
+                <input type="text" formControlName="newEducational_institution" tuiTextfield/>
+              </tui-input>
+            </div>
+          </div>
+
+          <div class="data-field">
+            <span class="data-field__label">Специальность</span>
+            <div>{{employee.specialization}}</div>
+
+            <div *ngIf="editMode && editModeEducation"  class="detailed__form_change">
+              <tui-input tuiTextfieldSize="m" class="detailed__input"
+                         [tuiTextfieldLabelOutside]="true">
+                {{employee.specialization}}
+                <input type="text" formControlName="newSpecialization" tuiTextfield/>
+              </tui-input>
+            </div>
+          </div>
+
+          <div class="data-field">
+            <span class="data-field__label">Год окончания</span>
+            <div>{{employee.year_graduation}}</div>
+
+            <div *ngIf="editMode && editModeEducation"  class="detailed__form_change">
+              <tui-input tuiTextfieldSize="m" class="detailed__input"
+                         [tuiTextfieldLabelOutside]="true">
+                {{employee.year_graduation}}
+                <input type="text" formControlName="newYear_graduation" tuiTextfield/>
+              </tui-input>
+            </div>
+          </div>
+          <button *ngIf="editMode && editModeEducation" tuiButton type="submit" appearance="primary" size="m"
+                  class="tui-space_right-3 tui-space_bottom-3 detailed__btn_change">
+            Изменить
+          </button>
+          <button *ngIf="editMode && editModeEducation" tuiButton type="button" appearance="outline" size="m"
+                  class="tui-space_right-3 tui-space_bottom-3 detailed__btn_change" (click)="closeEditModeEducation()">
+            Отменить
+          </button>
+        </form>
       </div>
 
       <h2 class="detailed__title">Журнал</h2>
       <div class="dairy-container">
-        <div class="dairy-field"></div>
+        <ul class="dairy__list">
+          <li *ngFor="let action of actions" [ngSwitch]="action.title" class="dairy-field">
+
+            <ng-template ngSwitchCase="Повышение">
+              <div class="dairy__field_promotion">
+                <div class="dairy__field_header">
+                  <div>{{ action.title }}</div> <div>{{ action.date }}</div>
+                </div>
+                <div class="dairy__field_body">{{action.newPost}}, {{action.newSalary! | monetary}}</div>
+              </div>
+            </ng-template>
+
+            <ng-template ngSwitchCase="Понижение">
+              <div class="dairy__field_reduce">
+                <div class="dairy__field_header">
+                  <div>{{ action.title }}</div> <div>{{ action.date }}</div>
+                </div>
+                <div class="dairy__field_body">{{action.newPost}}, {{action.newSalary! | monetary}}</div>
+              </div>
+            </ng-template>
+
+            <ng-template ngSwitchCase="Больничный">
+              <div class="dairy__field_header">
+                <div>{{ action.title }}</div> <div>{{ action.date }} - {{ action.date2 }}</div>
+              </div>
+            </ng-template>
+
+            <ng-template ngSwitchCase="Отпуск">
+              <div class="dairy__field_header">
+                <div>{{ action.title }}</div> <div>{{ action.date }} - {{ action.date2 }}</div>
+              </div>
+            </ng-template>
+
+            <ng-template ngSwitchCase="Изменение данных">
+              <div class="dairy__field_edit">
+                <div class="dairy__field_header" >
+                  <div>{{ action.title }}</div> <div>{{ action.date }}</div>
+                </div>
+                <div class="dairy__field_body">{{action.oldValue}} -- {{action.newValue}}</div>
+              </div>
+            </ng-template>
+
+            <ng-template ngSwitchDefault>
+              <div class="dairy__field_header" >
+                <div>{{ action.title }}</div> <div>{{ action.date }}</div>
+              </div>
+            </ng-template>
+
+          </li>
+        </ul>
       </div>
       <div class="detailed__buttons">
         <button tuiButton type="button" appearance="primary"
@@ -81,13 +217,16 @@
         >
           Добавить запись
         </button>
-<!--        <app-dialog-window></app-dialog-window>-->
-        <button tuiButton type="button" appearance="outline"
-                class="tui-space_right-3 tui-space_bottom-3 detailed__edit">
+        <button *ngIf="!(editModeMain || editModeEducation)" tuiButton type="button" appearance="outline"
+                class="tui-space_right-3 tui-space_bottom-3 detailed__edit" (click)="openEditMode()">
           Изменить данные
+        </button>
+        <button *ngIf="editModeMain || editModeEducation" tuiButton type="button" appearance="outline"
+                class="tui-space_right-3 tui-space_bottom-3 detailed__edit" (click)="closeEditMode()">
+          Отменить изменения
         </button>
       </div>
     </div>
   </div>
-  <app-dialog-window *ngIf="isOpen" (isOpen)="hideDialog($event)"></app-dialog-window>
+  <app-dialog-window *ngIf="isOpen" [id_owner]="idEmployee" (isOpen)="manageDialog($event)"></app-dialog-window>
 </tui-root>

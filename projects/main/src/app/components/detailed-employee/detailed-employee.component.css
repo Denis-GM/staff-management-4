@@ -43,6 +43,10 @@
   margin-bottom: 20px;
 }
 
+.data-sec {
+  margin-bottom: 15px;
+}
+
 .name-field {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
@@ -80,54 +84,9 @@
   color: #000000;
 }
 
-.success {
-  position: relative;
-  background-color: #E9F8F3;
-}
-
-.success_circle {
-  position: absolute;
-  left: 29px;
-  top: 10px;
-  width: 10px;
-  height: 10px;
-  background: #4AC99B;
-  border-radius: 10px;
-}
-
-.unsuccess {
-  position: relative;
-  background: #FEEBE4;
-}
-
-.unsuccess_circle {
-  position: absolute;
-  left: 29px;
-  top: 10px;
-  width: 10px;
-  height: 10px;
-  background: #F45725;
-  border-radius: 10px;
-}
-
-.ordinary {
-  position: relative;
-  background: #EEF6FE;
-}
-
-.ordinary_circle {
-  position: absolute;
-  left: 29px;
-  top: 10px;
-  width: 10px;
-  height: 10px;
-  background: #71B7F6;
-  border-radius: 10px;
-}
-
 .data-field {
   /*margin: 14px 0 0 49px;*/
-  margin-top: 15px;
+  margin-top: 20px;
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -139,7 +98,6 @@
   margin-top: 22px;
 }
 
-
 .data-field__label {
   display: block;
   color: #797979;
@@ -147,9 +105,24 @@
   margin-bottom: 7px;
 }
 
+.detailed__form_change {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.detailed__input {
+  width: 62%;
+}
+
+.detailed__btn_change {
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
 .dairy-container {
   margin-top: 19px;
-  margin-left: 63px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
@@ -157,13 +130,47 @@
   line-height: 29px;
 }
 
-.dairy-field__label {
-  margin: 25px 0 0 87px;
+.dairy__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .dairy-field {
-  /*margin-top: 23px;*/
-  /*margin-left: 49px;*/
+  background: #F5F7FA;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.dairy__field_header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px 15px 20px;
+}
+
+.dairy__field_body {
+  padding: 0 20px 15px 20px;
+  font-size: 22px;
+}
+
+.dairy__field_promotion {
+  border-radius: 15px;
+  background: #E9F8F3;
+}
+
+.dairy__field_reduce {
+  border-radius: 15px;
+  background: #FEEBE4;
+}
+
+.dairy__field_edit {
+  border-radius: 15px;
+  background: #f5f2e1;
+}
+
+.dairy-field__label {
+  margin: 25px 0 0 87px;
 }
 
 .detailed__buttons {
