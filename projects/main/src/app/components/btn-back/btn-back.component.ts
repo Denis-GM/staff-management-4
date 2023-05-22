@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-btn-back',
@@ -7,10 +8,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./btn-back.component.css']
 })
 export class BtnBackComponent {
-  constructor(private router: Router) {
+  constructor(private router: Router,private location:Location) {
   }
 
   redirectBack(){
-    this.router.navigate(['dashboard/']);
+    this.location.back()
+    // this.router.navigate(['dashboard/']);
   }
 }
