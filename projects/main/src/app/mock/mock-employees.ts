@@ -65,4 +65,7 @@ export const Employees: IEmployee[] = [
     education: 'Высшее', city:'Екатеринбург', educational_institution: 'Уральский федеральный университет',
     specialization: 'Программная инженерия', year_graduation: '2024', post: 'Младший программист', project: 'Artsofte', salary: 70000,
     success: 'Обычный' },
+  { id: 13, firstName: 'ТестУволен', lastName: 'Васильев', patronymic: 'Васильевич', birthday: '05.01.2000',
+    education: 'УрФУ', post: 'Младший программист', project: 'Artsofte', salary: 70000,
+    success: 'Уволен' },
 ]

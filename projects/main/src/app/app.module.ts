@@ -38,6 +38,7 @@ import { PaginationPipe } from './pipes/pagination.pipe';
 import { DialogWindowComponent } from './components/dialog-window/dialog-window.component';
 import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { DismissedEmployeesComponent } from './components/dismissed-employees/dismissed-employees.component';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { StatusEmployeeDirective } from './directives/status-employee.directive';
 import { ActionDirective } from './directives/action/action.directive';
@@ -62,6 +63,7 @@ import { ActionDirective } from './directives/action/action.directive';
     PaginationPipe,
     StatusEmployeeDirective,
     ActionDirective,
+    DismissedEmployeesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {debounceTime, Observable, of, Subject} from "rxjs";
 import {delay, startWith, switchMap} from 'rxjs/operators';
 import {EmployeeService} from "../../services/employee.service";
@@ -18,7 +18,7 @@ export class FilterComponent implements OnInit {
   protected databaseMockData: IEmployee[] =[]
   protected result: string[] = []
   protected value: string[] = [];
-  
+
   protected readonly min_salary = 0;
   protected readonly max_salary = 1000000
 
@@ -44,6 +44,8 @@ export class FilterComponent implements OnInit {
 
   constructor(private employeeService: EmployeeService) { }
 
+  @Input()
+  public isFiredList:boolean=false
   @Output()
   public filterEvent$: EventEmitter<string[]> = new EventEmitter<string[]>()
 
@@ -87,7 +89,12 @@ export class FilterComponent implements OnInit {
   getEmployees(): void {
     this.employeeService.getEmployees()
       .subscribe(employees => {
-        this.databaseMockData = employees
+        if (this.isFiredList){
+          this.databaseMockData = employees.filter(employee => employee.success.includes("Уволен"))
+        }
+        else {
+          this.databaseMockData = employees.filter(employee => !employee.success.includes("Уволен"))
+        }
       });
   }
 

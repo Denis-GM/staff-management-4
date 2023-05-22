@@ -2,7 +2,7 @@
   <app-header></app-header>
   <app-search (searchEvent$)="applySearch($event)"></app-search>
   <app-filter
-    [isFiredList]="false"
+    [isFiredList]="true"
     (filterEvent$)="applyFilter($event)"
     (filterRangeEvent$)="applyRangeFilter($event)"
     (paginationEvent$)="setItemsPerPage($event)">

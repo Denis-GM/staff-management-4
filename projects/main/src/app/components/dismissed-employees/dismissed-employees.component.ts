@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { IEmployee } from "../../interfaces/employee.interface";
-import { EmployeeService } from '../../services/employee.service';
-import { Router } from "@angular/router";
-import { FilterPipe } from "../../pipes/filter.pipe";
+import { Component } from '@angular/core';
+import {IEmployee} from "../../interfaces/employee.interface";
+import {EmployeeService} from "../../services/employee.service";
+import {Router} from "@angular/router";
+import {FilterPipe} from "../../pipes/filter.pipe";
 
 @Component({
-  selector: 'app-active-employees',
-  templateUrl: './active-employees.component.html',
-  styleUrls: ['./active-employees.component.css']
+  selector: 'app-dismissed-employees',
+  templateUrl: './dismissed-employees.component.html',
+  styleUrls: ['./dismissed-employees.component.css']
 })
-
-export class ActiveEmployeesComponent implements OnInit {
+export class DismissedEmployeesComponent {
   employees: IEmployee[] = [];
+  // selectedEmployee: IEmployee = {} as IEmployee;
   searchText = ""
   searchTags: string[] = []
   rangeSalary: number[] | null = []
@@ -29,7 +29,7 @@ export class ActiveEmployeesComponent implements OnInit {
   getEmployees(): void {
     this.employeeService.getEmployees()
       .subscribe(employees => {
-        this.employees = employees.filter(employee => !employee.success.includes("Уволен"))
+        this.employees = employees.filter(employee => employee.success.includes("Уволен"))
       });
   }
 
@@ -48,7 +48,7 @@ export class ActiveEmployeesComponent implements OnInit {
     this.router.navigate(
       ['dashboard/employee/', employee.id],
       // { queryParams: { 'employee': JSON.stringify(employee) }}
-      );
+    );
   }
 
   applyRangeFilter(value:number[]|null):void{
