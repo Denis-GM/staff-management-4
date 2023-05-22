@@ -19,6 +19,7 @@ export class StatusEmployeeDirective implements OnInit{
           this.class = 'success';
         break;
       case 'Неуспешный':
+      case 'Уволен':
         if (this.isCircle)
           this.class = 'unsuccess_circle';
         else
