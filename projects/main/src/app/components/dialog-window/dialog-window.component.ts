@@ -1,9 +1,7 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {IAction} from "../../mock/mock-actions";
-import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeService} from "../../services/employee.service";
-import {IEmployee} from "../../interfaces/employee.interface";
 
 @Component({
   selector: 'app-dialog-window',

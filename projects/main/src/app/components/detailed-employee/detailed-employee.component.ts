@@ -2,14 +2,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
-  Inject,
   OnInit,
-  Output
 } from '@angular/core';
 import { IEmployee } from "../../interfaces/employee.interface";
 import { EmployeeService } from '../../services/employee.service';
-import {filter, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import { ActivatedRoute} from "@angular/router";
 import {Employees} from "../../mock/mock-employees";
 import {IAction, IActionEdit} from "../../mock/mock-actions";
@@ -92,14 +89,18 @@ export class DetailedEmployeeComponent implements OnInit{
     }
   }
 
+  changeEmployee(nameEditField: string, oldValue: number | string, newValue: number | string,): void {
+    const date = new Date();
+    const action: IActionEdit = { id_owner: this.idEmployee, title: 'Изменение данных',
+      date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`, oldValue: null, newValue: null,};
+    action.oldValue = oldValue;
+    action.newValue = newValue;
+    this.employeeService.addAction(action);
+    this.employeeService.editEmployees(this.idEmployee, nameEditField, action.newValue);
+  }
+
   saveFormMain(): void {
     const form = this.formMain;
-    const date = new Date();
-    console.log(form);
-    const action: IActionEdit = { id_owner: this.idEmployee, title: 'Изменение данных',
-      date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`, oldValue: null, newValue: null,}
-    console.log(action);
-
     const newBirthday = form.get('newBirthday')?.value;
     const newCity = form.get('newCity')?.value;
     const newProject = form.get('newProject')?.value;
@@ -107,47 +108,45 @@ export class DetailedEmployeeComponent implements OnInit{
     const newSalary = form.get('newSalary')?.value;
 
     if(newBirthday !== null){
-      action.oldValue = this.employee.birthday;
-      action.newValue = newBirthday;
-      console.log('newBirthday',action)
-      this.employeeService.addAction(action);
-      this.employeeService.editEmployees(this.idEmployee, 'birthday', newBirthday);
+      this.changeEmployee('birthday', this.employee.birthday, newBirthday)
     }
     if(newCity !== null){
-      action.oldValue = this.employee.city;
-      action.newValue = newCity;
-      console.log('newCity',action)
-      this.employeeService.addAction(action);
-      this.employeeService.editEmployees(this.idEmployee, 'city', newCity);
+      this.changeEmployee('city', this.employee.city, newCity);
     }
     if(newProject !== null){
-      action.oldValue = this.employee.project;
-      action.newValue = newProject;
-      console.log('newProject',action)
-      this.employeeService.addAction(action);
-      this.employeeService.editEmployees(this.idEmployee, 'project', newProject);
+      this.changeEmployee('project', this.employee.project, newProject);
     }
     if(newPost !== null){
-      action.oldValue = this.employee.post;
-      action.newValue = newPost;
-      console.log('newPost', action)
-      this.employeeService.addAction(action);
-      this.employeeService.editEmployees(this.idEmployee, 'post', newPost);
+      this.changeEmployee('post', this.employee.post, newPost);
     }
     if(newSalary !== null){
-      action.oldValue = this.employee.salary;
-      action.newValue = newSalary;
-      console.log('newSalary',action)
-      this.employeeService.addAction(action);
-      this.employeeService.editEmployees(this.idEmployee, 'salary', newSalary);
+      this.changeEmployee('salary', this.employee.salary, newSalary);
     }
     this.closeEditModeMain();
     this.getActions();
   }
 
   saveFormEducation(): void {
-    console.log(this.formEducation.value);
+    const form = this.formEducation;
+    const newEducation = form.get('newEducation')?.value;
+    const newEducational_institution = form.get('newEducational_institution')?.value;
+    const newSpecialization = form.get('newSpecialization')?.value;
+    const newYear_graduation = form.get('newYear_graduation')?.value;
+
+    if(newEducation !== null){
+      this.changeEmployee('education', this.employee.education, newEducation)
+    }
+    if(newEducational_institution !== null){
+      this.changeEmployee('educational_institution', this.employee.educational_institution, newEducational_institution);
+    }
+    if(newSpecialization !== null){
+      this.changeEmployee('specialization', this.employee.specialization, newSpecialization);
+    }
+    if(newYear_graduation !== null){
+      this.changeEmployee('year_graduation', this.employee.year_graduation, newYear_graduation);
+    }
     this.closeEditModeEducation();
+    this.getActions();
   }
 
   openEditMode(): void {

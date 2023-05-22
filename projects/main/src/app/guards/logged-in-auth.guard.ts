@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 
 import { LocalStorageService } from '../services/local-storage.service';
-import { IUser } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +10,14 @@ import { IUser } from '../interfaces/user.interface';
 export class LoggedInAuthGuard {
 
   constructor(
-    private localStorageService: LocalStorageService, 
+    private localStorageService: LocalStorageService,
     private router: Router,
     ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    
+
     const user: boolean = this.localStorageService.get('user') || false;
     if(user) {
       this.router.navigate(['dashboard']);
@@ -26,5 +25,5 @@ export class LoggedInAuthGuard {
     }
     return true;
   }
-  
+
 }
