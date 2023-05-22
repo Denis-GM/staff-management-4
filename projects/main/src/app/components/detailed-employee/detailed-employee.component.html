@@ -10,11 +10,11 @@
                  class="tui-space_right-2 emp-block__success"
                  [ngClass]="{
                     success: employee.success === 'Успешный',
-                    unsuccess: employee.success === 'Неуспешный',
+                    unsuccess: employee.success === 'Неуспешный' || employee.success === 'Уволен',
                     ordinary: employee.success === 'Обычный',}">
           <span class="custom-content" [ngClass]="{
             success_circle: employee.success === 'Успешный',
-            unsuccess_circle: employee.success === 'Неуспешный',
+            unsuccess_circle: employee.success === 'Неуспешный' || employee.success === 'Уволен',
             ordinary_circle: employee.success === 'Обычный',
             }">
           </span>

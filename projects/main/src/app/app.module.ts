@@ -37,6 +37,7 @@ import { BtnBackComponent } from './components/btn-back/btn-back.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
 import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { DismissedEmployeesComponent } from './components/dismissed-employees/dismissed-employees.component';
 import { ErrorHandlerService } from './services/error-handler.service';
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ErrorHandlerService } from './services/error-handler.service';
     AddingEmployeesComponent,
     BtnBackComponent,
     PaginationPipe,
+    DismissedEmployeesComponent,
   ],
   imports: [
     BrowserModule,
