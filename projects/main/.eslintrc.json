@@ -24,7 +24,9 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/no-inferrable-types": "off",
+        "semi": ["error", "always", { "omitLastInOneLineBlock": false}]
       }
     },
     {
