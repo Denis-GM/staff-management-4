@@ -2,7 +2,7 @@ import {NgModule, ErrorHandler} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -33,7 +33,6 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { FilterComponent } from './components/filter/filter.component';
 import { LoginComponent } from './components/login/login.component';
 import { AddingEmployeesComponent } from './components/adding-employees/adding-employees.component';
-import { BtnBackComponent } from './components/btn-back/btn-back.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
 import { DialogWindowComponent } from './components/dialog-window/dialog-window.component';
 import { ActiveEmployeesComponent } from './components/active-employees/active-employees.component';
@@ -59,7 +58,6 @@ import { MyForDirective } from './directives/my-for.directive';
     SearchComponent,
     DetailedEmployeeComponent,
     AddingEmployeesComponent,
-    BtnBackComponent,
     DialogWindowComponent,
     PaginationPipe,
     StatusEmployeeDirective,

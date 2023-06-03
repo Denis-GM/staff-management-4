@@ -10,8 +10,10 @@ export class ErrorHandlerService implements ErrorHandler {
  
     handleError(error: Error) {
         const router = this.injector.get(Router);
-        console.log('URL: ' + router.url);
-        console.log('Произошла ошибка:', error.message);       
+        console.log({
+            url: router.url,
+            message: error.message
+        });
    }
 }
  

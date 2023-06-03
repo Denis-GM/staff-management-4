@@ -68,7 +68,7 @@ export class AddingEmployeesComponent implements OnInit {
         post: form.get('post')?.value,
         salary: Number(form.get('salary')?.value),
         success: 'Обычный',
-      }
+      };
     }
   }
 

@@ -10,16 +10,16 @@ import { IUser } from '../../interfaces/user.interface';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit{
+export class RegistrationComponent implements OnInit {
 
   registrationForm!: FormGroup;
   users: IUser[] = this.localStorageService.get('users') ?? [];
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private router: Router,
     private localStorageService: LocalStorageService
-    ) {}
+  ) { }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit{
         Validators.minLength(5),
         this.noSpaceAllowed
       ]]
-    })
+    });
   }
 
   get login() {
@@ -43,20 +43,20 @@ export class RegistrationComponent implements OnInit{
   get password() {
     return this.registrationForm.get('password');
   }
-  
+
   async submitHandler() {
     this.registrationForm.markAllAsTouched();
     if (this.registrationForm.valid) {
       const newUser: IUser = this.registrationForm.value;
       if (this.users.filter((user: IUser) => user.login === newUser.login).length) {
-        this.registrationForm.setErrors({ 'notUniqueUser': true })
+        this.registrationForm.setErrors({ 'notUniqueUser': true });
         return;
       }
-      this.users.push(newUser)
+      this.users.push(newUser);
       this.localStorageService.save('users', this.users);
       this.localStorageService.save('user', newUser);
-      
-      this.router.navigate(['/dashboard'])
+
+      this.router.navigate(['/dashboard']);
     }
   }
 

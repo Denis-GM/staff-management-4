@@ -42,10 +42,10 @@ export class LoginComponent implements OnInit{
       const currentUser: IUser = this.loginForm.value;
       if (this.users.filter((user: IUser) => JSON.stringify(currentUser) === JSON.stringify(user)).length) {
         this.localStorageService.save('user', currentUser);
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/dashboard']);
       }
       else {
-        this.loginForm.setErrors({ 'noSuchUser': true })
+        this.loginForm.setErrors({ 'noSuchUser': true });
       }
     }
   }

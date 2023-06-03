@@ -10,8 +10,6 @@ import {Actions, IAction, IActionEdit} from "../mock/mock-actions";
 })
 export class EmployeeService {
   employee: IEmployee = {} as IEmployee;
-  // public employees = of(Employees);
-  // public employeesActions = new ReplaySubject<string[]>();
 
   setEmployee(employee: IEmployee): void{
     this.employee = employee;

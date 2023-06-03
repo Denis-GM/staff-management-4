@@ -1,29 +1,32 @@
 <tui-root>
   <app-header></app-header>
   <app-search (searchEvent$)="applySearch($event)"></app-search>
-  <app-filter
-    [isFiredList]="false"
-    (filterEvent$)="applyFilter($event)"
-    (filterRangeEvent$)="applyRangeFilter($event)"
+  <app-filter [isFiredList]="false" (filterEvent$)="applyFilter($event)" (filterRangeEvent$)="applyRangeFilter($event)"
     (paginationEvent$)="setItemsPerPage($event)">
   </app-filter>
   <div class="emp-block__container">
     <div class="notation-panel">
       <ul class="list-reset">
-        <li>Автатар</li><li>Имя</li><li>Проект</li><li>Должность</li><li>Зарплата</li><li>Успешность</li>
+        <li>Автатар</li>
+        <li>Имя</li>
+        <li>Проект</li>
+        <li>Должность</li>
+        <li>Зарплата</li>
+        <li>Успешность</li>
       </ul>
     </div>
-    <div *myFor="let employee of employees
-    | filterTags:searchText:searchTags:rangeSalary
-    | pagination:itemsPerPage:index">
-      <app-employee [employee]="employee" (click)="selectEmployee(employee)"></app-employee>
-    </div>
-    <div class="pagination" *ngIf="length>1">
-      <tui-pagination
-        [length]="length"
-        [index]="index"
-        (indexChange)="goToPage($event)"
-      ></tui-pagination>
+    <ng-container *ngIf="employees | filterTags:searchText:searchTags:rangeSalary | pagination:itemsPerPage:index as employees; else empty">
+      <ng-container *ngIf="employees.length; else empty">
+        <ng-container *myFor="let employee of employees">
+          <app-employee [employee]="employee" (click)="selectEmployee(employee)"></app-employee>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-template #empty>
+      <div class="active-employees__empty">Нет сотрудников :(</div>
+    </ng-template>
+    <div class="pagination" *ngIf="length > 1">
+      <tui-pagination [length]="length" [index]="index" (indexChange)="goToPage($event)"></tui-pagination>
     </div>
   </div>
 </tui-root>

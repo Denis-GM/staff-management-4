@@ -11,15 +11,20 @@ import { FilterPipe } from "../../pipes/filter.pipe";
 })
 
 export class ActiveEmployeesComponent implements OnInit {
-  employees: IEmployee[] = [];
-  searchText = ""
-  searchTags: string[] = []
-  rangeSalary: number[] | null = []
+  
+  protected employees: IEmployee[] = [];
+  protected searchText = "";
+  protected searchTags: string[] = [];
+  protected rangeSalary: number[] | null = [];
+
+  protected length: number = 1;
+  protected index: number = 0;
+  protected itemsPerPage: number = 5;
 
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
-    private filterPipe:FilterPipe
+    private filterPipe: FilterPipe
   ) { }
 
   ngOnInit(): void {
@@ -29,52 +34,43 @@ export class ActiveEmployeesComponent implements OnInit {
   getEmployees(): void {
     this.employeeService.getEmployees()
       .subscribe(employees => {
-        this.employees = employees.filter(employee => !employee.success.includes("Уволен"))
+        this.employees = employees.filter(employee => !employee.success.includes("Уволен"));
       });
   }
 
-  applySearch(value:string):void{
-    this.searchText = value
-    this.updatePaginationPages()
+  applySearch(value: string): void {
+    this.searchText = value;
+    this.updatePaginationPages();
   }
 
-  applyFilter(value:string[]):void{
-    this.searchTags = value
-    this.updatePaginationPages()
+  applyFilter(value: string[]): void {
+    this.searchTags = value;
+    this.updatePaginationPages();
   }
 
   selectEmployee(employee: IEmployee) {
     this.employeeService.setEmployee(employee);
-    this.router.navigate(
-      ['dashboard/employee/', employee.id],
-      // { queryParams: { 'employee': JSON.stringify(employee) }}
-      );
+    this.router.navigate(['dashboard/employee/', employee.id]);
   }
 
-  applyRangeFilter(value:number[]|null):void{
-    this.rangeSalary = value
-    this.updatePaginationPages()
+  applyRangeFilter(value: number[] | null): void {
+    this.rangeSalary = value;
+    this.updatePaginationPages();
   }
 
-  updatePaginationPages():void{
+  updatePaginationPages(): void {
     const searchedItems = this.filterPipe.transform(this.employees, this.searchText,
-      this.searchTags,this.rangeSalary);
-    this.length = Math.ceil(searchedItems.length/this.itemsPerPage)
-    console.log(this.length)
-    this.index=0
+      this.searchTags, this.rangeSalary);
+    this.length = Math.ceil(searchedItems.length / this.itemsPerPage);
+    this.index = 0;
   }
 
-  setItemsPerPage(value:number):void{
-    this.itemsPerPage = value
-    this.updatePaginationPages()
+  setItemsPerPage(value: number): void {
+    this.itemsPerPage = value;
+    this.updatePaginationPages();
   }
 
-  length = 1;
-
-  index = 0;
-  itemsPerPage = 5
   goToPage(index: number): void {
     this.index = index;
-    // console.info('New page:', index);
   }
 }

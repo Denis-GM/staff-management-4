@@ -18,7 +18,7 @@ export class HeaderComponent {
 
   logout(): void {
     this.localStorageService.remove('user');
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
 }

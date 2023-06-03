@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {debounceTime, Observable, of, Subject} from "rxjs";
-import {delay, startWith, switchMap} from 'rxjs/operators';
-import {EmployeeService} from "../../services/employee.service";
-import {FormControl} from "@angular/forms";
-import {TuiKeySteps} from "@taiga-ui/kit";
-import {IEmployee} from "../../interfaces/employee.interface";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { debounceTime, Observable, of, Subject } from "rxjs";
+import { delay, startWith, switchMap } from 'rxjs/operators';
+import { EmployeeService } from "../../services/employee.service";
+import { FormControl } from "@angular/forms";
+import { TuiKeySteps } from "@taiga-ui/kit";
+import { IEmployee } from "../../interfaces/employee.interface";
 
 @Component({
   selector: 'app-filter',
@@ -15,12 +15,12 @@ import {IEmployee} from "../../interfaces/employee.interface";
 
 export class FilterComponent implements OnInit {
 
-  protected databaseMockData: IEmployee[] =[]
-  protected result: string[] = []
+  protected databaseMockData: IEmployee[] = [];
+  protected result: string[] = [];
   protected value: string[] = [];
 
   protected readonly min_salary = 0;
-  protected readonly max_salary = 1000000
+  protected readonly max_salary = 1000000;
 
   protected salaryControl: FormControl = new FormControl([this.min_salary, this.max_salary]);
   protected paginationControl: FormControl = new FormControl();
@@ -39,21 +39,32 @@ export class FilterComponent implements OnInit {
   protected readonly currency = {
     other: 'руб',
   };
+  
+  protected readonly search$: Subject<string> = new Subject<string>();
 
-  private readonly search$: Subject<string> = new Subject<string>();
+  protected readonly items$ = this.search$
+    .pipe(
+      switchMap(search =>
+        this.serverRequest(search)
+          .pipe(
+            startWith<string[] | null>(null)
+          ),
+      ),
+      startWith(this.result)
+    );
 
   constructor(private employeeService: EmployeeService) { }
 
   @Input()
-  public isFiredList:boolean=false
+  public isFiredList: boolean = false;
   @Output()
-  public filterEvent$: EventEmitter<string[]> = new EventEmitter<string[]>()
+  public filterEvent$: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   @Output()
-  public filterRangeEvent$: EventEmitter<number[]|null> = new EventEmitter<number[]|null>()
+  public filterRangeEvent$: EventEmitter<number[] | null> = new EventEmitter<number[] | null>();
 
   @Output()
-  public paginationEvent$: EventEmitter<number> = new EventEmitter<number>()
+  public paginationEvent$: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.getEmployees();
@@ -61,61 +72,55 @@ export class FilterComponent implements OnInit {
     const salary_list = this.databaseMockData.map((employee: IEmployee) => employee.salary);
     this.salaryControl = new FormControl([Math.min(...salary_list), Math.max(...salary_list)]);
 
-    this.filterRangeEvent$.next(this.salaryControl.value)
+    this.filterRangeEvent$.next(this.salaryControl.value);
     this.salaryControl.valueChanges.pipe(debounceTime(500))
-      .subscribe(v=>this.filterRangeEvent$.next(v))
-    this.paginationControl.setValue(5)
+      .subscribe(v => this.filterRangeEvent$.next(v));
+    this.paginationControl.setValue(5);
     this.paginationControl.valueChanges.pipe(debounceTime(500))
-      .subscribe(v=>this.paginationEvent$.next(v))
+      .subscribe(v => this.paginationEvent$.next(v));
 
     this.databaseMockData.forEach(Employee => {
-      const proj = "Проект: "+Employee.project
-      if (!this.result.includes(proj)){
-        this.result.push(proj)
+      const proj = "Проект: " + Employee.project;
+      if (!this.result.includes(proj)) {
+        this.result.push(proj);
       }
-      const post = "Должность: "+Employee.post
-      if (!this.result.includes(post)){
-        this.result.push(post)
+      const post = "Должность: " + Employee.post;
+      if (!this.result.includes(post)) {
+        this.result.push(post);
       }
-      const success ="Успешность: "+Employee.success
-      if (!this.result.includes(success)){
-        this.result.push(success)
+      const success = "Успешность: " + Employee.success;
+      if (!this.result.includes(success)) {
+        this.result.push(success);
       }
-    })
+    });
 
-    this.result.sort()
+    this.result.sort();
   }
 
   getEmployees(): void {
     this.employeeService.getEmployees()
       .subscribe(employees => {
-        if (this.isFiredList){
-          this.databaseMockData = employees.filter(employee => employee.success.includes("Уволен"))
+        if (this.isFiredList) {
+          this.databaseMockData = employees.filter(employee => employee.success.includes("Уволен"));
         }
         else {
-          this.databaseMockData = employees.filter(employee => !employee.success.includes("Уволен"))
+          this.databaseMockData = employees.filter(employee => !employee.success.includes("Уволен"));
         }
       });
   }
-
-  readonly items$ = this.search$.pipe(
-    switchMap(search =>
-      this.serverRequest(search).pipe(startWith<string[] | null>(null)),
-    ),
-    startWith(this.result)
-  );
 
   onSearchChange(search: string): void {
     this.search$.next(search);
   }
 
   private serverRequest(search: string): Observable<string[]> {
-    let data = this.result
-    data = data.filter(item =>
-    {
-      return item.toLowerCase().includes(search.toLocaleLowerCase())
-    })
-    return of(data).pipe(delay(Math.random()*1000+500));
+    let data = this.result;
+    data = data.filter(item => {
+      return item.toLowerCase().includes(search.toLocaleLowerCase());
+    });
+    return of(data).pipe(
+        delay(Math.random() * 1000 + 500)
+      );
   }
 }
 

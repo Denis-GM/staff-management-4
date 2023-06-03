@@ -6,7 +6,7 @@
     margin: 0 auto;
     padding: 0 80px;
 
-    max-width: 450px;
+    max-width: 550px;
     background-color: white;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
     border-radius: 29.2473px;
@@ -15,7 +15,7 @@
 .login__title {
     margin: 40px 0;
 
-    font-size: 1.6em;
+    font-size: 2em;
     font-weight: 400;
 }
 
@@ -24,7 +24,7 @@
     padding: 12px;
 
     width: 100%;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 300;
 
     background-color: #F9FBFE;
@@ -34,10 +34,10 @@
 
 .login__button {
     margin-top: 10px;
-    padding: 15px;
+    padding: 20px 15px;
 
     width: 100%;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: 500;
     color: white;
 
@@ -55,11 +55,11 @@
     position: relative;
     top: -12px;
     color: red;
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
 .login__bottom-text {
-    margin: 20px 0 30px;
+    margin: 25px 0 35px;
     font-weight: 300;
 }
 
