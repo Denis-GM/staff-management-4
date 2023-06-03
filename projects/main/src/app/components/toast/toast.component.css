@@ -1,0 +1,41 @@
+.toast {
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+
+  position: fixed;
+  z-index: 100;
+  top: 125px;
+  min-width: 380px;
+  max-width: 420px;
+
+  overflow: hidden;
+}
+
+.toast__wrapper {
+  position: relative;
+  padding: 16px 22px;
+}
+
+.toast__title {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.toast__message {
+  font-size: 1.2em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toast__progress-bar {
+  width: 100%;
+  background: red;
+  height: 5px;
+  transition: width 0.1s;
+  transition-timing-function: ease-out;
+}

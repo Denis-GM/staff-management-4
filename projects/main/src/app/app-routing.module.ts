@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'dashboard', component: ActiveEmployeesComponent, canActivate: [AuthGuard]},
   { path: 'dismissed-employees', component: DismissedEmployeesComponent, canActivate: [AuthGuard]},
   { path: 'dashboard/employee/:id', component: DetailedEmployeeComponent, canActivate: [AuthGuard]},
-  { path: 'adding', component: AddingEmployeesComponent, canActivate: [AuthGuard]},
+  { path: 'adding', component: AddingEmployeesComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

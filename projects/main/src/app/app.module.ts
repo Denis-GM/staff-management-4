@@ -42,6 +42,7 @@ import { ErrorHandlerService } from './services/error-handler.service';
 import { StatusEmployeeDirective } from './directives/status-employee.directive';
 import { ActionDirective } from './directives/action/action.directive';
 import { MyForDirective } from './directives/my-for.directive';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { MyForDirective } from './directives/my-for.directive';
     ActionDirective,
     DismissedEmployeesComponent,
     MyForDirective,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

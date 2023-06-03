@@ -1,0 +1,17 @@
+<div (mouseenter)="stopCountDown()" (mouseleave)="countDown()" class="toast"
+    [@openClose]="toastService.data && toastService.data.show ? 'open' : 'closed'">
+    <div class="toast__wrapper">
+        <div *ngIf="toastService.data">
+            <div class="toast__content">
+                <div class="toast__title">
+                    {{ toastService.data.title }}
+                </div>
+                <p class="toast__message">
+                    {{ toastService.data.message }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast__progress-bar" #progressBar></div>
+</div>
