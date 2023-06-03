@@ -42,6 +42,7 @@ import { DismissedEmployeesComponent } from './components/dismissed-employees/di
 import { ErrorHandlerService } from './services/error-handler.service';
 import { StatusEmployeeDirective } from './directives/status-employee.directive';
 import { ActionDirective } from './directives/action/action.directive';
+import { MyForDirective } from './directives/my-for.directive';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ActionDirective } from './directives/action/action.directive';
     StatusEmployeeDirective,
     ActionDirective,
     DismissedEmployeesComponent,
+    MyForDirective,
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@
         <li>Автатар</li><li>Имя</li><li>Проект</li><li>Должность</li><li>Зарплата</li><li>Успешность</li>
       </ul>
     </div>
-    <div *ngFor="let employee of employees
+    <div *myFor="let employee of employees
     | filterTags:searchText:searchTags:rangeSalary
     | pagination:itemsPerPage:index">
       <app-employee [employee]="employee" (click)="selectEmployee(employee)"></app-employee>
