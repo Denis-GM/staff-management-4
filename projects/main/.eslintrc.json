@@ -25,7 +25,24 @@
             "style": "kebab-case"
           }
         ],
-        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/typedef": [
+          "error",
+          {
+              "arrowParameter": true,
+              "variableDeclaration": true,
+              "arrayDestructuring": true,
+              "parameter": true,
+              "propertyDeclaration": true,
+              "memberVariableDeclaration": true,
+              "objectDestructuring": true,
+              "variableDeclarationIgnoreFunction": true
+          }
+        ],
+        "@typescript-eslint/no-inferrable-types": [
+          false,
+          "ignore-params",
+          "ignore-properties"
+        ],
         "semi": ["error", "always", { "omitLastInOneLineBlock": false}]
       }
     },
