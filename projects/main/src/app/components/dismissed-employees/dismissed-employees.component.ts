@@ -4,6 +4,7 @@ import {EMPLOYEES_TOKEN, EmployeeService} from "../../services/employee.service"
 import {Router} from "@angular/router";
 import {FilterPipe} from "../../pipes/filter.pipe";
 import { Observable, Subject, takeUntil } from 'rxjs';
+import { DestroyService } from '../../services/destroy.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
   templateUrl: './dismissed-employees.component.html',
   styleUrls: ['./dismissed-employees.component.css']
 })
-export class DismissedEmployeesComponent implements OnInit, OnDestroy {
+export class DismissedEmployeesComponent implements OnInit {
 
   protected employees: IEmployee[] = [];
   protected searchText: string = '';
@@ -22,10 +23,9 @@ export class DismissedEmployeesComponent implements OnInit, OnDestroy {
   protected index: number = 0;
   protected itemsPerPage: number = 5;
 
-  private readonly _destroy$: Subject<void> = new Subject<void>();
-
   constructor(
     @Inject(EMPLOYEES_TOKEN) protected employees$: Observable<IEmployee[]>,
+    @Inject(DestroyService) protected destroy$: DestroyService,
     private employeeService: EmployeeService,
     private router: Router,
     private filterPipe:FilterPipe
@@ -34,16 +34,11 @@ export class DismissedEmployeesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.employees$
       .pipe(
-        takeUntil(this._destroy$)
+        takeUntil(this.destroy$)
       )
       .subscribe((employeesList: IEmployee[]) => {
         this.employees = employeesList;
       });
-  }
-
-  ngOnDestroy(): void {
-    this._destroy$.next();
-    this._destroy$.complete();
   }
 
   applySearch(value:string):void{

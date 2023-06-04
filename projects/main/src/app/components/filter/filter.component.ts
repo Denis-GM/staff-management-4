@@ -19,14 +19,14 @@ export class FilterComponent implements OnInit {
   protected result: string[] = [];
   protected value: string[] = [];
 
-  protected readonly min_salary = 0;
-  protected readonly max_salary = 1000000;
+  protected readonly min_salary: number = 0;
+  protected readonly max_salary: number = 1000000;
 
   protected salaryControl: FormControl = new FormControl([this.min_salary, this.max_salary]);
   protected paginationControl: FormControl = new FormControl();
 
   protected readonly items: number[] = [5, 10, 15, 20];
-  protected readonly totalSteps = 100;
+  protected readonly totalSteps: number = 100;
 
   protected readonly keySteps: TuiKeySteps = [
     [0, this.min_salary],

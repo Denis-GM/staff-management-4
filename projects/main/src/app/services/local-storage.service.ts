@@ -10,8 +10,7 @@ export class LocalStorageService {
   }
 
   public get<T>(key: string): T {
-    const data = localStorage.getItem(key);
-    return JSON.parse(data ?? 'null');
+    return JSON.parse(localStorage.getItem(key) ?? 'null');
   }
   public remove(key: string): void {
     localStorage.removeItem(key);

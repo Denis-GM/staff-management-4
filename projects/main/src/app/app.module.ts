@@ -43,7 +43,7 @@ import { StatusEmployeeDirective } from './directives/status-employee.directive'
 import { ActionDirective } from './directives/action/action.directive';
 import { MyForDirective } from './directives/my-for.directive';
 import { ToastComponent } from './components/toast/toast.component';
-import { EMPLOYEES_TOKEN, EmployeeService, employeesFactory } from './services/employee.service';
+import { EMPLOYEES_TOKEN, employeesFactory } from './services/employee.service';
 
 @NgModule({
   declarations: [
@@ -92,8 +92,8 @@ import { EMPLOYEES_TOKEN, EmployeeService, employeesFactory } from './services/e
   ],
   providers: [
     {
-    provide: TUI_SANITIZER,
-    useClass: NgDompurifySanitizer
+      provide: TUI_SANITIZER,
+      useClass: NgDompurifySanitizer
     },
     {
       provide: ErrorHandler,
@@ -107,4 +107,5 @@ import { EMPLOYEES_TOKEN, EmployeeService, employeesFactory } from './services/e
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

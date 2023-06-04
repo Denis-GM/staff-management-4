@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy} from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { IEmployee } from '../../interfaces/employee.interface';
 import {
   EMPLOYEES_TOKEN,
@@ -6,14 +6,15 @@ import {
 } from '../../services/employee.service';
 import { Router } from '@angular/router';
 import { FilterPipe } from '../../pipes/filter.pipe';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
+import { DestroyService } from '../../services/destroy.service';
 
 @Component({
   selector: 'app-active-employees',
   templateUrl: './active-employees.component.html',
   styleUrls: ['./active-employees.component.css']
 })
-export class ActiveEmployeesComponent implements OnInit, OnDestroy {
+export class ActiveEmployeesComponent implements OnInit {
   
   protected employees: IEmployee[] = [];
   protected searchText: string = '';
@@ -24,10 +25,9 @@ export class ActiveEmployeesComponent implements OnInit, OnDestroy {
   protected index: number = 0;
   protected itemsPerPage: number = 5;
 
-  private readonly _destroy$: Subject<void> = new Subject<void>();
-
   constructor(
     @Inject(EMPLOYEES_TOKEN) protected employees$: Observable<IEmployee[]>,
+    @Inject(DestroyService) protected destroy$: DestroyService,
     private employeeService: EmployeeService,
     private router: Router,
     private filterPipe: FilterPipe
@@ -36,16 +36,11 @@ export class ActiveEmployeesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.employees$
       .pipe(
-        takeUntil(this._destroy$)
+        takeUntil(this.destroy$)
       )
       .subscribe((employeesList: IEmployee[]) => {
         this.employees = employeesList;
       });
-  }
-
-  ngOnDestroy(): void {
-    this._destroy$.next();
-    this._destroy$.complete();
   }
 
   applySearch(value: string): void {

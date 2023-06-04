@@ -1,8 +1,9 @@
-import { Component, ElementRef, ViewChild, Inject, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChild, Inject, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ToastService } from '../../services/toast.service';
 import { ToastData } from '../../interfaces/toast.interface';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
+import { DestroyService } from '../../services/destroy.service';
 
 @Component({
   selector: 'app-toast',
@@ -27,19 +28,22 @@ import { Subject, takeUntil } from 'rxjs';
     ]),
   ]
 })
-export class ToastComponent implements OnDestroy {
+export class ToastComponent implements OnInit {
 
   @ViewChild('progressBar', { static: false })
   protected progressBar!: ElementRef;
   protected progressInterval!: ReturnType<typeof setTimeout>;
   protected progressWidth!: string;
 
-  private readonly _destroy$: Subject<void> = new Subject<void>();
+  constructor(
+    @Inject(ToastService) public toastService: ToastService,
+    @Inject(DestroyService) protected destroy$: DestroyService
+    ) { }
 
-  constructor(@Inject(ToastService) public toastService: ToastService) {
+  ngOnInit(): void {
     this.toastService.getState()
       .pipe(
-        takeUntil(this._destroy$)
+        takeUntil(this.destroy$)
       )
       .subscribe((data: ToastData) => {
         if (data.show) {
@@ -47,11 +51,6 @@ export class ToastComponent implements OnDestroy {
           this.countDown();
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    this._destroy$.next();
-    this._destroy$.complete();
   }
 
   public countDown(): void {
