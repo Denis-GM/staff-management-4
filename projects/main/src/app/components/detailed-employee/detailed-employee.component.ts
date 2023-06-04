@@ -4,7 +4,7 @@ import { EmployeeService } from '../../services/employee.service';
 import {ActivatedRoute, Params} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 import { animations } from '../../animations/animations';
-import {IActionEdit} from "../../interfaces/action.interface";
+import {IAction} from "../../interfaces/action.interface";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -18,12 +18,12 @@ import {Subscription} from "rxjs";
 })
 export class DetailedEmployeeComponent implements OnInit{
   protected employee: IEmployee = {} as IEmployee;
-  protected actions: any = [];
+  protected actions: IAction[] = [];
   public idEmployee: number = 0;
-  public isOpen:boolean = false;
-  protected editMode:boolean = false;
-  editModeMain:boolean = false;
-  editModeEducation:boolean = false;
+  public isOpen: boolean = false;
+  protected editMode: boolean = false;
+  editModeMain: boolean = false;
+  editModeEducation: boolean = false;
 
   protected formMain!: FormGroup;
   protected formEducation!: FormGroup;
@@ -32,8 +32,8 @@ export class DetailedEmployeeComponent implements OnInit{
   constructor(private route: ActivatedRoute, private employeeService: EmployeeService,
               private changeDetection: ChangeDetectorRef) {
     this.routeSubscription = route.params.subscribe((params: Params) => {
-      this.employee = this.employeeService.getEmployee();
       this.idEmployee = params['id'];
+      this.employee = this.employeeService.getEmployee(this.idEmployee);
     });
   }
 
@@ -60,7 +60,7 @@ export class DetailedEmployeeComponent implements OnInit{
     console.log(id_owner);
     this.actions = [];
     this.employeeService.getEmployeeActions(id_owner)
-      .subscribe((action:object) => {
+      .subscribe((action: IAction) => {
         this.actions.push(action);
       });
   }
@@ -76,7 +76,6 @@ export class DetailedEmployeeComponent implements OnInit{
   }
 
   protected manageDialog(isOpen: boolean) {
-    // if (isOpen)
     this.isOpen = false;
     if (!isOpen){
       this.getActions();
@@ -85,25 +84,25 @@ export class DetailedEmployeeComponent implements OnInit{
   }
 
   changeEmployee(nameEditField: string, oldValue: number | string, newValue: number | string,): void {
-    const date:Date = new Date();
-    const action: IActionEdit = { id_owner: this.idEmployee, title: 'Изменение данных',
-      date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`, oldValue: null, newValue: null,};
-    action.oldValue = oldValue;
-    action.newValue = newValue;
+    const date: Date = new Date();
+    const action: IAction = { id_owner: this.idEmployee, title: 'Изменение данных',
+      date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`, date2: null, newPost: null,
+      newSalary: null, newStatus: null, oldValue : oldValue, newValue: newValue};
     this.employeeService.addAction(action);
-    this.employeeService.editEmployees(this.idEmployee, nameEditField, action.newValue);
+    this.employeeService.editEmployees(this.idEmployee, nameEditField, newValue);
   }
 
   saveFormMain(): void {
     const form:FormGroup = this.formMain;
-    const newBirthday: string = this.convertDate(form.get('newBirthday')?.value);
+    const newBirthday: string = form.get('newBirthday')?.value;
     const newCity: string = form.get('newCity')?.value;
     const newProject: string = form.get('newProject')?.value;
     const newPost: string = form.get('newPost')?.value;
     const newSalary: number = form.get('newSalary')?.value;
 
     if(newBirthday !== null){
-      this.changeEmployee('birthday', this.employee.birthday, newBirthday);
+      this.changeEmployee('birthday', this.employee.birthday,
+        this.convertDate(newBirthday));
     }
     if(newCity !== null){
       this.changeEmployee('city', this.employee.city, newCity);

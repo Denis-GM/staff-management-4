@@ -76,6 +76,8 @@ export class DialogWindowComponent implements OnInit{
       newPost: null,
       newSalary: null,
       newStatus: null,
+      oldValue: null,
+      newValue: null,
     };
 
     if (actionName === 'Повышение' || actionName === 'Понижение' || actionName === 'Принятие на работу') {

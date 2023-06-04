@@ -160,7 +160,7 @@
       <h2 class="detailed__title">Журнал</h2>
       <div class="dairy-container">
         <ul class="dairy__list">
-          <li *ngFor="let action of actions" [ngSwitch]="action.title" class="dairy-field">
+          <li *ngFor="let action of actions; let i = index" [ngSwitch]="action.title" class="dairy-field">
 
             <ng-template ngSwitchCase="Повышение">
               <div class="dairy__field_promotion">

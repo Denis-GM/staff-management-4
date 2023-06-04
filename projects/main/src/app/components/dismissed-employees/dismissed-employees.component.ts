@@ -56,7 +56,6 @@ export class DismissedEmployeesComponent implements OnInit {
   }
 
   selectEmployee(employee: IEmployee) {
-    this.employeeService.setEmployee(employee);
     this.router.navigate(
       ['fired/employee/', employee.id],
       // { queryParams: { 'employee': JSON.stringify(employee) }}

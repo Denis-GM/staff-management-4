@@ -1,9 +1,8 @@
 import {inject, Injectable, InjectionToken} from '@angular/core';
 import { IEmployee } from "../interfaces/employee.interface";
-
 import { Employees } from '../mock/mock-employees';
 import { filter, from, Observable, of, switchMap } from 'rxjs';
-import { Actions } from "../mock/mock-actions";
+import {Actions} from "../mock/mock-actions";
 import { Router } from '@angular/router';
 import {IAction} from "../interfaces/action.interface";
 
@@ -27,31 +26,20 @@ export const employeesFactory = (): Observable<IEmployee[]> => {
   providedIn: 'root'
 })
 export class EmployeeService {
-  employee: IEmployee = {} as IEmployee;
 
-  setEmployee(employee: IEmployee): void{
-    this.employee = employee;
-  }
-
-  getEmployee(): IEmployee{
-    const res: IEmployee = this.employee;
-    this.clearEmployee();
-    return res;
+  getEmployee(id: number): IEmployee{
+    return Employees.find((emp: IEmployee) => emp.id == id)!;
   }
 
   addEmployee(employee:IEmployee): void {
     Employees.push(employee);
   }
 
-  clearEmployee(): void{
-    this.employee = {} as IEmployee;
-  }
-
   getEmployees(): Observable<IEmployee[]> {
     return of(Employees);
   }
 
-  getEmployeeActions(id_owner: number): Observable<object> {
+  getEmployeeActions(id_owner: number): Observable<IAction> {
     return from(Actions)
       .pipe(filter((action: IAction) => action.id_owner == id_owner));
   }

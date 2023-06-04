@@ -58,7 +58,6 @@ export class ActiveEmployeesComponent implements OnInit {
   }
 
   selectEmployee(employee: IEmployee) {
-    this.employeeService.setEmployee(employee);
     this.router.navigate(['dashboard/employee/', employee.id]);
   }
 
