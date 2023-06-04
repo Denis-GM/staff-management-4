@@ -46,3 +46,11 @@
 .pagination {
   margin-bottom: 50px;
 }
+
+.active-employees__empty {
+  display: flex;
+  margin: 200px auto;
+  justify-content: center;
+
+  font-size: 1.4em;
+}

@@ -12,7 +12,6 @@ export class StatusEmployeeDirective implements OnChanges{
 
   ngOnChanges(changes: SimpleChanges){
     this.assignStatus();
-    console.log(changes);
   }
 
   assignStatus(): void {

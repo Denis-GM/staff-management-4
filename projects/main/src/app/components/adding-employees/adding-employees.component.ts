@@ -89,7 +89,6 @@ export class AddingEmployeesComponent implements OnInit {
   submit(){
     this.setEmployee(this.employeeForm);
     this.employeeService.addEmployee(this.employee);
-    console.log(this.employee);
     this.redirectBack();
   }
 }

@@ -1,4 +1,4 @@
-import {NgModule, ErrorHandler } from '@angular/core';
+import {NgModule, ErrorHandler, inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -44,6 +44,7 @@ import { MyForDirective } from './directives/my-for.directive';
 import { ToastComponent } from './components/toast/toast.component';
 import { EMPLOYEES_TOKEN, employeesFactory } from './services/employee.service';
 import { EmployeesSkeletonComponent } from './components/employees-skeleton/employees-skeleton.component';
+
 
 @NgModule({
   declarations: [

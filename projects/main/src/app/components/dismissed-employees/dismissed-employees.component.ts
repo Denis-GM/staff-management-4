@@ -32,7 +32,6 @@ export class DismissedEmployeesComponent implements OnInit {
   constructor(
     @Inject(EMPLOYEES_TOKEN) protected employees$: Observable<IEmployee[]>,
     @Inject(DestroyService) protected destroy$: DestroyService,
-    private employeeService: EmployeeService,
     private router: Router,
     private filterPipe:FilterPipe
   ) { }
@@ -79,7 +78,6 @@ export class DismissedEmployeesComponent implements OnInit {
     const searchedItems: IEmployee[] = this.filterPipe.transform(this.employees, this.searchText,
       this.searchTags,this.rangeSalary);
     this.length = Math.ceil(searchedItems.length/this.itemsPerPage);
-    console.log(this.length);
     this.index=0;
   }
 

@@ -105,7 +105,6 @@ export class DialogWindowComponent implements OnInit{
       throw Error('missing action');
     }
     this.employeeService.addAction(action);
-    console.log(action);
     this.applyChanges();
   }
 

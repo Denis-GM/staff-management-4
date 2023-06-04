@@ -1,7 +1,7 @@
 <app-header></app-header>
 <tui-root>
   <div class="header-board" [@slideIn]>
-    <a routerLink="/dashboard" class="btn-back">Назад</a>
+    <a routerLink="{{backUrl}}" class="btn-back">Назад</a>
     <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
                 class="tui-space_top-1 avatar" size="xxl" [rounded]="true" [autoColor]="true">
     </tui-avatar>
@@ -203,7 +203,7 @@
                 <div class="dairy__field_header" >
                   <div>{{ action.title }}</div> <div>{{ action.date }}</div>
                 </div>
-                <div class="dairy__field_body">{{action.oldValue}} -- {{action.newValue}}</div>
+                <div class="dairy__field_body">{{action.oldValue}} > {{action.newValue}}</div>
               </div>
             </ng-template>
 
