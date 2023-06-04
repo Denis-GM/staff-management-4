@@ -17,10 +17,10 @@ import { animations } from '../../animations/animations';
 export class LoginComponent implements OnInit{
 
   public loginForm!: FormGroup;
-  public users: IUser[] = this.localStorageService.get('users') ?? [];
+  public users: IUser[] = this.localStorageService.get<IUser[]>('users') ?? [];
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private router: Router,
     private localStorageService: LocalStorageService
     ) {}
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit{
   get password() {
     return this.loginForm.get('password');
   }
-  
+
   async submitHandler() {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {

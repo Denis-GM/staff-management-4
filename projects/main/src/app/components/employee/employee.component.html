@@ -16,9 +16,9 @@
             <span class="emp-block__salary">
                 {{ employee.salary | monetary}}
             </span>
-            <tui-badge size="l" status="custom" value="{{ employee.success }}"
-                class="tui-space_right-2 emp-block__success" [appStatusEmployee]="employee.success">
-            <span class="custom-content" [appStatusEmployee]="employee.success" [isCircle]="true"></span>
+            <tui-badge size="l" status="custom" value="{{ employee.status }}"
+                class="tui-space_right-2 emp-block__success" [appStatusEmployee]="employee.status">
+            <span class="custom-content" [appStatusEmployee]="employee.status" [isCircle]="true"></span>
             </tui-badge>
         </div>
     </div>

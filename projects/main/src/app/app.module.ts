@@ -40,7 +40,6 @@ import { EmployeeComponent } from './components/employee/employee.component';
 import { DismissedEmployeesComponent } from './components/dismissed-employees/dismissed-employees.component';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { StatusEmployeeDirective } from './directives/status-employee.directive';
-import { ActionDirective } from './directives/action/action.directive';
 import { MyForDirective } from './directives/my-for.directive';
 import { ToastComponent } from './components/toast/toast.component';
 import { EMPLOYEES_TOKEN, employeesFactory } from './services/employee.service';
@@ -63,7 +62,6 @@ import { EMPLOYEES_TOKEN, employeesFactory } from './services/employee.service';
     DialogWindowComponent,
     PaginationPipe,
     StatusEmployeeDirective,
-    ActionDirective,
     DismissedEmployeesComponent,
     MyForDirective,
     ToastComponent

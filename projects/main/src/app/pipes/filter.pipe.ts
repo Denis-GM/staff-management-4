@@ -14,26 +14,26 @@ export class FilterPipe implements PipeTransform {
     let result:[]|IEmployee[] = Employees;
     if (searchText){
       searchText = searchText.toLocaleLowerCase();
-      result = result.filter(Employee =>{
+      result = result.filter((Employee: IEmployee) =>{
         return `${Employee.lastName} ${Employee.firstName} ${Employee.patronymic}`.toLocaleLowerCase().includes(searchText);
       });
     }
     if (searchTags.length !== 0){
-      searchTags = searchTags.map((tag) => tag.toLocaleLowerCase());
+      searchTags = searchTags.map((tag: string) => tag.toLocaleLowerCase());
       const toFilter:ISearchTags = {
-        projects: searchTags.filter(tag=>tag.includes("проект: ")).map(value => {
+        projects: searchTags.filter((tag: string)=>tag.includes("проект: ")).map((value: string) => {
           if (value === undefined){
             return "";
           }
           return value.split(": ")[1];
         }),
-        post: searchTags.filter(tag=>tag.includes("должность: ")).map(value => {
+        post: searchTags.filter((tag: string)=>tag.includes("должность: ")).map((value: string) => {
           if (value === undefined){
             return "";
           }
           return value.split(": ")[1];
         }),
-        success: searchTags.filter(tag=>tag.includes("успешность: ")).map(value => {
+        success: searchTags.filter((tag: string)=>tag.includes("успешность: ")).map((value: string) => {
           if (value === undefined){
             return "";
           }
@@ -41,21 +41,21 @@ export class FilterPipe implements PipeTransform {
         })
       };
       if (toFilter.projects.length !==0){
-        result = result.filter(Employee=>
-          toFilter.projects.some(value => value === Employee.project.toLocaleLowerCase()));
+        result = result.filter((Employee: IEmployee)=>
+          toFilter.projects.some((value: string) => value === Employee.project.toLocaleLowerCase()));
       }
       if (toFilter.post.length !==0){
-        result = result.filter(Employee=>
-          toFilter.post.some(value => value === Employee.post.toLocaleLowerCase()));
+        result = result.filter((Employee: IEmployee)=>
+          toFilter.post.some((value: string) => value === Employee.post.toLocaleLowerCase()));
       }
       if (toFilter.success.length !==0){
-        result = result.filter(Employee=>
-          toFilter.success.some(value => value === Employee.success.toLocaleLowerCase()));
+        result = result.filter((Employee: IEmployee)=>
+          toFilter.success.some((value: string) => value === Employee.status.toLocaleLowerCase()));
       }
     }
 
     if (range !== null){
-      result = result.filter(Employee => range[0] <= Employee.salary && Employee.salary <= range[1]
+      result = result.filter((Employee: IEmployee) => range[0] <= Employee.salary && Employee.salary <= range[1]
       );
     }
     // console.log(result)

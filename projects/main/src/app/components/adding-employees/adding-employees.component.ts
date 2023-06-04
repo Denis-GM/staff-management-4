@@ -52,6 +52,12 @@ export class AddingEmployeesComponent implements OnInit {
   constructor(private router: Router, private employeeService: EmployeeService) {
   }
 
+  convertDate(date: string): string {
+    // год, месяц, день
+    const dateArr: string[] = date.split('-');
+    return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
+  }
+
   setEmployee(form: FormGroup): void {
     if (form.valid) {
       this.employee = {
@@ -59,7 +65,7 @@ export class AddingEmployeesComponent implements OnInit {
         firstName: form.get('firstName')?.value,
         lastName: form.get('lastName')?.value,
         patronymic: form.get('patronymic')?.value,
-        birthday: form.get('birthday')?.value,
+        birthday: this.convertDate(form.get('birthday')?.value),
         email: form.get('email')?.value,
         city: form.get('city')?.value,
 
@@ -71,7 +77,7 @@ export class AddingEmployeesComponent implements OnInit {
         project: form.get('project')?.value,
         post: form.get('post')?.value,
         salary: Number(form.get('salary')?.value),
-        success: 'Обычный',
+        status: 'Обычный',
       };
     }
   }
@@ -82,9 +88,6 @@ export class AddingEmployeesComponent implements OnInit {
 
   submit(){
     this.setEmployee(this.employeeForm);
-    // this.employeeService.getEmployees().subscribe( observer => {
-    //   observer.
-    // });
     this.employeeService.addEmployee(this.employee);
     console.log(this.employee);
     this.redirectBack();

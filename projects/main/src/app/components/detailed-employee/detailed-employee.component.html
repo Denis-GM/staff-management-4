@@ -8,10 +8,10 @@
     <div>
       <div class="name-field">{{employee.lastName}} {{employee.firstName}} {{employee.patronymic}}</div>
       <div class="email-field">{{employee.email}}</div>
-      <tui-badge size="l" statusEmployee="custom" value="{{ employee.success }}"
+      <tui-badge size="l" statusEmployee="custom" value="{{ employee.status }}"
                  class="tui-space_right-2 emp-block__success"
-                 [appStatusEmployee]="employee.success">
-        <span class="custom-content" [appStatusEmployee]="employee.success" [isCircle]="true"></span>
+                 [appStatusEmployee]="employee.status">
+        <span class="custom-content" [appStatusEmployee]="employee.status" [isCircle]="true"></span>
       </tui-badge>
     </div>
   </div>
@@ -180,6 +180,12 @@
               </div>
             </ng-template>
 
+            <ng-template ngSwitchCase="Увольнение">
+                <div class="dairy__field_header dairy__field_reduce">
+                  <div>{{ action.title }}</div> <div>{{ action.date }}</div>
+                </div>
+            </ng-template>
+
             <ng-template ngSwitchCase="Больничный">
               <div class="dairy__field_header">
                 <div>{{ action.title }}</div> <div>{{ action.date }} - {{ action.date2 }}</div>
@@ -198,6 +204,15 @@
                   <div>{{ action.title }}</div> <div>{{ action.date }}</div>
                 </div>
                 <div class="dairy__field_body">{{action.oldValue}} -- {{action.newValue}}</div>
+              </div>
+            </ng-template>
+
+            <ng-template ngSwitchCase="Изменение статуса">
+              <div class="dairy__field_edit">
+                <div class="dairy__field_header" >
+                  <div>{{ action.title }}</div> <div>{{ action.date }}</div>
+                </div>
+                <div class="dairy__field_body">{{action.newStatus}}</div>
               </div>
             </ng-template>
 

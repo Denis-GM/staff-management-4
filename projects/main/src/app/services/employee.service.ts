@@ -5,6 +5,7 @@ import { Employees } from '../mock/mock-employees';
 import { filter, from, Observable, of, switchMap } from 'rxjs';
 import { Actions } from "../mock/mock-actions";
 import { Router } from '@angular/router';
+import {IAction} from "../interfaces/action.interface";
 
 export const EMPLOYEES_TOKEN: InjectionToken<string> = new InjectionToken<string>('EMPLOYEES_TOKEN');
 
@@ -15,9 +16,8 @@ export const employeesFactory = (): Observable<IEmployee[]> => {
   return employeeService.getEmployees()
     .pipe(
       switchMap((employees: IEmployee[]) => {
-
         return of(employees.filter((employee: IEmployee) => {
-          return router.url === '/dashboard' ? !employee.success.includes('Уволен'): employee.success.includes('Уволен');
+          return router.url === '/dashboard' ? !employee.status.includes('Уволен'): employee.status.includes('Уволен');
         }));
       })
     );
@@ -34,7 +34,7 @@ export class EmployeeService {
   }
 
   getEmployee(): IEmployee{
-    const res = this.employee;
+    const res: IEmployee = this.employee;
     this.clearEmployee();
     return res;
   }
@@ -48,34 +48,25 @@ export class EmployeeService {
   }
 
   getEmployees(): Observable<IEmployee[]> {
-    const employees = of(Employees);
-    return employees;
+    return of(Employees);
   }
 
   getEmployeeActions(id_owner: number): Observable<object> {
-    const actions: Observable<object> = from(Actions)
-      .pipe(filter(action => action.id_owner == id_owner));
-    return actions;
+    return from(Actions)
+      .pipe(filter((action: IAction) => action.id_owner == id_owner));
   }
 
-  addAction(action: any): void {
+  addAction(action: IAction): void {
     Actions.push(action);
   }
 
   editEmployees(id: number, field: string, newValue: string | number): void {
-    const key = field as keyof IEmployee;
-    const employee = Employees.find(emp => emp.id == id);
+    const key: keyof IEmployee = field as keyof IEmployee;
+    const employee: IEmployee | undefined = Employees.find((emp: IEmployee) => emp.id == id);
     if (employee != undefined) {
       console.log(employee);
         employee[key] = newValue as never;
       console.log(employee[key]);
     }
-    // console.log(res);
   }
-
-  // getEmployee(id: number): IEmployee {
-  //   const employee: IEmployee = Employees.find(el => el.id === id)!;
-  //   console.log(employee)
-  //   return employee;
-  // }
 }

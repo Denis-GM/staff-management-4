@@ -69,7 +69,7 @@ export class DismissedEmployeesComponent implements OnInit {
   }
 
   updatePaginationPages():void{
-    const searchedItems = this.filterPipe.transform(this.employees, this.searchText,
+    const searchedItems: IEmployee[] = this.filterPipe.transform(this.employees, this.searchText,
       this.searchTags,this.rangeSalary);
     this.length = Math.ceil(searchedItems.length/this.itemsPerPage);
     console.log(this.length);

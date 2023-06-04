@@ -1,17 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { IEmployee } from "../../interfaces/employee.interface";
 import { EmployeeService } from '../../services/employee.service';
-import {Subscription} from "rxjs";
-import { ActivatedRoute} from "@angular/router";
-import {Employees} from "../../mock/mock-employees";
-import {IActionEdit} from "../../mock/mock-actions";
+import {ActivatedRoute, Params} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 import { animations } from '../../animations/animations';
+import {IActionEdit} from "../../interfaces/action.interface";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-detailed-employee',
@@ -25,7 +19,7 @@ import { animations } from '../../animations/animations';
 export class DetailedEmployeeComponent implements OnInit{
   protected employee: IEmployee = {} as IEmployee;
   protected actions: any = [];
-  public idEmployee:number = 0;
+  public idEmployee: number = 0;
   public isOpen:boolean = false;
   protected editMode:boolean = false;
   editModeMain:boolean = false;
@@ -34,15 +28,12 @@ export class DetailedEmployeeComponent implements OnInit{
   protected formMain!: FormGroup;
   protected formEducation!: FormGroup;
   private routeSubscription: Subscription;
-  // private querySubscription: Subscription;
 
   constructor(private route: ActivatedRoute, private employeeService: EmployeeService,
               private changeDetection: ChangeDetectorRef) {
-    this.routeSubscription = route.params.subscribe(params => {
+    this.routeSubscription = route.params.subscribe((params: Params) => {
       this.employee = this.employeeService.getEmployee();
       this.idEmployee = params['id'];
-      console.log(this.employee);
-      console.log(Employees);
     });
   }
 
@@ -105,11 +96,11 @@ export class DetailedEmployeeComponent implements OnInit{
 
   saveFormMain(): void {
     const form:FormGroup = this.formMain;
-    const newBirthday = form.get('newBirthday')?.value;
-    const newCity = form.get('newCity')?.value;
-    const newProject = form.get('newProject')?.value;
-    const newPost = form.get('newPost')?.value;
-    const newSalary = form.get('newSalary')?.value;
+    const newBirthday: string = this.convertDate(form.get('newBirthday')?.value);
+    const newCity: string = form.get('newCity')?.value;
+    const newProject: string = form.get('newProject')?.value;
+    const newPost: string = form.get('newPost')?.value;
+    const newSalary: number = form.get('newSalary')?.value;
 
     if(newBirthday !== null){
       this.changeEmployee('birthday', this.employee.birthday, newBirthday);
@@ -131,11 +122,11 @@ export class DetailedEmployeeComponent implements OnInit{
   }
 
   saveFormEducation(): void {
-    const form = this.formEducation;
-    const newEducation = form.get('newEducation')?.value;
-    const newEducational_institution = form.get('newEducational_institution')?.value;
-    const newSpecialization = form.get('newSpecialization')?.value;
-    const newYear_graduation = form.get('newYear_graduation')?.value;
+    const form: FormGroup = this.formEducation;
+    const newEducation: string = form.get('newEducation')?.value;
+    const newEducational_institution: string = form.get('newEducational_institution')?.value;
+    const newSpecialization: string = form.get('newSpecialization')?.value;
+    const newYear_graduation: string = form.get('newYear_graduation')?.value;
 
     if(newEducation !== null){
       this.changeEmployee('education', this.employee.education, newEducation);

@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild, Inject, OnInit } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ToastService } from '../../services/toast.service';
 import { ToastData } from '../../interfaces/toast.interface';
 import { takeUntil } from 'rxjs';

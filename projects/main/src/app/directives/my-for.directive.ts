@@ -9,7 +9,7 @@ export class MyForDirective {
   @Input()
   set myForOf(collection:IEmployee[]) {
     this.viewContainer.clear();
-    collection.forEach((employee, index) => {
+    collection.forEach((employee: IEmployee, index: number) => {
       this.viewContainer.createEmbeddedView(
         this.templateRef,
         {$implicit: employee},
@@ -17,9 +17,6 @@ export class MyForDirective {
       );
     });
   }
-
-  constructor(private templateRef:TemplateRef<{$implicit: IEmployee}>,private viewContainer:ViewContainerRef) { }
-
-
-
+  constructor(private templateRef:TemplateRef<{$implicit: IEmployee}>,
+              private viewContainer:ViewContainerRef) { }
 }

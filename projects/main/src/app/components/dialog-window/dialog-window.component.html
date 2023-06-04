@@ -48,6 +48,28 @@
           </form>
         </div>
 
+        <div *ngIf="actionControl.value === 'Изменение статуса'">
+          <form class="dialog__form" [formGroup]="formStatus" (ngSubmit)="submit()">
+            <label class="dialog__label">Статус сотрудника</label>
+            <tui-select formControlName="newStatus" class="tui-space_vertical-4 dialog__select_status"
+                        [tuiTextfieldLabelOutside]="true">
+              Выберите статус
+              <input
+                tuiTextfield
+              />
+              <tui-data-list-wrapper
+                *tuiDataList
+                [items]="statuses"
+              ></tui-data-list-wrapper>
+            </tui-select>
+
+<!--            <tui-input tuiTextfieldSize="l" class="dialog__input"-->
+<!--                       [tuiTextfieldLabelOutside]="true">-->
+<!--              <input type="text" name="date_interview" formControlName="newStatus" tuiTextfield/>-->
+<!--            </tui-input>-->
+          </form>
+        </div>
+
         <div class="dialog__buttons">
           <button tuiButton type="submit" class="dialog__add" (click)="submit()">
             Добавить

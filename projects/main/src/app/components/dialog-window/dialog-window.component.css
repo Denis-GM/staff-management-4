@@ -66,6 +66,10 @@
   line-height: 27px;
 }
 
+.dialog__select_status {
+  margin-top: 7px;
+}
+
 .dialog__input {
   margin-top: 5px;
   margin-bottom: 15px;

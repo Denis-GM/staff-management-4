@@ -14,5 +14,5 @@ export interface IEmployee{
   year_graduation: string;
   post: string;
   salary: number;
-  success: string;
+  status: string;
 }

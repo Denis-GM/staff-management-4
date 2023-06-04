@@ -1,16 +1,21 @@
-import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[appStatusEmployee]',
 })
-export class StatusEmployeeDirective implements OnInit{
-  @Input('appStatusEmployee') statusEmployee = 'Успешный';
-  @Input() isCircle = false;
-  private class ='';
+export class StatusEmployeeDirective implements OnChanges{
+  @Input('appStatusEmployee') statusEmployee: string = 'Успешный';
+  @Input() isCircle: boolean = false;
+  private class: string ='';
 
   constructor(private element: ElementRef, private renderer: Renderer2) {  }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges){
+    this.assignStatus();
+    console.log(changes);
+  }
+
+  assignStatus(): void {
     switch (this.statusEmployee){
       case 'Успешный':
         if (this.isCircle)
@@ -34,5 +39,4 @@ export class StatusEmployeeDirective implements OnInit{
     }
     this.renderer.addClass(this.element.nativeElement, this.class);
   }
-
 }

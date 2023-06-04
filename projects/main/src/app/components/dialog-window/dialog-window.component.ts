@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {IAction} from "../../mock/mock-actions";
 import {EmployeeService} from "../../services/employee.service";
+import {IAction} from "../../interfaces/action.interface";
 
 @Component({
   selector: 'app-dialog-window',
@@ -12,22 +12,30 @@ export class DialogWindowComponent implements OnInit{
   readonly actions: string[] = [
     'Повышение',
     'Понижение',
+    'Увольнение',
+    'Изменение статуса',
     'Больничный',
     'Отпуск',
     'Собеседование',
     'Принятие на работу',
     'Первый рабочий день',
-    // 'Изменение зарплаты',
+  ];
+
+  readonly statuses: string[] = [
+    'Успешный',
+    'Обычный',
+    'Неуспешный',
   ];
 
 
-  @Input() id_owner = 0;
+  @Input() id_owner: number = 0;
   @Output() protected isOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  actionControl = new FormControl(this.actions[0]);
-  dateControl = new FormControl();
+  actionControl: FormControl = new FormControl(this.actions[0]);
+  dateControl: FormControl = new FormControl();
 
   protected formPost!: FormGroup;
+  protected formStatus!: FormGroup;
   protected formDoubleDate!: FormGroup;
 
   constructor(private employeeService: EmployeeService, private changeDetection: ChangeDetectorRef) {}
@@ -41,6 +49,10 @@ export class DialogWindowComponent implements OnInit{
     this.formDoubleDate = new FormGroup({
       endDate: new FormControl(),
     });
+
+    this.formStatus =new FormGroup({
+      newStatus: new FormControl(),
+    });
   }
 
   protected closeDialog() {
@@ -49,13 +61,13 @@ export class DialogWindowComponent implements OnInit{
 
   convertDate(date: string): string {
     // год, месяц, день
-    const dateArr = date.split('-');
+    const dateArr: string[] = date.split('-');
     return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
   }
 
   submit(){
-    const actionName = this.actionControl.value!;
-    const date = this.convertDate(this.dateControl.value);
+    const actionName: string = this.actionControl.value!;
+    const date: string = this.convertDate(this.dateControl.value);
     const action: IAction = {
       id_owner: this.id_owner,
       title: actionName,
@@ -63,11 +75,12 @@ export class DialogWindowComponent implements OnInit{
       date2: null,
       newPost: null,
       newSalary: null,
+      newStatus: null,
     };
 
     if (actionName === 'Повышение' || actionName === 'Понижение' || actionName === 'Принятие на работу') {
-      const newPost = this.formPost.get('newPost')?.value;
-      const newSalary = this.formPost.get('newSalary')?.value;
+      const newPost: string = this.formPost.get('newPost')?.value;
+      const newSalary: number = this.formPost.get('newSalary')?.value;
       action.newPost = newPost;
       action.newSalary = newSalary;
       this.employeeService.editEmployees(this.id_owner, 'post', newPost);
@@ -76,9 +89,16 @@ export class DialogWindowComponent implements OnInit{
     else if (actionName === 'Больничный' || actionName === 'Отпуск') {
       action.date2 = this.convertDate(this.formDoubleDate.get('endDate')?.value);
     }
-    // else if (actionName === 'Собеседование' || actionName === 'Первый рабочий день' || actionName === 'Увольнение') {
-    //   this.employeeService.addAction(action);
-    // }
+    else if (actionName === 'Изменение статуса') {
+      const newStatus: string = this.formStatus.get('newStatus')?.value;
+      action.newStatus = newStatus;
+      this.employeeService.editEmployees(this.id_owner, 'status', newStatus);
+    }
+    else if (actionName === 'Увольнение') {
+      const status: string = 'Уволен';
+      action.newStatus = status;
+      this.employeeService.editEmployees(this.id_owner, 'status', status);
+    }
     else if (this.actions.indexOf(actionName) === -1) {
       throw Error('missing action');
     }

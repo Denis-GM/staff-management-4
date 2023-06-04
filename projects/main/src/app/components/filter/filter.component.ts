@@ -44,7 +44,7 @@ export class FilterComponent implements OnInit {
 
   protected readonly items$ = this.search$
     .pipe(
-      switchMap(search =>
+      switchMap((search: string) =>
         this.serverRequest(search)
           .pipe(
             startWith<string[] | null>(null)
@@ -69,7 +69,7 @@ export class FilterComponent implements OnInit {
   ngOnInit(): void {
     this.databaseMockData = this.data;
 
-    const salary_list = this.databaseMockData.map((employee: IEmployee) => employee.salary);
+    const salary_list: number[] = this.databaseMockData.map((employee: IEmployee) => employee.salary);
     this.salaryControl = new FormControl([Math.min(...salary_list), Math.max(...salary_list)]);
 
     this.filterRangeEvent$.next(this.salaryControl.value);
@@ -79,32 +79,30 @@ export class FilterComponent implements OnInit {
     this.paginationControl.valueChanges.pipe(debounceTime(500))
       .subscribe(v => this.paginationEvent$.next(v));
 
-    this.databaseMockData.forEach(Employee => {
-      const proj = "Проект: " + Employee.project;
+    this.databaseMockData.forEach((Employee: IEmployee) => {
+      const proj: string = "Проект: " + Employee.project;
       if (!this.result.includes(proj)) {
         this.result.push(proj);
       }
-      const post = "Должность: " + Employee.post;
+      const post: string = "Должность: " + Employee.post;
       if (!this.result.includes(post)) {
         this.result.push(post);
       }
-      const success = "Успешность: " + Employee.success;
+      const success: string = "Успешность: " + Employee.status;
       if (!this.result.includes(success)) {
         this.result.push(success);
       }
     });
-
     this.result.sort();
   }
-
 
   onSearchChange(search: string): void {
     this.search$.next(search);
   }
 
   private serverRequest(search: string): Observable<string[]> {
-    let data = this.result;
-    data = data.filter(item => {
+    let data: string[] = this.result;
+    data = data.filter((item: string) => {
       return item.toLowerCase().includes(search.toLocaleLowerCase());
     });
     return of(data).pipe(

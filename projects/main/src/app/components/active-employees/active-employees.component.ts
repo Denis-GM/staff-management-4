@@ -19,7 +19,7 @@ import { animations } from '../../animations/animations';
   ]
 })
 export class ActiveEmployeesComponent implements OnInit {
-  
+
   protected employees: IEmployee[] = [];
   protected searchText: string = '';
   protected searchTags: string[] = [];

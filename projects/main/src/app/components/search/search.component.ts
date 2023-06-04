@@ -1,9 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
-
-
-
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -13,7 +9,7 @@ export class SearchComponent {
   @Output()
   public searchEvent$: EventEmitter<string> = new EventEmitter<string>();
 
-  public value = "";
+  public value: string = "";
 
   searchText() {
     this.searchEvent$.next(this.value);
