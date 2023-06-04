@@ -39,7 +39,7 @@
           }
         ],
         "@typescript-eslint/no-inferrable-types": [
-          false,
+          0,
           "ignore-params",
           "ignore-properties"
         ],
