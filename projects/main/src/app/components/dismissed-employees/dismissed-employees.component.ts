@@ -1,40 +1,50 @@
-import {Component, Inject, inject, InjectionToken, Injector} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import {IEmployee} from "../../interfaces/employee.interface";
-import {EMPLOEES_TOKEN, EmployeeService} from "../../services/employee.service";
+import {EMPLOYEES_TOKEN, EmployeeService} from "../../services/employee.service";
 import {Router} from "@angular/router";
 import {FilterPipe} from "../../pipes/filter.pipe";
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 
 @Component({
   selector: 'app-dismissed-employees',
   templateUrl: './dismissed-employees.component.html',
-  styleUrls: ['./dismissed-employees.component.css'],
-  providers:[{provide:EMPLOEES_TOKEN,useFactory:(EmploeeS:EmployeeService):IEmployee[]=>{
-    let res:IEmployee[]=[];
-    EmploeeS.getEmployees().subscribe(el=>res=el.filter(value => value.success.includes("Уволен")));
-    return res;
-    },deps:[EmployeeService]}]
+  styleUrls: ['./dismissed-employees.component.css']
 })
-export class DismissedEmployeesComponent {
-  employees:IEmployee[];
-  searchText = "";
-  searchTags: string[] = [];
-  rangeSalary: number[] | null = [];
+export class DismissedEmployeesComponent implements OnInit, OnDestroy {
+
+  protected employees: IEmployee[] = [];
+  protected searchText: string = '';
+  protected searchTags: string[] = [];
+  protected rangeSalary: number[] | null = [];
+
+  protected length: number = 1;
+  protected index: number = 0;
+  protected itemsPerPage: number = 5;
+
+  private readonly _destroy$: Subject<void> = new Subject<void>();
 
   constructor(
+    @Inject(EMPLOYEES_TOKEN) protected employees$: Observable<IEmployee[]>,
     private employeeService: EmployeeService,
     private router: Router,
-    private filterPipe:FilterPipe,
-    @Inject(EMPLOEES_TOKEN) emp:IEmployee[]
-  ) {
-    this.employees = emp;
-  }
+    private filterPipe:FilterPipe
+  ) { }
 
   ngOnInit(): void {
-    console.log(this.employees);
+    this.employees$
+      .pipe(
+        takeUntil(this._destroy$)
+      )
+      .subscribe((employeesList: IEmployee[]) => {
+        this.employees = employeesList;
+      });
   }
 
-
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
 
   applySearch(value:string):void{
     this.searchText = value;
@@ -49,7 +59,7 @@ export class DismissedEmployeesComponent {
   selectEmployee(employee: IEmployee) {
     this.employeeService.setEmployee(employee);
     this.router.navigate(
-      ['dashboard/employee/', employee.id],
+      ['fired/employee/', employee.id],
       // { queryParams: { 'employee': JSON.stringify(employee) }}
     );
   }
@@ -72,10 +82,6 @@ export class DismissedEmployeesComponent {
     this.updatePaginationPages();
   }
 
-  length = 1;
-
-  index = 0;
-  itemsPerPage = 5;
   goToPage(index: number): void {
     this.index = index;
     // console.info('New page:', index);

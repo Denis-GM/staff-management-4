@@ -1,10 +1,28 @@
-import {Injectable, InjectionToken} from '@angular/core';
+import {inject, Injectable, InjectionToken} from '@angular/core';
 import { IEmployee } from "../interfaces/employee.interface";
 
 import { Employees } from '../mock/mock-employees';
-import {filter, from, Observable, of, ReplaySubject, Subject} from 'rxjs';
-import {Actions, IAction, IActionEdit} from "../mock/mock-actions";
-export const EMPLOEES_TOKEN = new InjectionToken<string>('EMPLOEES');
+import { filter, from, Observable, of, switchMap } from 'rxjs';
+import { Actions } from "../mock/mock-actions";
+import { Router } from '@angular/router';
+
+export const EMPLOYEES_TOKEN: InjectionToken<string> = new InjectionToken<string>('EMPLOYEES_TOKEN');
+
+export const employeesFactory = (): Observable<IEmployee[]> => {
+  const employeeService: EmployeeService = inject(EmployeeService);
+  const router: Router = inject(Router);
+
+  return employeeService.getEmployees()
+    .pipe(
+      switchMap((employees: IEmployee[]) => {
+
+        return of(employees.filter((employee: IEmployee) => {
+          return router.url === '/dashboard' ? !employee.success.includes('Уволен'): employee.success.includes('Уволен');
+        }));
+      })
+    );
+};
+
 @Injectable({
   providedIn: 'root'
 })

@@ -34,12 +34,12 @@ export class ToastComponent implements OnDestroy {
   protected progressInterval!: ReturnType<typeof setTimeout>;
   protected progressWidth!: string;
 
-  private readonly destroy$: Subject<void> = new Subject<void>();
+  private readonly _destroy$: Subject<void> = new Subject<void>();
 
   constructor(@Inject(ToastService) public toastService: ToastService) {
     this.toastService.getState()
       .pipe(
-        takeUntil(this.destroy$)
+        takeUntil(this._destroy$)
       )
       .subscribe((data: ToastData) => {
         if (data.show) {
@@ -50,8 +50,8 @@ export class ToastComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 
   public countDown(): void {

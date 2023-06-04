@@ -1,34 +1,20 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy} from '@angular/core';
 import { IEmployee } from '../../interfaces/employee.interface';
 import {
-  EMPLOEES_TOKEN,
+  EMPLOYEES_TOKEN,
   EmployeeService,
 } from '../../services/employee.service';
 import { Router } from '@angular/router';
 import { FilterPipe } from '../../pipes/filter.pipe';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-active-employees',
   templateUrl: './active-employees.component.html',
-  styleUrls: ['./active-employees.component.css'],
-  providers: [
-    {
-      provide: EMPLOEES_TOKEN,
-      useFactory: (EmploeeS: EmployeeService): IEmployee[] => {
-        let res: IEmployee[] = [];
-        EmploeeS.getEmployees().subscribe(
-          (el: IEmployee[]) =>
-            (res = el.filter(
-              (value: IEmployee) => !value.success.includes('Уволен')
-            ))
-        );
-        return res;
-      },
-      deps: [EmployeeService],
-    },
-  ],
+  styleUrls: ['./active-employees.component.css']
 })
-export class ActiveEmployeesComponent {
+export class ActiveEmployeesComponent implements OnInit, OnDestroy {
+  
   protected employees: IEmployee[] = [];
   protected searchText: string = '';
   protected searchTags: string[] = [];
@@ -38,13 +24,28 @@ export class ActiveEmployeesComponent {
   protected index: number = 0;
   protected itemsPerPage: number = 5;
 
+  private readonly _destroy$: Subject<void> = new Subject<void>();
+
   constructor(
+    @Inject(EMPLOYEES_TOKEN) protected employees$: Observable<IEmployee[]>,
     private employeeService: EmployeeService,
     private router: Router,
-    private filterPipe: FilterPipe,
-    @Inject(EMPLOEES_TOKEN) emp: IEmployee[]
-  ) {
-    this.employees = emp;
+    private filterPipe: FilterPipe
+  ) { }
+
+  ngOnInit(): void {
+    this.employees$
+      .pipe(
+        takeUntil(this._destroy$)
+      )
+      .subscribe((employeesList: IEmployee[]) => {
+        this.employees = employeesList;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 
   applySearch(value: string): void {

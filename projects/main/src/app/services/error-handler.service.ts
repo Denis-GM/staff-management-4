@@ -10,8 +10,8 @@ export class ErrorHandlerService implements ErrorHandler {
     constructor(private injector: Injector) { }
  
     handleError(error: Error) {
-        const toast = this.injector.get(ToastService);
-        const router = this.injector.get(Router);
+        const toast: ToastService = this.injector.get(ToastService);
+        const router: Router = this.injector.get(Router);
 
         toast.show({
             title: 'Произошла ошибка',

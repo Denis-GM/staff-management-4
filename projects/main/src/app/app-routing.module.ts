@@ -17,8 +17,9 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent, canActivate: [LoggedInAuthGuard]},
   { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard]},
   { path: 'dashboard', component: ActiveEmployeesComponent, canActivate: [AuthGuard]},
-  { path: 'dismissed-employees', component: DismissedEmployeesComponent, canActivate: [AuthGuard]},
   { path: 'dashboard/employee/:id', component: DetailedEmployeeComponent, canActivate: [AuthGuard]},
+  { path: 'fired', component: DismissedEmployeesComponent, canActivate: [AuthGuard]},
+  { path: 'fired/employee/:id', component: DetailedEmployeeComponent, canActivate: [AuthGuard]},
   { path: 'adding', component: AddingEmployeesComponent, canActivate: [AuthGuard]}
 ];
 

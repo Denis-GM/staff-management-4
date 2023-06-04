@@ -1,4 +1,4 @@
-import {NgModule, ErrorHandler} from '@angular/core';
+import {NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -43,6 +43,7 @@ import { StatusEmployeeDirective } from './directives/status-employee.directive'
 import { ActionDirective } from './directives/action/action.directive';
 import { MyForDirective } from './directives/my-for.directive';
 import { ToastComponent } from './components/toast/toast.component';
+import { EMPLOYEES_TOKEN, EmployeeService, employeesFactory } from './services/employee.service';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { ToastComponent } from './components/toast/toast.component';
     TuiInputTagModule,
     TuiPaginationModule,
   ],
-  providers: [{
+  providers: [
+    {
     provide: TUI_SANITIZER,
     useClass: NgDompurifySanitizer
     },
@@ -97,7 +99,12 @@ import { ToastComponent } from './components/toast/toast.component';
       provide: ErrorHandler,
       useClass: ErrorHandlerService,
     },
-    FilterPipe],
+    {
+      provide: EMPLOYEES_TOKEN,
+      useFactory: employeesFactory
+    },
+    FilterPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
