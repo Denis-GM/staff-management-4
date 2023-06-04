@@ -15,6 +15,19 @@ import { IEmployee } from "../../interfaces/employee.interface";
 
 export class FilterComponent implements OnInit {
 
+  @Input()
+  public data: IEmployee[] = [];
+  
+  @Output()
+  public filterEvent$: EventEmitter<string[]> = new EventEmitter<string[]>();
+
+  @Output()
+  public filterRangeEvent$: EventEmitter<number[] | null> = new EventEmitter<number[] | null>();
+
+  @Output()
+  public paginationEvent$: EventEmitter<number> = new EventEmitter<number>();
+
+
   protected databaseMockData: IEmployee[] = [];
   protected result: string[] = [];
   protected value: string[] = [];
@@ -54,17 +67,6 @@ export class FilterComponent implements OnInit {
     );
 
   constructor(private employeeService: EmployeeService) { }
-
-  @Input()
-  public data:IEmployee[]=[];
-  @Output()
-  public filterEvent$: EventEmitter<string[]> = new EventEmitter<string[]>();
-
-  @Output()
-  public filterRangeEvent$: EventEmitter<number[] | null> = new EventEmitter<number[] | null>();
-
-  @Output()
-  public paginationEvent$: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.databaseMockData = this.data;

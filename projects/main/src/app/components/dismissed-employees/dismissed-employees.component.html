@@ -1,29 +1,39 @@
 <tui-root>
   <app-header></app-header>
   <app-search (searchEvent$)="applySearch($event)"></app-search>
-  <app-filter
-    [data]="employees"
-    (filterEvent$)="applyFilter($event)"
-    (filterRangeEvent$)="applyRangeFilter($event)"
+  <app-filter [data]="employees" (filterEvent$)="applyFilter($event)" (filterRangeEvent$)="applyRangeFilter($event)"
     (paginationEvent$)="setItemsPerPage($event)">
   </app-filter>
   <div class="emp-block__container" [@slideIn]>
     <div class="notation-panel">
       <ul class="list-reset">
-        <li>Автатар</li><li>Имя</li><li>Проект</li><li>Должность</li><li>Зарплата</li><li>Успешность</li>
+        <li>Автатар</li>
+        <li>Имя</li>
+        <li>Проект</li>
+        <li>Должность</li>
+        <li>Зарплата</li>
+        <li>Успешность</li>
       </ul>
     </div>
-    <div *ngFor="let employee of employees
-    | filterTags:searchText:searchTags:rangeSalary
-    | pagination:itemsPerPage:index">
-      <app-employee [employee]="employee" (click)="selectEmployee(employee)"></app-employee>
-    </div>
-    <div class="pagination" *ngIf="length>1">
-      <tui-pagination
-        [length]="length"
-        [index]="index"
-        (indexChange)="goToPage($event)"
-      ></tui-pagination>
-    </div>
+    <ng-container *ngIf="employees | filterTags:searchText:searchTags:rangeSalary | pagination:itemsPerPage:index as employees; else loading">
+      <ng-container *ngIf="!!employees.length && (loading$ | async) === false; else loading">
+        <ng-container *myFor="let employee of employees">
+          <app-employee [employee]="employee" (click)="selectEmployee(employee)"></app-employee>
+        </ng-container>
+        <div class="pagination" *ngIf="length > 1">
+          <tui-pagination [length]="length" [index]="index" (indexChange)="goToPage($event)"></tui-pagination>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #loading>
+      <ng-container *ngIf="loading$ | async; else empty">
+        <app-employees-skeleton [repeat]="5"></app-employees-skeleton>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #empty>
+      <div class="active-employees__empty">Нет сотрудников :(</div>
+    </ng-template>
   </div>
 </tui-root>

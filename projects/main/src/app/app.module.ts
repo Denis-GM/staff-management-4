@@ -43,6 +43,7 @@ import { StatusEmployeeDirective } from './directives/status-employee.directive'
 import { MyForDirective } from './directives/my-for.directive';
 import { ToastComponent } from './components/toast/toast.component';
 import { EMPLOYEES_TOKEN, employeesFactory } from './services/employee.service';
+import { EmployeesSkeletonComponent } from './components/employees-skeleton/employees-skeleton.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { EMPLOYEES_TOKEN, employeesFactory } from './services/employee.service';
     StatusEmployeeDirective,
     DismissedEmployeesComponent,
     MyForDirective,
-    ToastComponent
+    ToastComponent,
+    EmployeesSkeletonComponent
   ],
   imports: [
     BrowserModule,
