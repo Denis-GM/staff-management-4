@@ -1,6 +1,6 @@
-<app-header xmlns="http://www.w3.org/1999/html"></app-header>
+<app-header></app-header>
 <tui-root>
-  <div class="header-board">
+  <div class="header-board" [@slideIn]>
     <a routerLink="/dashboard" class="btn-back">Назад</a>
     <tui-avatar text="{{ employee.firstName + ' ' + employee.lastName}}"
                 class="tui-space_top-1 avatar" size="xxl" [rounded]="true" [autoColor]="true">
@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div class="main-board">
+  <div class="main-board" [@slideIn]>
     <div class="detailed__container">
       <h2 class="detailed__title">Основная информация</h2>
       <form [formGroup]="formMain" (ngSubmit)="saveFormMain()" class="data-sec">

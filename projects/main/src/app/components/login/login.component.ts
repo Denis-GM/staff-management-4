@@ -4,11 +4,15 @@ import { Router } from '@angular/router';
 
 import { LocalStorageService } from '../../services/local-storage.service';
 import { IUser } from '../../interfaces/user.interface';
+import { animations } from '../../animations/animations';
 
 @Component({
   selector: 'app-loginn',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [
+    animations['slideIn']
+  ]
 })
 export class LoginComponent implements OnInit{
 

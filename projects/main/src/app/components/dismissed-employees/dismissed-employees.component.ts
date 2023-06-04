@@ -5,12 +5,16 @@ import {Router} from "@angular/router";
 import {FilterPipe} from "../../pipes/filter.pipe";
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { DestroyService } from '../../services/destroy.service';
+import { animations } from '../../animations/animations';
 
 
 @Component({
   selector: 'app-dismissed-employees',
   templateUrl: './dismissed-employees.component.html',
-  styleUrls: ['./dismissed-employees.component.css']
+  styleUrls: ['./dismissed-employees.component.css'],
+  animations: [
+    animations['slideIn']
+  ]
 })
 export class DismissedEmployeesComponent implements OnInit {
 

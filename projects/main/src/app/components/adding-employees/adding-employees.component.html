@@ -1,6 +1,6 @@
 <app-header></app-header>
 <tui-root>
-  <div class="adding">
+  <div class="adding" [@slideIn]>
     <div class="adding__container">
       <form [formGroup]="employeeForm" novalidate (ngSubmit)='submit()'>
         <h2 class="adding__title">Основная информация</h2>

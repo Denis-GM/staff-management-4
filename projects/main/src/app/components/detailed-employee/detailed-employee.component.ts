@@ -11,12 +11,16 @@ import { ActivatedRoute} from "@angular/router";
 import {Employees} from "../../mock/mock-employees";
 import {IActionEdit} from "../../mock/mock-actions";
 import {FormControl, FormGroup} from "@angular/forms";
+import { animations } from '../../animations/animations';
 
 @Component({
   selector: 'app-detailed-employee',
   templateUrl: './detailed-employee.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./detailed-employee.component.css']
+  styleUrls: ['./detailed-employee.component.css'],
+  animations: [
+    animations['slideIn']
+  ]
 })
 export class DetailedEmployeeComponent implements OnInit{
   protected employee: IEmployee = {} as IEmployee;

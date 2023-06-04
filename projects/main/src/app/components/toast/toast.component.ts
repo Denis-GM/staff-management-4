@@ -4,28 +4,14 @@ import { ToastService } from '../../services/toast.service';
 import { ToastData } from '../../interfaces/toast.interface';
 import { takeUntil } from 'rxjs';
 import { DestroyService } from '../../services/destroy.service';
+import { animations } from '../../animations/animations';
 
 @Component({
   selector: 'app-toast',
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.css'],
   animations: [
-    trigger('openClose', [
-      state(
-        'closed',
-        style({
-          visibility: 'hidden',
-          right: '-400px',
-        })
-      ),
-      state(
-        'open',
-        style({
-          right: '100px',
-        })
-      ),
-      transition('open <=> closed', [animate('0.5s ease-in-out')]),
-    ]),
+    animations['openClose']
   ]
 })
 export class ToastComponent implements OnInit {

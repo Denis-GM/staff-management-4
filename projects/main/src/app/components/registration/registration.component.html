@@ -4,7 +4,7 @@
     </a>
 </header>
 
-<form class="registration" [formGroup]="registrationForm" #form="ngForm" (ngSubmit)="submitHandler()">
+<form class="registration" [formGroup]="registrationForm" #form="ngForm" (ngSubmit)="submitHandler()" [@slideIn]>
     <h2 class="registration__title">Регистрация</h2>
 
     <input class= "registration__input" type="text" placeholder="Логин" autocomplete="off" formControlName="login">

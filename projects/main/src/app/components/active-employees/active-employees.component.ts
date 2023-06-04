@@ -8,11 +8,15 @@ import { Router } from '@angular/router';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { Observable, takeUntil } from 'rxjs';
 import { DestroyService } from '../../services/destroy.service';
+import { animations } from '../../animations/animations';
 
 @Component({
   selector: 'app-active-employees',
   templateUrl: './active-employees.component.html',
-  styleUrls: ['./active-employees.component.css']
+  styleUrls: ['./active-employees.component.css'],
+  animations: [
+    animations['slideIn']
+  ]
 })
 export class ActiveEmployeesComponent implements OnInit {
   

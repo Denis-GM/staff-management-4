@@ -4,11 +4,15 @@ import {Router} from "@angular/router";
 import { EmployeeService } from "../../services/employee.service";
 import { IEmployee } from "../../interfaces/employee.interface";
 import {Employees} from "../../mock/mock-employees";
+import { animations } from '../../animations/animations';
 
 @Component({
   selector: 'app-adding-employees',
   templateUrl: './adding-employees.component.html',
-  styleUrls: ['./adding-employees.component.css']
+  styleUrls: ['./adding-employees.component.css'],
+  animations: [
+    animations['slideIn']
+  ]
 })
 export class AddingEmployeesComponent implements OnInit {
   private employee: IEmployee = {} as IEmployee;

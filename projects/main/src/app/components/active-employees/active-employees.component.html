@@ -4,7 +4,7 @@
   <app-filter [data]="employees" (filterEvent$)="applyFilter($event)" (filterRangeEvent$)="applyRangeFilter($event)"
     (paginationEvent$)="setItemsPerPage($event)">
   </app-filter>
-  <div class="emp-block__container">
+  <div class="emp-block__container"  [@slideIn]>
     <div class="notation-panel">
       <ul class="list-reset">
         <li>Автатар</li>

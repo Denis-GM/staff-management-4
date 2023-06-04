@@ -4,11 +4,15 @@ import { Router } from '@angular/router';
 
 import { LocalStorageService } from '../../services/local-storage.service';
 import { IUser } from '../../interfaces/user.interface';
+import { animations } from '../../animations/animations';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
+  animations: [
+    animations['slideIn']
+  ]
 })
 export class RegistrationComponent implements OnInit {
 
