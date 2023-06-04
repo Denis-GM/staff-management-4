@@ -1,7 +1,7 @@
 <tui-root>
   <app-header></app-header>
   <app-search (searchEvent$)="applySearch($event)"></app-search>
-  <app-filter [isFiredList]="false" (filterEvent$)="applyFilter($event)" (filterRangeEvent$)="applyRangeFilter($event)"
+  <app-filter [data]="employees" (filterEvent$)="applyFilter($event)" (filterRangeEvent$)="applyRangeFilter($event)"
     (paginationEvent$)="setItemsPerPage($event)">
   </app-filter>
   <div class="emp-block__container">

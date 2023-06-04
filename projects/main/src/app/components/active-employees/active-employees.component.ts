@@ -1,19 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { IEmployee } from "../../interfaces/employee.interface";
-import { EmployeeService } from '../../services/employee.service';
-import { Router } from "@angular/router";
-import { FilterPipe } from "../../pipes/filter.pipe";
+import { Component, Inject } from '@angular/core';
+import { IEmployee } from '../../interfaces/employee.interface';
+import {
+  EMPLOEES_TOKEN,
+  EmployeeService,
+} from '../../services/employee.service';
+import { Router } from '@angular/router';
+import { FilterPipe } from '../../pipes/filter.pipe';
 
 @Component({
   selector: 'app-active-employees',
   templateUrl: './active-employees.component.html',
-  styleUrls: ['./active-employees.component.css']
+  styleUrls: ['./active-employees.component.css'],
+  providers: [
+    {
+      provide: EMPLOEES_TOKEN,
+      useFactory: (EmploeeS: EmployeeService): IEmployee[] => {
+        let res: IEmployee[] = [];
+        EmploeeS.getEmployees().subscribe(
+          (el: IEmployee[]) =>
+            (res = el.filter(
+              (value: IEmployee) => !value.success.includes('Уволен')
+            ))
+        );
+        return res;
+      },
+      deps: [EmployeeService],
+    },
+  ],
 })
-
-export class ActiveEmployeesComponent implements OnInit {
-  
+export class ActiveEmployeesComponent {
   protected employees: IEmployee[] = [];
-  protected searchText = "";
+  protected searchText: string = '';
   protected searchTags: string[] = [];
   protected rangeSalary: number[] | null = [];
 
@@ -24,18 +41,10 @@ export class ActiveEmployeesComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
-    private filterPipe: FilterPipe
-  ) { }
-
-  ngOnInit(): void {
-    this.getEmployees();
-  }
-
-  getEmployees(): void {
-    this.employeeService.getEmployees()
-      .subscribe(employees => {
-        this.employees = employees.filter(employee => !employee.success.includes("Уволен"));
-      });
+    private filterPipe: FilterPipe,
+    @Inject(EMPLOEES_TOKEN) emp: IEmployee[]
+  ) {
+    this.employees = emp;
   }
 
   applySearch(value: string): void {
@@ -59,8 +68,12 @@ export class ActiveEmployeesComponent implements OnInit {
   }
 
   updatePaginationPages(): void {
-    const searchedItems = this.filterPipe.transform(this.employees, this.searchText,
-      this.searchTags, this.rangeSalary);
+    const searchedItems: IEmployee[] = this.filterPipe.transform(
+      this.employees,
+      this.searchText,
+      this.searchTags,
+      this.rangeSalary
+    );
     this.length = Math.ceil(searchedItems.length / this.itemsPerPage);
     this.index = 0;
   }

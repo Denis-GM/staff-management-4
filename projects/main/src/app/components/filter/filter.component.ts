@@ -39,7 +39,7 @@ export class FilterComponent implements OnInit {
   protected readonly currency = {
     other: 'руб',
   };
-  
+
   protected readonly search$: Subject<string> = new Subject<string>();
 
   protected readonly items$ = this.search$
@@ -56,7 +56,7 @@ export class FilterComponent implements OnInit {
   constructor(private employeeService: EmployeeService) { }
 
   @Input()
-  public isFiredList: boolean = false;
+  public data:IEmployee[]=[];
   @Output()
   public filterEvent$: EventEmitter<string[]> = new EventEmitter<string[]>();
 
@@ -67,7 +67,7 @@ export class FilterComponent implements OnInit {
   public paginationEvent$: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {
-    this.getEmployees();
+    this.databaseMockData = this.data;
 
     const salary_list = this.databaseMockData.map((employee: IEmployee) => employee.salary);
     this.salaryControl = new FormControl([Math.min(...salary_list), Math.max(...salary_list)]);
@@ -97,17 +97,6 @@ export class FilterComponent implements OnInit {
     this.result.sort();
   }
 
-  getEmployees(): void {
-    this.employeeService.getEmployees()
-      .subscribe(employees => {
-        if (this.isFiredList) {
-          this.databaseMockData = employees.filter(employee => employee.success.includes("Уволен"));
-        }
-        else {
-          this.databaseMockData = employees.filter(employee => !employee.success.includes("Уволен"));
-        }
-      });
-  }
 
   onSearchChange(search: string): void {
     this.search$.next(search);
