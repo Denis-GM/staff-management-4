@@ -16,7 +16,7 @@ export class ErrorHandlerService implements ErrorHandler {
         toast.show({
             title: 'Произошла ошибка',
             message: error.message
-        })
+        });
 
         console.dirxml({
             name: error.name,

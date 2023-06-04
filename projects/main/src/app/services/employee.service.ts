@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable, InjectionToken} from '@angular/core';
 import { IEmployee } from "../interfaces/employee.interface";
 
 import { Employees } from '../mock/mock-employees';
 import {filter, from, Observable, of, ReplaySubject, Subject} from 'rxjs';
 import {Actions, IAction, IActionEdit} from "../mock/mock-actions";
-
+export const EMPLOEES_TOKEN = new InjectionToken<string>('EMPLOEES');
 @Injectable({
   providedIn: 'root'
 })

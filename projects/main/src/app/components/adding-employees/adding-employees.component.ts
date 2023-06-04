@@ -12,7 +12,7 @@ import {Employees} from "../../mock/mock-employees";
 })
 export class AddingEmployeesComponent implements OnInit {
   private employee: IEmployee = {} as IEmployee;
-  types = [
+  types:string[] = [
     'Основное общее',
     'Среднее общее',
     'Специалитет',

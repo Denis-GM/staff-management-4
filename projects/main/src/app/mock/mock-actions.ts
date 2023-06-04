@@ -37,4 +37,4 @@ export const Actions = [
     newSalary: null},
   { id_owner: 2, title: 'Принят на работу', date: '12.05.2023', date2: null,  newPost: null,
     newSalary: null},
-]
+];

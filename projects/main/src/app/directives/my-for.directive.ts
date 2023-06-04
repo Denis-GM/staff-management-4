@@ -14,7 +14,7 @@ export class MyForDirective {
         this.templateRef,
         {$implicit: employee},
         index
-      )
+      );
     });
   }
 

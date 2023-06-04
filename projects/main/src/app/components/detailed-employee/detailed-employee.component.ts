@@ -9,7 +9,7 @@ import { EmployeeService } from '../../services/employee.service';
 import {Subscription} from "rxjs";
 import { ActivatedRoute} from "@angular/router";
 import {Employees} from "../../mock/mock-employees";
-import {IAction, IActionEdit} from "../../mock/mock-actions";
+import {IActionEdit} from "../../mock/mock-actions";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
@@ -21,11 +21,11 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class DetailedEmployeeComponent implements OnInit{
   protected employee: IEmployee = {} as IEmployee;
   protected actions: any = [];
-  public idEmployee = 0;
-  public isOpen = false;
-  protected editMode= false;
-  editModeMain = false;
-  editModeEducation = false;
+  public idEmployee:number = 0;
+  public isOpen:boolean = false;
+  protected editMode:boolean = false;
+  editModeMain:boolean = false;
+  editModeEducation:boolean = false;
 
   protected formMain!: FormGroup;
   protected formEducation!: FormGroup;
@@ -50,22 +50,22 @@ export class DetailedEmployeeComponent implements OnInit{
       newProject:  new FormControl(),
       newPost:  new FormControl(),
       newSalary:  new FormControl(),
-    })
+    });
 
     this.formEducation = new FormGroup({
       newEducation:  new FormControl(),
       newEducational_institution:  new FormControl(),
       newSpecialization:  new FormControl(),
       newYear_graduation:  new FormControl(),
-    })
+    });
   }
 
   getActions(): void {
-    const id_owner = this.idEmployee;
+    const id_owner:number = this.idEmployee;
     console.log(id_owner);
     this.actions = [];
     this.employeeService.getEmployeeActions(id_owner)
-      .subscribe(action => {
+      .subscribe((action:object) => {
         this.actions.push(action);
       });
   }
@@ -76,7 +76,7 @@ export class DetailedEmployeeComponent implements OnInit{
 
   convertDate(date: string): string {
     // год, месяц, день
-    const dateArr = date.split('-');
+    const dateArr:string[] = date.split('-');
     return `${dateArr[2]}.${dateArr[1]}.${dateArr[0]}`;
   }
 
@@ -85,12 +85,12 @@ export class DetailedEmployeeComponent implements OnInit{
     this.isOpen = false;
     if (!isOpen){
       this.getActions();
-      this.changeDetection.detectChanges()
+      this.changeDetection.detectChanges();
     }
   }
 
   changeEmployee(nameEditField: string, oldValue: number | string, newValue: number | string,): void {
-    const date = new Date();
+    const date:Date = new Date();
     const action: IActionEdit = { id_owner: this.idEmployee, title: 'Изменение данных',
       date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`, oldValue: null, newValue: null,};
     action.oldValue = oldValue;
@@ -100,7 +100,7 @@ export class DetailedEmployeeComponent implements OnInit{
   }
 
   saveFormMain(): void {
-    const form = this.formMain;
+    const form:FormGroup = this.formMain;
     const newBirthday = form.get('newBirthday')?.value;
     const newCity = form.get('newCity')?.value;
     const newProject = form.get('newProject')?.value;
@@ -108,7 +108,7 @@ export class DetailedEmployeeComponent implements OnInit{
     const newSalary = form.get('newSalary')?.value;
 
     if(newBirthday !== null){
-      this.changeEmployee('birthday', this.employee.birthday, newBirthday)
+      this.changeEmployee('birthday', this.employee.birthday, newBirthday);
     }
     if(newCity !== null){
       this.changeEmployee('city', this.employee.city, newCity);
@@ -134,7 +134,7 @@ export class DetailedEmployeeComponent implements OnInit{
     const newYear_graduation = form.get('newYear_graduation')?.value;
 
     if(newEducation !== null){
-      this.changeEmployee('education', this.employee.education, newEducation)
+      this.changeEmployee('education', this.employee.education, newEducation);
     }
     if(newEducational_institution !== null){
       this.changeEmployee('educational_institution', this.employee.educational_institution, newEducational_institution);

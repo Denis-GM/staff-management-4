@@ -67,8 +67,8 @@ export class ToastComponent implements OnDestroy {
         return;
       }
 
-      this.progressWidth = `${width - 1}%`
-      this.progressBar.nativeElement.style.width = this.progressWidth
+      this.progressWidth = `${width - 1}%`;
+      this.progressBar.nativeElement.style.width = this.progressWidth;
     }, 50);
   }
 

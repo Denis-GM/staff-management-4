@@ -36,11 +36,11 @@ export class DialogWindowComponent implements OnInit{
     this.formPost = new FormGroup({
       newPost: new FormControl(),
       newSalary: new FormControl(),
-    })
+    });
 
     this.formDoubleDate = new FormGroup({
       endDate: new FormControl(),
-    })
+    });
   }
 
   protected closeDialog() {
@@ -63,7 +63,7 @@ export class DialogWindowComponent implements OnInit{
       date2: null,
       newPost: null,
       newSalary: null,
-    }
+    };
 
     if (actionName === 'Повышение' || actionName === 'Понижение' || actionName === 'Принятие на работу') {
       const newPost = this.formPost.get('newPost')?.value;
@@ -83,7 +83,7 @@ export class DialogWindowComponent implements OnInit{
       throw Error('missing action');
     }
     this.employeeService.addAction(action);
-    console.log(action)
+    console.log(action);
     this.applyChanges();
   }
 
