@@ -58,11 +58,11 @@ export const Actions: IAction[] = [
     newSalary: null, newStatus: null, oldValue: null, newValue: null
   },
   {
-    id_owner: 5, title: 'Принят на работу', date: '12.05.2023', date2: null, newPost: null,
+    id_owner: 5, title: 'Собеседование', date: '12.05.2023', date2: null, newPost: null,
     newSalary: null, newStatus: null, oldValue: null, newValue: null
   },
   {
-    id_owner: 5, title: 'Собеседование', date: '01.05.2023', date2: null, newPost: null,
+    id_owner: 5, title: 'Принят на работу', date: '01.05.2023', date2: null, newPost: null,
     newSalary: null, newStatus: null, oldValue: null, newValue: null
   },
   {

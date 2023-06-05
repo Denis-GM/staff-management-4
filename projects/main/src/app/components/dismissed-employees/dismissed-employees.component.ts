@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit } from '@angular/core';
 import {IEmployee} from "../../interfaces/employee.interface";
-import {EMPLOYEES_TOKEN} from "../../services/employee.service";
 import {Router} from "@angular/router";
 import {FilterPipe} from "../../pipes/filter.pipe";
 import { BehaviorSubject, Observable, map, takeUntil } from 'rxjs';
 import { DestroyService } from '../../services/destroy.service';
 import { animations } from '../../animations/animations';
+import { EMPLOYEES_TOKEN, employeesFactory } from '../../tokens/employee.token';
 
 
 @Component({
@@ -15,6 +15,12 @@ import { animations } from '../../animations/animations';
   animations: [
     animations['slideIn']
   ],
+  providers: [
+    {
+      provide: EMPLOYEES_TOKEN,
+      useFactory: employeesFactory
+    }
+  ]
 })
 export class DismissedEmployeesComponent implements OnInit {
 

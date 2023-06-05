@@ -1,11 +1,12 @@
-import {Component,  Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { IEmployee } from '../../interfaces/employee.interface';
-import {EMPLOYEES_TOKEN, employeesFactory} from '../../services/employee.service';
+
 import { Router } from '@angular/router';
 import { FilterPipe } from '../../pipes/filter.pipe';
-import { BehaviorSubject, Observable, map,  takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, map, takeUntil } from 'rxjs';
 import { DestroyService } from '../../services/destroy.service';
 import { animations } from '../../animations/animations';
+import { EMPLOYEES_TOKEN, employeesFactory } from '../../tokens/employee.token';
 
 @Component({
   selector: 'app-active-employees',
@@ -19,7 +20,7 @@ import { animations } from '../../animations/animations';
       provide: EMPLOYEES_TOKEN,
       useFactory: employeesFactory
     },
-  ],
+  ]
 })
 export class ActiveEmployeesComponent implements OnInit {
 

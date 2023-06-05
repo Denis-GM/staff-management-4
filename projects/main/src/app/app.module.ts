@@ -42,7 +42,6 @@ import { ErrorHandlerService } from './services/error-handler.service';
 import { StatusEmployeeDirective } from './directives/status-employee.directive';
 import { MyForDirective } from './directives/my-for.directive';
 import { ToastComponent } from './components/toast/toast.component';
-import { EMPLOYEES_TOKEN, employeesFactory } from './services/employee.service';
 import { EmployeesSkeletonComponent } from './components/employees-skeleton/employees-skeleton.component';
 
 
@@ -99,10 +98,6 @@ import { EmployeesSkeletonComponent } from './components/employees-skeleton/empl
     {
       provide: ErrorHandler,
       useClass: ErrorHandlerService,
-    },
-    {
-      provide: EMPLOYEES_TOKEN,
-      useFactory: employeesFactory
     },
     FilterPipe
   ],
