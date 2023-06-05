@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {Component, ErrorHandler, Inject, OnChanges, OnInit} from '@angular/core';
 import { IEmployee } from '../../interfaces/employee.interface';
 import {
   EMPLOYEES_TOKEN,
-  EmployeeService,
+  EmployeeService, employeesFactory,
 } from '../../services/employee.service';
 import { Router } from '@angular/router';
 import { FilterPipe } from '../../pipes/filter.pipe';
@@ -16,7 +16,13 @@ import { animations } from '../../animations/animations';
   styleUrls: ['./active-employees.component.css'],
   animations: [
     animations['slideIn']
-  ]
+  ],
+  providers: [
+    {
+      provide: EMPLOYEES_TOKEN,
+      useFactory: employeesFactory
+    },
+  ],
 })
 export class ActiveEmployeesComponent implements OnInit {
 
@@ -52,7 +58,7 @@ export class ActiveEmployeesComponent implements OnInit {
       .subscribe((employeesList: IEmployee[]) => {
         this.employees = employeesList;
       });
-}
+  }
 
   applySearch(value: string): void {
     this.searchText = value;

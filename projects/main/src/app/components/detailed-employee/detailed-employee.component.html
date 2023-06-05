@@ -26,7 +26,7 @@
 
           <div *ngIf="editMode && editModeMain" class="detailed__form_change">
             <tui-input tuiTextfieldSize="m" class="detailed__input"
-                       [tuiTextfieldLabelOutside]="true">
+                       [tuiTextfieldLabelOutside]="true" formControlName="newBirthday">
               <input type="date" formControlName="newBirthday" tuiTextfield/>
             </tui-input>
           </div>
@@ -38,7 +38,7 @@
 
           <div *ngIf="editMode && editModeMain" class="detailed__form_change">
             <tui-input tuiTextfieldSize="m" class="detailed__input"
-                       [tuiTextfieldLabelOutside]="true">
+                       [tuiTextfieldLabelOutside]="true" formControlName="newCity">
               {{employee.city}}
               <input type="text" formControlName="newCity" tuiTextfield/>
             </tui-input>
@@ -50,7 +50,7 @@
 
           <div *ngIf="editMode && editModeMain" class="detailed__form_change">
             <tui-input tuiTextfieldSize="m" class="detailed__input"
-                       [tuiTextfieldLabelOutside]="true">
+                       [tuiTextfieldLabelOutside]="true" formControlName="newProject">
               {{employee.project}}
               <input type="text" formControlName="newProject" tuiTextfield/>
             </tui-input>
@@ -63,7 +63,7 @@
 
           <div *ngIf="editMode && editModeMain" class="detailed__form_change">
             <tui-input tuiTextfieldSize="m" class="detailed__input"
-                       [tuiTextfieldLabelOutside]="true">
+                       [tuiTextfieldLabelOutside]="true" formControlName="newPost">
               {{employee.post}}
               <input type="text" formControlName="newPost" tuiTextfield/>
             </tui-input>
@@ -76,7 +76,7 @@
 
           <div *ngIf="editMode && editModeMain" class="detailed__form_change">
             <tui-input tuiTextfieldSize="m" class="detailed__input"
-                       [tuiTextfieldLabelOutside]="true">
+                       [tuiTextfieldLabelOutside]="true" formControlName="newSalary">
               {{employee.salary}}
               <input type="number" formControlName="newSalary" tuiTextfield/>
             </tui-input>
@@ -102,7 +102,7 @@
 
             <div *ngIf="editMode && editModeEducation" class="detailed__form_change">
               <tui-input tuiTextfieldSize="m" class="detailed__input"
-                         [tuiTextfieldLabelOutside]="true">
+                         [tuiTextfieldLabelOutside]="true" formControlName="newEducation">
                 {{employee.education}}
                 <input type="text" formControlName="newEducation" tuiTextfield/>
               </tui-input>
@@ -114,7 +114,7 @@
 
             <div *ngIf="editMode && editModeEducation" class="detailed__form_change">
               <tui-input tuiTextfieldSize="m" class="detailed__input"
-                         [tuiTextfieldLabelOutside]="true">
+                         [tuiTextfieldLabelOutside]="true" formControlName="newEducational_institution">
                 {{employee.educational_institution}}
                 <input type="text" formControlName="newEducational_institution" tuiTextfield/>
               </tui-input>
@@ -127,7 +127,7 @@
 
             <div *ngIf="editMode && editModeEducation"  class="detailed__form_change">
               <tui-input tuiTextfieldSize="m" class="detailed__input"
-                         [tuiTextfieldLabelOutside]="true">
+                         [tuiTextfieldLabelOutside]="true" formControlName="newSpecialization">
                 {{employee.specialization}}
                 <input type="text" formControlName="newSpecialization" tuiTextfield/>
               </tui-input>
@@ -140,7 +140,7 @@
 
             <div *ngIf="editMode && editModeEducation"  class="detailed__form_change">
               <tui-input tuiTextfieldSize="m" class="detailed__input"
-                         [tuiTextfieldLabelOutside]="true">
+                         [tuiTextfieldLabelOutside]="true" formControlName="newYear_graduation">
                 {{employee.year_graduation}}
                 <input type="text" formControlName="newYear_graduation" tuiTextfield/>
               </tui-input>

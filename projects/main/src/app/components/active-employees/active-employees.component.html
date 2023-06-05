@@ -22,10 +22,10 @@
         </ng-container>
         <div class="pagination" *ngIf="length > 1">
           <tui-pagination [length]="length" [index]="index" (indexChange)="goToPage($event)"></tui-pagination>
-        </div>    
+        </div>
       </ng-container>
     </ng-container>
-   
+
     <ng-template #loading>
       <ng-container *ngIf="loading$ | async; else empty">
         <app-employees-skeleton [repeat]="5"></app-employees-skeleton>

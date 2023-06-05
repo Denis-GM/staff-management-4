@@ -25,6 +25,7 @@
     "@taiga-ui/icons": "^3.23.1",
     "@taiga-ui/kit": "^3.23.1",
     "@tinkoff/ng-dompurify": "3.0.0",
+    "@types/aria-query": "^5.0.1",
     "dompurify": "2.2.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

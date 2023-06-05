@@ -6,34 +6,34 @@
         <h2 class="adding__title">Основная информация</h2>
         <label class="adding__label">Фамилия</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
+                   [tuiTextfieldLabelOutside]="true" formControlName="lastName">
           Иванов
           <input type="text" name="lastName" formControlName="lastName" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Имя</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                    [tuiTextfieldLabelOutside]="true">
+                    [tuiTextfieldLabelOutside]="true" formControlName="firstName">
           Иван
           <input type="text" name="firstName" formControlName="firstName" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Отчество</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
+                   [tuiTextfieldLabelOutside]="true" formControlName="patronymic">
           Иванович
           <input type="text" name="patronymic" formControlName="patronymic" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Дата рождения</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
+                   [tuiTextfieldLabelOutside]="true" formControlName="birthday">
           <input type="date" name="birthday" formControlName="birthday" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Контактный Email</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
+                   [tuiTextfieldLabelOutside]="true" formControlName="email">
           example@email.com
           <input  name="email" formControlName="email" tuiTextfield type="email"/>
         </tui-input>
@@ -42,28 +42,28 @@
         <h2 class="adding__title">Трудоустройство</h2>
         <label class="adding__label">Должность</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
+                   [tuiTextfieldLabelOutside]="true" formControlName="post">
           Зарплата
           <input type="text" name="post" formControlName="post" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Зарплата</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
+                   [tuiTextfieldLabelOutside]="true" formControlName="salary">
           Зарплата
           <input type="text" name="salary" formControlName="salary" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Проект</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
+                   [tuiTextfieldLabelOutside]="true" formControlName="project">
           Название
           <input type="text" name="project" formControlName="project" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Город</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
+                   [tuiTextfieldLabelOutside]="true" formControlName="city">
           Введите город
           <input type="text" name="city" formControlName="city" tuiTextfield/>
         </tui-input>
@@ -83,19 +83,21 @@
 
         <label class="adding__label">Образовательное учреждение</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
+                   [tuiTextfieldLabelOutside]="true" formControlName="educational_institution">
           Название
           <input type="text" name="educational_institution" formControlName="educational_institution" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Специальность</label>
-        <tui-input tuiTextfieldSize="l" class="adding__input" [tuiTextfieldLabelOutside]="true">
+        <tui-input tuiTextfieldSize="l" class="adding__input"
+                   [tuiTextfieldLabelOutside]="true" formControlName="specialization">
           Название
           <input type="text" name="specialization" formControlName="specialization" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Год окончания</label>
-        <tui-input tuiTextfieldSize="l" class="adding__input" [tuiTextfieldLabelOutside]="true">
+        <tui-input tuiTextfieldSize="l" class="adding__input"
+                   [tuiTextfieldLabelOutside]="true" formControlName="year_graduation">
           Введите год
           <input type="text" name="year_graduation" formControlName="year_graduation" tuiTextfield/>
         </tui-input>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit} from '@angular/core';
 import { IEmployee } from "../../interfaces/employee.interface";
 import { EmployeeService } from '../../services/employee.service';
 import {ActivatedRoute, Params} from "@angular/router";
@@ -10,13 +10,14 @@ import {Subscription} from "rxjs";
 @Component({
   selector: 'app-detailed-employee',
   templateUrl: './detailed-employee.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   styleUrls: ['./detailed-employee.component.css'],
   animations: [
     animations['slideIn']
   ]
 })
-export class DetailedEmployeeComponent implements OnInit{
+export class DetailedEmployeeComponent implements OnInit {
+
   protected employee: IEmployee = {} as IEmployee;
   protected actions: IAction[] = [];
   public idEmployee: number = 0;
@@ -38,7 +39,7 @@ export class DetailedEmployeeComponent implements OnInit{
       this.employee = this.employeeService.getEmployee(this.idEmployee);
     });
   }
-  
+
   ngOnInit() {
     this.getActions();
     this.formMain = new FormGroup({
@@ -58,11 +59,11 @@ export class DetailedEmployeeComponent implements OnInit{
   }
 
   getActions(): void {
-    const id_owner:number = this.idEmployee;
+    const id_owner: number = this.idEmployee;
     this.actions = [];
-    this.employeeService.getEmployeeActions(id_owner)
-      .subscribe((action: IAction) => {
-        this.actions.push(action);
+    this.employeeService.getEmployeeActions()
+      .subscribe((action: IAction[]) => {
+        this.actions = action.filter((action: IAction) => action.id_owner == id_owner);
       });
   }
 
@@ -119,6 +120,7 @@ export class DetailedEmployeeComponent implements OnInit{
     }
     this.closeEditModeMain();
     this.getActions();
+    this.changeDetection.detectChanges();
   }
 
   saveFormEducation(): void {
@@ -142,6 +144,7 @@ export class DetailedEmployeeComponent implements OnInit{
     }
     this.closeEditModeEducation();
     this.getActions();
+    this.changeDetection.detectChanges();
   }
 
   openEditMode(): void {
@@ -154,6 +157,7 @@ export class DetailedEmployeeComponent implements OnInit{
     this.editMode = false;
     this.editModeMain = false;
     this.editModeEducation = false;
+    this.changeDetection.detectChanges();
   }
 
   closeEditModeMain(): void {

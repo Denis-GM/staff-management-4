@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
 import { EmployeeService } from "../../services/employee.service";
 import { IEmployee } from "../../interfaces/employee.interface";
-import {Employees} from "../../mock/mock-employees";
 import { animations } from '../../animations/animations';
+import {Observable} from "rxjs";
+import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-adding-employees',
@@ -15,16 +16,8 @@ import { animations } from '../../animations/animations';
   ]
 })
 export class AddingEmployeesComponent implements OnInit {
-  private employee: IEmployee = {} as IEmployee;
-  types:string[] = [
-    'Основное общее',
-    'Среднее общее',
-    'Специалитет',
-    'Бакалавриат',
-    'Магистратура',
-  ];
 
-  employeeForm!: FormGroup;
+  protected employeeForm!: FormGroup;
 
   ngOnInit(): void {
     this.employeeForm = new FormGroup({
@@ -34,20 +27,30 @@ export class AddingEmployeesComponent implements OnInit {
       'birthday': new FormControl('', [Validators.required]),
       'email': new FormControl('', [Validators.required]),
 
-      'post': new FormControl(' '),
-      'salary': new FormControl(' '),
-      'project': new FormControl(' '),
-      'city': new FormControl(' '),
+      'post': new FormControl(''),
+      'salary': new FormControl(''),
+      'project': new FormControl(''),
+      'city': new FormControl(''),
 
       'education': new FormControl('УрФУ'),
-      'educational_institution': new FormControl(' '),
-      'specialization': new FormControl(' '),
+      'educational_institution': new FormControl(''),
+      'specialization': new FormControl(''),
       'year_graduation': new FormControl('2021'),
     });
   }
 
-  constructor(private router: Router, private employeeService: EmployeeService) {
-  }
+  constructor(private router: Router, private employeeService: EmployeeService,
+              @Inject(LocalStorageService) protected storageService: LocalStorageService) {  }
+
+  private employees: IEmployee[] = this.storageService.get('employees');
+  private employee: IEmployee = {} as IEmployee;
+  types:string[] = [
+    'Основное общее',
+    'Среднее общее',
+    'Специалитет',
+    'Бакалавриат',
+    'Магистратура',
+  ];
 
   convertDate(date: string): string {
     // год, месяц, день
@@ -56,9 +59,10 @@ export class AddingEmployeesComponent implements OnInit {
   }
 
   setEmployee(form: FormGroup): void {
+    console.log(this.employees);
     if (form.valid) {
       this.employee = {
-        id: Employees[Employees.length - 1].id++,
+        id: ++this.employees.length,
         firstName: form.get('firstName')?.value,
         lastName: form.get('lastName')?.value,
         patronymic: form.get('patronymic')?.value,
