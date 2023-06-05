@@ -82,6 +82,7 @@ export class DetailedEmployeeComponent implements OnInit {
     if (!isOpen){
       this.getActions();
       this.changeDetection.detectChanges();
+      this.employee = this.employeeService.getEmployee(this.idEmployee);
     }
   }
 
