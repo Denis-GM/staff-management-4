@@ -1,12 +1,9 @@
-import {Component, ErrorHandler, Inject, OnChanges, OnInit} from '@angular/core';
+import {Component,  Inject, OnInit} from '@angular/core';
 import { IEmployee } from '../../interfaces/employee.interface';
-import {
-  EMPLOYEES_TOKEN,
-  EmployeeService, employeesFactory,
-} from '../../services/employee.service';
+import {EMPLOYEES_TOKEN, employeesFactory} from '../../services/employee.service';
 import { Router } from '@angular/router';
 import { FilterPipe } from '../../pipes/filter.pipe';
-import { BehaviorSubject, Observable, debounceTime, map, skip, startWith, switchMap, takeUntil, tap, throttleTime } from 'rxjs';
+import { BehaviorSubject, Observable, map,  takeUntil } from 'rxjs';
 import { DestroyService } from '../../services/destroy.service';
 import { animations } from '../../animations/animations';
 

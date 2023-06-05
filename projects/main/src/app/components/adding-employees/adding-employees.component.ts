@@ -4,7 +4,6 @@ import {Router} from "@angular/router";
 import { EmployeeService } from "../../services/employee.service";
 import { IEmployee } from "../../interfaces/employee.interface";
 import { animations } from '../../animations/animations';
-import {Observable} from "rxjs";
 import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({

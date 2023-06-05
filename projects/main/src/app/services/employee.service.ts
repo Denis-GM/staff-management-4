@@ -1,6 +1,6 @@
 import { Injectable, InjectionToken, Inject, inject } from '@angular/core';
 import { IEmployee } from "../interfaces/employee.interface";
-import { filter, from, Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { Actions } from "../mock/mock-actions";
 import { IAction } from "../interfaces/action.interface";
 import { LocalStorageService } from './local-storage.service';

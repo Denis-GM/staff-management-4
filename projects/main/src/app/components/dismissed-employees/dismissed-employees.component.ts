@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit } from '@angular/core';
 import {IEmployee} from "../../interfaces/employee.interface";
-import {EMPLOYEES_TOKEN, EmployeeService} from "../../services/employee.service";
+import {EMPLOYEES_TOKEN} from "../../services/employee.service";
 import {Router} from "@angular/router";
 import {FilterPipe} from "../../pipes/filter.pipe";
 import { BehaviorSubject, Observable, map, takeUntil } from 'rxjs';

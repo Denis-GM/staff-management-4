@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { IEmployee } from "../../interfaces/employee.interface";
 import { EmployeeService } from '../../services/employee.service';
 import {ActivatedRoute, Params} from "@angular/router";
@@ -120,7 +120,6 @@ export class DetailedEmployeeComponent implements OnInit {
     }
     this.closeEditModeMain();
     this.getActions();
-    this.changeDetection.detectChanges();
   }
 
   saveFormEducation(): void {
@@ -144,7 +143,6 @@ export class DetailedEmployeeComponent implements OnInit {
     }
     this.closeEditModeEducation();
     this.getActions();
-    this.changeDetection.detectChanges();
   }
 
   openEditMode(): void {
@@ -157,7 +155,6 @@ export class DetailedEmployeeComponent implements OnInit {
     this.editMode = false;
     this.editModeMain = false;
     this.editModeEducation = false;
-    this.changeDetection.detectChanges();
   }
 
   closeEditModeMain(): void {
