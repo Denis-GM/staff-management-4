@@ -92,6 +92,7 @@ export class DetailedEmployeeComponent implements OnInit {
       newSalary: null, newStatus: null, oldValue : oldValue, newValue: newValue};
     this.employeeService.addAction(action);
     this.employeeService.editEmployees(this.idEmployee, nameEditField, newValue);
+    this.employee = this.employeeService.getEmployee(this.idEmployee);
   }
 
   saveFormMain(): void {
