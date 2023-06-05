@@ -1,22 +1,22 @@
-import {inject, Injectable, InjectionToken} from '@angular/core';
+import { Injectable, InjectionToken, Inject, inject } from '@angular/core';
 import { IEmployee } from "../interfaces/employee.interface";
-import { Employees } from '../mock/mock-employees';
 import { filter, from, Observable, of, switchMap } from 'rxjs';
-import {Actions} from "../mock/mock-actions";
+import { Actions } from "../mock/mock-actions";
+import { IAction } from "../interfaces/action.interface";
+import { LocalStorageService } from './local-storage.service';
+import { Employees } from '../mock/mock-employees';
 import { Router } from '@angular/router';
-import {IAction} from "../interfaces/action.interface";
 
 export const EMPLOYEES_TOKEN: InjectionToken<string> = new InjectionToken<string>('EMPLOYEES_TOKEN');
 
 export const employeesFactory = (): Observable<IEmployee[]> => {
   const employeeService: EmployeeService = inject(EmployeeService);
   const router: Router = inject(Router);
-
   return employeeService.getEmployees()
     .pipe(
       switchMap((employees: IEmployee[]) => {
         return of(employees.filter((employee: IEmployee) => {
-          return router.url === '/dashboard' ? !employee.status.includes('Уволен'): employee.status.includes('Уволен');
+          return router.url === '/dashboard' ? !employee.status.includes('Уволен') : employee.status.includes('Уволен');
         }));
       })
     );
@@ -27,16 +27,34 @@ export const employeesFactory = (): Observable<IEmployee[]> => {
 })
 export class EmployeeService {
 
-  getEmployee(id: number): IEmployee{
-    return Employees.find((emp: IEmployee) => emp.id == id)!;
+  protected employees!: IEmployee[];
+
+  constructor(
+    @Inject(LocalStorageService) protected storageService: LocalStorageService
+  ) {}
+
+  getEmployee(id: number): IEmployee {
+    this.employees = this.storageService.get('employees');
+    const employee: IEmployee | undefined = this.employees.find((emp: IEmployee) => emp.id === +id);
+    if(!employee) {
+      throw new Error(`Сотрудник с id:${id} не найден!`);
+    }
+    return employee;
   }
 
-  addEmployee(employee:IEmployee): void {
-    Employees.push(employee);
+  addEmployee(employee: IEmployee): void {
+    this.employees = this.storageService.get('employees');
+    this.employees.push(employee);
+    this.storageService.save('employees', this.employees);
   }
 
   getEmployees(): Observable<IEmployee[]> {
-    return of(Employees);
+    this.employees = this.storageService.get('employees');
+    if(!this.employees) {
+      this.storageService.save('employees', Employees);
+      this.employees = Employees;
+    }
+    return of(this.employees.reverse());
   }
 
   getEmployeeActions(id_owner: number): Observable<IAction> {
@@ -52,9 +70,7 @@ export class EmployeeService {
     const key: keyof IEmployee = field as keyof IEmployee;
     const employee: IEmployee | undefined = Employees.find((emp: IEmployee) => emp.id == id);
     if (employee != undefined) {
-      console.log(employee);
-        employee[key] = newValue as never;
-      console.log(employee[key]);
+      employee[key] = newValue as never;
     }
   }
 }

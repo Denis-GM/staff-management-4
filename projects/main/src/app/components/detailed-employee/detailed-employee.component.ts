@@ -25,6 +25,8 @@ export class DetailedEmployeeComponent implements OnInit{
   editModeMain: boolean = false;
   editModeEducation: boolean = false;
 
+  protected backUrl: string = `/${this.route.snapshot.url[0]}`;
+
   protected formMain!: FormGroup;
   protected formEducation!: FormGroup;
   private routeSubscription: Subscription;
@@ -36,7 +38,7 @@ export class DetailedEmployeeComponent implements OnInit{
       this.employee = this.employeeService.getEmployee(this.idEmployee);
     });
   }
-
+  
   ngOnInit() {
     this.getActions();
     this.formMain = new FormGroup({
@@ -57,7 +59,6 @@ export class DetailedEmployeeComponent implements OnInit{
 
   getActions(): void {
     const id_owner:number = this.idEmployee;
-    console.log(id_owner);
     this.actions = [];
     this.employeeService.getEmployeeActions(id_owner)
       .subscribe((action: IAction) => {

@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit } from '@angular/core';
 import {IEmployee} from "../../interfaces/employee.interface";
-import {EMPLOYEES_TOKEN, EmployeeService} from "../../services/employee.service";
+import {EMPLOYEES_TOKEN} from "../../services/employee.service";
 import {Router} from "@angular/router";
 import {FilterPipe} from "../../pipes/filter.pipe";
-import { Observable, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, map, takeUntil } from 'rxjs';
 import { DestroyService } from '../../services/destroy.service';
 import { animations } from '../../animations/animations';
 
@@ -18,6 +18,8 @@ import { animations } from '../../animations/animations';
 })
 export class DismissedEmployeesComponent implements OnInit {
 
+  protected loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
   protected employees: IEmployee[] = [];
   protected searchText: string = '';
   protected searchTags: string[] = [];
@@ -30,7 +32,6 @@ export class DismissedEmployeesComponent implements OnInit {
   constructor(
     @Inject(EMPLOYEES_TOKEN) protected employees$: Observable<IEmployee[]>,
     @Inject(DestroyService) protected destroy$: DestroyService,
-    private employeeService: EmployeeService,
     private router: Router,
     private filterPipe:FilterPipe
   ) { }
@@ -38,6 +39,12 @@ export class DismissedEmployeesComponent implements OnInit {
   ngOnInit(): void {
     this.employees$
       .pipe(
+        map((employees: IEmployee[]) => {
+          setTimeout(() => {
+            this.loading$.next(false);
+          }, 500);
+          return employees;
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe((employeesList: IEmployee[]) => {
@@ -58,7 +65,6 @@ export class DismissedEmployeesComponent implements OnInit {
   selectEmployee(employee: IEmployee) {
     this.router.navigate(
       ['fired/employee/', employee.id],
-      // { queryParams: { 'employee': JSON.stringify(employee) }}
     );
   }
 
@@ -71,7 +77,6 @@ export class DismissedEmployeesComponent implements OnInit {
     const searchedItems: IEmployee[] = this.filterPipe.transform(this.employees, this.searchText,
       this.searchTags,this.rangeSalary);
     this.length = Math.ceil(searchedItems.length/this.itemsPerPage);
-    console.log(this.length);
     this.index=0;
   }
 
@@ -82,6 +87,5 @@ export class DismissedEmployeesComponent implements OnInit {
 
   goToPage(index: number): void {
     this.index = index;
-    // console.info('New page:', index);
   }
 }

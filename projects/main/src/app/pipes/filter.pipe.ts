@@ -58,7 +58,7 @@ export class FilterPipe implements PipeTransform {
       result = result.filter((Employee: IEmployee) => range[0] <= Employee.salary && Employee.salary <= range[1]
       );
     }
-    // console.log(result)
+    
     return result;
   }
 }
