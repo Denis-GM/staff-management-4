@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {EmployeeService} from "../../services/employee.service";
 import {IAction} from "../../interfaces/action.interface";
@@ -38,7 +38,7 @@ export class DialogWindowComponent implements OnInit{
   protected formStatus!: FormGroup;
   protected formDoubleDate!: FormGroup;
 
-  constructor(private employeeService: EmployeeService, private changeDetection: ChangeDetectorRef) {}
+  constructor(private employeeService: EmployeeService) {}
 
   ngOnInit() {
     this.formPost = new FormGroup({
@@ -66,7 +66,7 @@ export class DialogWindowComponent implements OnInit{
   }
 
   submit(){
-    const actionName: string = this.actionControl.value!;
+    const actionName: string = this.actionControl.value;
     const date: string = this.convertDate(this.dateControl.value);
     const action: IAction = {
       id_owner: this.id_owner,

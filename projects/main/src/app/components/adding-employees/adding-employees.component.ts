@@ -38,9 +38,6 @@ export class AddingEmployeesComponent implements OnInit {
       'salary': new FormControl(' '),
       'project': new FormControl(' '),
       'city': new FormControl(' '),
-      'date_interview': new FormControl(' '),
-      'date_employment': new FormControl(' '),
-      'date_output': new FormControl(' '),
 
       'education': new FormControl('УрФУ'),
       'educational_institution': new FormControl(' '),

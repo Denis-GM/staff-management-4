@@ -28,14 +28,14 @@
         <label class="adding__label">Дата рождения</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
-          <input type="text" name="birthday" formControlName="birthday" tuiTextfield type="date"/>
+          <input type="date" name="birthday" formControlName="birthday" tuiTextfield/>
         </tui-input>
 
         <label class="adding__label">Контактный Email</label>
         <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           example@email.com
-          <input  type="text" name="email" formControlName="email" tuiTextfield type="email"/>
+          <input  name="email" formControlName="email" tuiTextfield type="email"/>
         </tui-input>
 
 
@@ -65,25 +65,7 @@
         <tui-input tuiTextfieldSize="l" class="adding__input"
                    [tuiTextfieldLabelOutside]="true">
           Введите город
-          <input type="adding__label" name="city" formControlName="city" tuiTextfield/>
-        </tui-input>
-
-        <label class="adding__label">Дата собеседования</label>
-        <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
-          <input type="date" name="date_interview" formControlName="date_interview" tuiTextfield/>
-        </tui-input>
-
-        <label class="adding__label">Дата трудоустройства</label>
-        <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
-          <input type="date" name="date_employment" formControlName="date_employment" tuiTextfield/>
-        </tui-input>
-
-        <label class="adding__label">Дата выхода</label>
-        <tui-input tuiTextfieldSize="l" class="adding__input"
-                   [tuiTextfieldLabelOutside]="true">
-          <input type="date" name="date_output" formControlName="date_output" tuiTextfield/>
+          <input type="text" name="city" formControlName="city" tuiTextfield/>
         </tui-input>
 
 

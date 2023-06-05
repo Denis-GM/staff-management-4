@@ -1,9 +1,9 @@
-import {Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import {Component, Inject, OnInit } from '@angular/core';
 import {IEmployee} from "../../interfaces/employee.interface";
 import {EMPLOYEES_TOKEN, EmployeeService} from "../../services/employee.service";
 import {Router} from "@angular/router";
 import {FilterPipe} from "../../pipes/filter.pipe";
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 import { DestroyService } from '../../services/destroy.service';
 import { animations } from '../../animations/animations';
 

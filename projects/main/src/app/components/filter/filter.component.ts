@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { debounceTime, Observable, of, Subject } from "rxjs";
 import { delay, startWith, switchMap } from 'rxjs/operators';
-import { EmployeeService } from "../../services/employee.service";
 import { FormControl } from "@angular/forms";
 import { TuiKeySteps } from "@taiga-ui/kit";
 import { IEmployee } from "../../interfaces/employee.interface";
@@ -36,13 +35,13 @@ export class FilterComponent implements OnInit {
     [100, this.max_salary],
   ];
 
-  protected readonly currency = {
+  protected readonly currency: {other: string} = {
     other: 'руб',
   };
 
   protected readonly search$: Subject<string> = new Subject<string>();
 
-  protected readonly items$ = this.search$
+  protected readonly items$:  Observable<string[] | null> = this.search$
     .pipe(
       switchMap((search: string) =>
         this.serverRequest(search)
@@ -52,8 +51,6 @@ export class FilterComponent implements OnInit {
       ),
       startWith(this.result)
     );
-
-  constructor(private employeeService: EmployeeService) { }
 
   @Input()
   public data:IEmployee[]=[];
@@ -74,10 +71,10 @@ export class FilterComponent implements OnInit {
 
     this.filterRangeEvent$.next(this.salaryControl.value);
     this.salaryControl.valueChanges.pipe(debounceTime(500))
-      .subscribe(v => this.filterRangeEvent$.next(v));
+      .subscribe((v: number[]) => this.filterRangeEvent$.next(v));
     this.paginationControl.setValue(5);
     this.paginationControl.valueChanges.pipe(debounceTime(500))
-      .subscribe(v => this.paginationEvent$.next(v));
+      .subscribe((v: number) => this.paginationEvent$.next(v));
 
     this.databaseMockData.forEach((Employee: IEmployee) => {
       const proj: string = "Проект: " + Employee.project;
